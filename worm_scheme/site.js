@@ -1,9 +1,12 @@
 
 var site = function site() {
-	var property1 = "test shit";
-	console.log(__dirname);
-	function Display() {
-		return this.property1;
+	
+	function ImportModule(path) {
+		var resolvePath = require.resolve(path);
+		
+		delete.require.cache[resolvePath];
+		
+		return require(resolvePath);
 	}
 };
 
