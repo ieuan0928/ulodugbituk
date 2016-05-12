@@ -1,3 +1,3 @@
-var Home = function Home() {};
+var Home = function() {};
 
 module.exports = Home;

@@ -1,11 +1,11 @@
-var wormIndex = function() {};
+var wormIndex = function(site) {
+	_site = site;
+};
 
-wormIndex.Request = null;
-wormIndex.Response = null;
-wormIndex.Site = null;
+var _site;
 
 wormIndex.prototype.Start = function() {
-	var home = this.Site.ImportModule("./wwPages/Home.js");
+	var home = _site.ImportModule("./wwPages/Home.js");
 };
 
 module.exports = wormIndex;

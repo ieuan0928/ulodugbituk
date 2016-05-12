@@ -1,9 +1,10 @@
 
-var site = function site() {};
+var site = function() {};
 
 site.Instance = null;
 
 site.prototype.ImportModule = function(path) {
+	console.log("test daw beh");
 	var resolvePath = require.resolve("../" + path);
 	delete require.cache[resolvePath];
 	return require(resolvePath);
