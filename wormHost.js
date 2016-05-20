@@ -1,23 +1,20 @@
 wormHelper = {
+	site: null,
 	refreshModule : function(path) {
 		var resolvePath = require.resolve(path);
 		delete require.cache[resolvePath];
 		return require(resolvePath);
 	},
 	getSite : function(request, response) {
-		var site = wormHelper.refreshModule("./worm_scheme/site.js");
+		var siteModule = wormHelper.refreshModule("./worm_scheme/site.js");
+		wormHelper.site = new siteModule();
 		var wormIndex = wormHelper.refreshModule("./wormIndex.js");
-		site.request = request;
-		site.response = response;
+		wormHelper.site.request = request;
+		wormHelper.site.response = response;
 		response.writeHead(200, {'Content-Type': 'text/html'});
-		new wormIndex(site).render();
+		new wormIndex().render();
 	},
 	getJS: function(request, response) {
-		console.log("test");
-		response.write("$(document).ready(function() {");
-		response.write("alert('bullshit')");
-		response.write("});")
-		response.end("// test runtime");
 		
 	},
 	getCSS: function(request, response) {

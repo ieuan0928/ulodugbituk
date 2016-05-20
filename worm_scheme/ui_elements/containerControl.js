@@ -4,7 +4,7 @@ var _parent = wormHelper.refreshModule("./worm_scheme/ui_elements/controlBase.js
 
 _proto.constructor = containerControl;
 
-function containerControl(site) {
+function containerControl() {
 	_parent.constructor.apply(this, arguments);
 }
 

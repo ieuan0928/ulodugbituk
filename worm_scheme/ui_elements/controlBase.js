@@ -1,11 +1,9 @@
 var _proto = controlBase.prototype;
 
 _proto.constructor = controlBase;
-function controlBase(site) {
-	this.site = site;
+function controlBase() {
 }
 
-_proto.site = null;
 _proto.parentControl = null;
 _proto.name = "";
 _proto.className = "";
