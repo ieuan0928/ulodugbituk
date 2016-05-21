@@ -9,8 +9,8 @@ wormHelper = {
 		var siteModule = wormHelper.refreshModule("./worm_scheme/site.js");
 		wormHelper.site = new siteModule();
 		var wormIndex = wormHelper.refreshModule("./wormIndex.js");
-		wormHelper.site.request = request;
-		wormHelper.site.response = response;
+		wormHelper.site.set("response", response);
+		wormHelper.site.get("request", request);
 		response.writeHead(200, {'Content-Type': 'text/html'});
 		new wormIndex().render();
 	},

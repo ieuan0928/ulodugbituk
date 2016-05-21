@@ -1,5 +1,6 @@
 
-var _proto = wormIndex.prototype; 
+var _proto = wormIndex.prototype;
+
 function wormIndex() {}
 
 _proto.render = function() {

@@ -1,13 +1,15 @@
 
-var _proto = site.prototype;
+var _parent = wormHelper.refreshModule("./worm_scheme/propertyEntity.js").prototype,
+	_proto = site.prototype = Object.create(_parent);
 
-function site() {}
+_proto.constructor = site;
 
-_proto.request = null;
-_proto.response = null;
+function site() {
+	_parent.constructor.apply(this, arguments);
+}
 
 _proto.render = function(page) {
-	var res = this.response;
+	var res = this.get("response");
 	
 	res.write("<!DOCTYPE html>");
 	res.write("<html>");
