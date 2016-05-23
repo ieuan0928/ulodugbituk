@@ -8,7 +8,6 @@ function home() {
 }
 
 _proto.render = function() {
-	//console.log(wormHelper.site.properties);
 	wormHelper.site.get("response").write("test");
 }
 

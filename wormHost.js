@@ -1,5 +1,6 @@
 wormHelper = {
 	site: null,
+	siteMap: [],
 	refreshModule : function(path) {
 		var resolvePath = require.resolve(path);
 		delete require.cache[resolvePath];
@@ -15,7 +16,7 @@ wormHelper = {
 		new wormIndex().render();
 	},
 	getJS: function(request, response) {
-		
+		response.end("to do...");
 	},
 	getCSS: function(request, response) {
 		
@@ -29,9 +30,18 @@ var express = require("express");
 server.listen(3000);
 
 app.get("/", wormHelper.getSite);
+
 app.get("/index.html", wormHelper.getSite);
 app.get("/*.js", wormHelper.getJS);
 app.get("/*.css", wormHelper.getCSS);
+
+app.get("/**/", function(req, res) {
+	var url = require("url");
+	
+	var parsedUrl = url.parse(req.url);
+	console.log(req.route.path);
+	res.end(req.route.path);
+});
 
 
 
