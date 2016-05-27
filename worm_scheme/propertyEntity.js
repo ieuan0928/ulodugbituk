@@ -10,7 +10,13 @@ function propertyEntity() {
 _proto.properties = null;
 
 _proto.get = function(propertyName) {
-	return this.properties[propertyName];
+	
+	switch(propertyName.trim()toLowerCase()) {
+		
+		default:
+			return null;
+			break;
+	}
 };
 
 _proto.set = function(propertyName, value) {

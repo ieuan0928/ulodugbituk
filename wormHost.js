@@ -11,7 +11,7 @@ wormHelper = {
 		wormHelper.site = new siteModule();
 		var wormIndex = wormHelper.refreshModule("./wormIndex.js");
 		wormHelper.site.set("response", response);
-		wormHelper.site.get("request", request);
+		wormHelper.site.set("request", request);
 		response.writeHead(200, {'Content-Type': 'text/html'});
 		new wormIndex().render();
 	},
