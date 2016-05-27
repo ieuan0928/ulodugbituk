@@ -21,7 +21,7 @@ _proto.set = function(propertyName, value) {
 			this.properties[propertyName] = value;
 			break;
 		default:
-			return _parent.set(propertyName, value);
+			_parent.set.call(this, propertyName, value);
 			break;
 	}
 };

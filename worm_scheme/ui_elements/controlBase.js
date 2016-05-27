@@ -8,11 +8,13 @@ function controlBase() {
 	_parent.constructor.apply(this, arguments);
 }
 
-_proto.set = function(propertyName, value) {
+_proto.kinsako = function() {
 	
+}
+_proto.set = function(propertyName, value) {
 	switch(propertyName.trim().toLowerCase()) {
 		case "parent":
-			console.log(this);
+			
 			value.addControl(this);
 			
 			break;

@@ -1,4 +1,4 @@
-var _parent = require("./mamal.js").prototype,
+var _parent = ppp.refreshModule("./mamal.js").prototype,
 	_proto = Animal.prototype = Object.create(_parent);
 
 _proto.constructor = Animal;
@@ -11,8 +11,6 @@ _proto.getAge = function() {
     return this._age; 
 }; 
 
-_proto.kinsako = function() {
-	console.log(this);
-}
+
 
 module.exports = Animal;
