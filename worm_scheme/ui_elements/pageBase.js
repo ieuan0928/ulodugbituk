@@ -6,6 +6,8 @@ _proto.constructor = pageBase;
 
 function pageBase() {
 	_parent.constructor.apply(this, arguments);
+	
+	
 }
 
 module.exports = pageBase;

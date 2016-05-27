@@ -10,17 +10,11 @@ function propertyEntity() {
 _proto.properties = null;
 
 _proto.get = function(propertyName) {
-	
-	switch(propertyName.trim()toLowerCase()) {
-		
-		default:
-			return null;
-			break;
-	}
+	throw new Error("Unable to idenfity the Property.");
 };
 
 _proto.set = function(propertyName, value) {
-	this.properties[propertyName] = value;
+	throw new Error("Unable to idenfity the Property.");
 };
 
 

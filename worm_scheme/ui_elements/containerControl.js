@@ -6,16 +6,21 @@ _proto.constructor = containerControl;
 
 function containerControl() {
 	_parent.constructor.apply(this, arguments);
+	
+	this.properties["childControls"] = [];
 }
 
-_proto.childControls = [];
+
+_proto.addControl = function(child) {
+	this.properties["childControls"].push(child);
+}
 
 _proto.preRender = function() {
 	
 }
 
 _proto.render = function() {
-	var cc = this.childControls;
+	var cc = this.properties["childControls"];
 	for (var index in cc) {
 		var control = cc[index];
 		

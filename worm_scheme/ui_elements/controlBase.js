@@ -1,5 +1,5 @@
 
-var _parent = wormHelper.refreshModule("./worm_scheme/propertyEntity.js").prototype,
+var _parent = wormHelper.refreshModule("./worm_scheme/ui_elements/uiBase.js").prototype,
 	_proto = controlBase.prototype = Object.create(_parent);
 
 _proto.constructor = controlBase;
@@ -10,8 +10,13 @@ function controlBase() {
 
 _proto.set = function(propertyName, value) {
 	
-	switch(propertyName.trim()toLowerCase()) {
-		case "className":
+	switch(propertyName.trim().toLowerCase()) {
+		case "parent":
+			console.log(this);
+			value.addControl(this);
+			
+			break;
+		case "classname":
 			this.properties[propertyName] = value;
 			break;
 		case "identifier":
@@ -28,9 +33,9 @@ _proto.set = function(propertyName, value) {
 
 _proto.get = function(propertyName) {
 	
-	switch(propertyName.trim()toLowerCase()) {
+	switch(propertyName.trim().toLowerCase()) {
 		case "className":
-			return this.properties["className"];
+			return this.properties["classname"];
 			break;
 		case "identifier":
 			return this.properties["identifier"];
@@ -44,8 +49,8 @@ _proto.get = function(propertyName) {
 	}
 };
 
-_proto.parentControl = null;
-/*_proto.name = "";
+/*_proto.parentControl = null;
+_proto.name = "";
 _proto.className = "";*/
 
 _proto.render = function() {};

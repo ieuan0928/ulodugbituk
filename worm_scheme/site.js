@@ -10,7 +10,7 @@ function site() {
 
 _proto.set = function(propertyName, value) {
 	
-	switch(propertyName.trim()toLowerCase()) {
+	switch(propertyName.trim().toLowerCase()) {
 		case "request":
 			this.properties[propertyName] = value;
 			break;
@@ -25,7 +25,7 @@ _proto.set = function(propertyName, value) {
 
 _proto.get = function(propertyName) {
 	
-	switch(propertyName.trim()toLowerCase()) {
+	switch(propertyName.trim().toLowerCase()) {
 		case "request":
 			return this.properties["request"];
 			break;
@@ -40,6 +40,8 @@ _proto.get = function(propertyName) {
 
 _proto.render = function(page) {
 	var res = this.get("response");
+	
+	page.createElements();
 	
 	res.write("<!DOCTYPE html>");
 	res.write("<html>");

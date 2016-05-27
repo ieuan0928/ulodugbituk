@@ -10,8 +10,8 @@ function textBox() {
 
 _proto.set = function(propertyName, value) {
 	
-	switch(propertyName.trim()toLowerCase()) {
-		case "isMultiline":
+	switch(propertyName.trim().toLowerCase()) {
+		case "ismultiline":
 			this.properties[propertyName] = value;
 			break;
 		case "value":
@@ -28,9 +28,9 @@ _proto.set = function(propertyName, value) {
 
 _proto.get = function(propertyName) {
 	
-	switch(propertyName.trim()toLowerCase()) {
-		case "isMultiline":
-			return this.properties["isMultiline"];
+	switch(propertyName.trim().toLowerCase()) {
+		case "ismultiline":
+			return this.properties["ismultiline"];
 			break;
 		case "value":
 			return this.properties["value"];
@@ -47,9 +47,11 @@ _proto.get = function(propertyName) {
 _proto.render = function() {
 	var res = wormHelper.site.get("response");
 	
-	var isMultiline = this.get("");
+	//var isMultiline = this.get("");
 	
-	switch(this.properties["isMultiline"]) {
+	res.write("<input type='text'></input>");
+	
+	/*switch(this.properties["isMultiline"]) {
 		case true:
 			res.write("");
 			break;
@@ -59,7 +61,10 @@ _proto.render = function() {
 		default:
 			return true;
 			break;
-	}
+	}*/
 }
+
+_proto.preRender = function() {};
+_proto.postRender = function() {};
 
 module.exports = textBox;
