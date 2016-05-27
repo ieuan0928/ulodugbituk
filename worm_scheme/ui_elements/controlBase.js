@@ -5,7 +5,7 @@ var _parent = wormHelper.refreshModule("./worm_scheme/ui_elements/uiBase.js").pr
 _proto.constructor = controlBase;
 
 function controlBase() {
-	_parent.constructor.apply(this, arguments);
+	_parent.constructor.apply(this);
 }
 
 _proto.kinsako = function() {
@@ -13,11 +13,6 @@ _proto.kinsako = function() {
 }
 _proto.set = function(propertyName, value) {
 	switch(propertyName.trim().toLowerCase()) {
-		case "parent":
-			
-			value.addControl(this);
-			
-			break;
 		case "classname":
 			this.properties[propertyName] = value;
 			break;
@@ -27,8 +22,11 @@ _proto.set = function(propertyName, value) {
 		case "name":
 			this.properties[propertyName] = value;
 			break;
+		case "parent":
+			value.addControl(this);
+			break;
 		default:
-			return _parent.set(propertyName, value);
+			return _parent.set.call(this, propertyName, value);
 			break;
 	}
 };
@@ -46,7 +44,7 @@ _proto.get = function(propertyName) {
 			return this.properties["name"];
 			break;
 		default:
-			return _parent.set(propertyName, value);
+			return _parent.get.call(this, propertyName);
 			break;
 	}
 };

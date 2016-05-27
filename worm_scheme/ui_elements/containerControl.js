@@ -5,7 +5,7 @@ var _parent = wormHelper.refreshModule("./worm_scheme/ui_elements/controlBase.js
 _proto.constructor = containerControl;
 
 function containerControl() {
-	_parent.constructor.apply(this, arguments);
+	_parent.constructor.apply(this);
 	
 	this.properties["childControls"] = [];
 }

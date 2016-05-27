@@ -5,7 +5,7 @@ var _parent = wormHelper.refreshModule("./worm_scheme/ui_elements/controlBase.js
 _proto.constructor = textBox;	
 	
 function textBox() {
-	_parent.constructor.apply(this, arguments);
+	_parent.constructor.apply(this);
 }
 
 _proto.set = function(propertyName, value) {
@@ -21,7 +21,7 @@ _proto.set = function(propertyName, value) {
 			this.properties[propertyName] = value;
 			break;
 		default:
-			_parent.set.call(this, propertyName, value);
+			return _parent.set.call(this, propertyName, value);
 			break;
 	}
 };
@@ -39,7 +39,7 @@ _proto.get = function(propertyName) {
 			return this.properties["placeholder"];
 			break;
 		default:
-			return _parent.set(propertyName, value);
+			return _parent.get.call(this, propertyName);
 			break;
 	}
 };
@@ -47,21 +47,31 @@ _proto.get = function(propertyName) {
 _proto.render = function() {
 	var res = wormHelper.site.get("response");
 	
-	//var isMultiline = this.get("");
+	var isMultiline = this.get("ismultiline");
+	var value = this.get("value");
+	var placeholder = this.get("placeholder");
 	
-	res.write("<input type='text'></input>");
+	console.log(isMultiline);
 	
-	/*switch(this.properties["isMultiline"]) {
+	switch(isMultiline) {
 		case true:
-			res.write("");
+			var concat = "_textArea_container";
+		
+			res.write("<div>");
+			res.write("<textarea></textarea>");
+			res.write("</div>");
 			break;
 		case false:
-			this.properties[propertyName] = value;
+			var concat = "_textArea_container";
+		
+			res.write("<div>");
+			res.write("<input type='text'></input>");
+			res.write("</div>");
 			break;
 		default:
 			return true;
 			break;
-	}*/
+	}
 }
 
 _proto.preRender = function() {};

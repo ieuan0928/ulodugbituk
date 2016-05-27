@@ -5,7 +5,7 @@ var _parent = wormHelper.refreshModule("./worm_scheme/ui_elements/containerContr
 _proto.constructor = pageBase;
 
 function pageBase() {
-	_parent.constructor.apply(this, arguments);
+	_parent.constructor.apply(this);
 	
 	
 }

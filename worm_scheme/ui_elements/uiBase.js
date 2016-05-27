@@ -6,7 +6,7 @@ var _parent = wormHelper.refreshModule("./worm_scheme/propertyEntity.js").protot
 _proto.constructor = uiBase;
 
 function uiBase() {
-	_parent.constructor.apply(this, arguments);
+	_parent.constructor.apply(this);
 }
 
 _proto.set = function(propertyName, value) {
@@ -16,7 +16,7 @@ _proto.set = function(propertyName, value) {
 			this.properties[propertyName] = value;
 			break;
 		default:
-			return _parent.set(propertyName, value);
+			return _parent.set.call(this, propertyName, value);
 			break;
 	}
 };
@@ -28,7 +28,7 @@ _proto.get = function(propertyName) {
 			return this.properties["identifier"];
 			break;
 		default:
-			return _parent.set(propertyName, value);
+			return _parent.get.call(this, propertyName);
 			break;
 	}
 };

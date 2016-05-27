@@ -5,7 +5,7 @@ var _parent = wormHelper.refreshModule("./worm_scheme/propertyEntity.js").protot
 _proto.constructor = site;
 
 function site() {
-	_parent.constructor.apply(this, arguments);
+	_parent.constructor.apply(this);
 }
 
 _proto.set = function(propertyName, value) {
