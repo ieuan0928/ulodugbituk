@@ -1,4 +1,4 @@
-var _super = require("./animal.js").prototype,
+var _super = ppp.refreshModule("./animal.js").prototype,
 	methodsad = Mouse.prototype = Object.create(_super);
 	
 methodsad.constructor = Mouse;
