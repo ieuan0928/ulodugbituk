@@ -8,7 +8,7 @@ ppp = {
 
 var Animal = require("./mouse.js");
 
-var mouseTest = new Animal(3);
+var mouseTest = new Animal();
 
 console.log(mouseTest.getAge());
 

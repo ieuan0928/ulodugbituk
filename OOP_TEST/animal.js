@@ -11,6 +11,10 @@ _proto.getAge = function() {
     return this._age; 
 }; 
 
+_proto.kinsako = function() {
+	_parent.kinsako.call(this);
+}
+
 
 
 module.exports = Animal;
