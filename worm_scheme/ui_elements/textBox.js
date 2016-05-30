@@ -51,8 +51,6 @@ _proto.render = function() {
 	var value = this.get("value");
 	var placeholder = this.get("placeholder");
 	
-	console.log(isMultiline);
-	
 	switch(isMultiline) {
 		case true:
 			var concat = "_textArea_container";
@@ -73,8 +71,5 @@ _proto.render = function() {
 			break;
 	}
 }
-
-_proto.preRender = function() {};
-_proto.postRender = function() {};
 
 module.exports = textBox;

@@ -6,6 +6,13 @@ ppp = {
 	}
 }
 
+var test = {
+	Property1: "Test Property",
+};
+
+test["Property2"] = "grrrr";
+
+console.log(test.Property2);
 var Animal = require("./mouse.js");
 
 var mouseTest = new Animal();

@@ -8,7 +8,6 @@ wormHelper = {
 	},
 	getSite : function(request, response) {
 		var siteModule = wormHelper.refreshModule("./worm_scheme/site.js");
-		console.log("niagi");
 		wormHelper.site = new siteModule();
 		var wormIndex = wormHelper.refreshModule("./wormIndex.js");
 		wormHelper.site.set("response", response);

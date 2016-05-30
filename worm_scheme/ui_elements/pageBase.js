@@ -6,8 +6,9 @@ _proto.constructor = pageBase;
 
 function pageBase() {
 	_parent.constructor.apply(this);
-	
-	
 }
+
+_proto.createElements = function() {};
+
 
 module.exports = pageBase;
