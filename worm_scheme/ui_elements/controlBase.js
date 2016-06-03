@@ -11,13 +11,13 @@ function controlBase() {
 _proto.set = function(propertyName, value) {
 	switch(propertyName.trim().toLowerCase()) {
 		case "classname":
-			this.properties[propertyName] = value;
+			this.properties["className"] = value;
 			break;
 		case "identifier":
-			this.properties[propertyName] = value;
+			this.properties["identifier"] = value;
 			break;
 		case "name":
-			this.properties[propertyName] = value;
+			this.properties["name"] = value;
 			break;
 		case "parent":
 			value.addControl(this);
@@ -30,8 +30,8 @@ _proto.set = function(propertyName, value) {
 
 _proto.get = function(propertyName) {
 	switch(propertyName.trim().toLowerCase()) {
-		case "className":
-			return this.properties["classname"];
+		case "classname":
+			return this.properties["className"];
 			break;
 		case "identifier":
 			return this.properties["identifier"];

@@ -12,13 +12,13 @@ _proto.set = function(propertyName, value) {
 	
 	switch(propertyName.trim().toLowerCase()) {
 		case "ismultiline":
-			this.properties[propertyName] = value;
+			this.properties["isMultiline"] = value;
 			break;
 		case "value":
-			this.properties[propertyName] = value;
+			this.properties["value"] = value;
 			break;
 		case "placeholder":
-			this.properties[propertyName] = value;
+			this.properties["placeHolder"] = value;
 			break;
 		default:
 			return _parent.set.call(this, propertyName, value);
@@ -30,13 +30,13 @@ _proto.get = function(propertyName) {
 	
 	switch(propertyName.trim().toLowerCase()) {
 		case "ismultiline":
-			return this.properties["ismultiline"];
+			return this.properties["isMultiline"];
 			break;
 		case "value":
 			return this.properties["value"];
 			break;
 		case "placeholder":
-			return this.properties["placeholder"];
+			return this.properties["placeHolder"];
 			break;
 		default:
 			return _parent.get.call(this, propertyName);
@@ -47,23 +47,26 @@ _proto.get = function(propertyName) {
 _proto.render = function() {
 	var res = wormHelper.site.get("response");
 	
-	var isMultiline = this.get("ismultiline");
+	var isMultiline = this.get("isMultiline");
 	var value = this.get("value");
-	var placeholder = this.get("placeholder");
+	var placeHolder = this.get("placeHolder");
+	var className = this.get("className");
+	var identifier = this.get("identifier");
+	var name = this.get("name");
 	
 	switch(isMultiline) {
 		case true:
-			var concat = "_textArea_container";
+			var concat = "_textAreaContainer";
 		
-			res.write("<div>");
-			res.write("<textarea></textarea>");
+			res.write("<div class='" + className + concat + "' id='" + identifier + "'>");
+			res.write("<textarea class='" + className + "' id='" + identifier + "' name='" + name + "'>" + value + "</textarea>");
 			res.write("</div>");
 			break;
 		case false:
-			var concat = "_textArea_container";
+			var concat = "_textBoxContainer";
 		
-			res.write("<div>");
-			res.write("<input type='text'></input>");
+			res.write("<div class='" + className + concat + "' id='" + identifier + "'>");
+			res.write("<input type='text' class='" + className + "' id='" + identifier + "' name='" + name + "' placeholder='" + placeHolder + "' value='" + value + "'></input>");
 			res.write("</div>");
 			break;
 		default:

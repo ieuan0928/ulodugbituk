@@ -13,7 +13,7 @@ _proto.set = function(propertyName, value) {
 	
 	switch(propertyName.trim().toLowerCase()) {
 		case "inlinereadyscripts":
-			this.properties[propertyName] = value;
+			this.properties["inlineReadyScripts"] = value;
 			break;
 		default:
 			return _parent.set.call(this, propertyName, value);
@@ -25,7 +25,7 @@ _proto.get = function(propertyName) {
 	
 	switch(propertyName.trim().toLowerCase()) {
 		case "inlinereadyscripts":
-			return this.properties["identifier"];
+			return this.properties["inlineReadyScripts"];
 			break;
 		default:
 			return _parent.get.call(this, propertyName);

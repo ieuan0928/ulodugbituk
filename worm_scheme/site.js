@@ -12,10 +12,10 @@ _proto.set = function(propertyName, value) {
 	
 	switch(propertyName.trim().toLowerCase()) {
 		case "request":
-			this.properties[propertyName] = value;
+			this.properties["request"] = value;
 			break;
 		case "response":
-			this.properties[propertyName] = value;
+			this.properties["response"] = value;
 			break;
 		default:
 			return _parent.set(propertyName, value);
