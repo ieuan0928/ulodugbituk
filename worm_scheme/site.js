@@ -9,7 +9,6 @@ function site() {
 }
 
 _proto.set = function(propertyName, value) {
-	
 	switch(propertyName.trim().toLowerCase()) {
 		case "request":
 			this.properties["request"] = value;
@@ -24,7 +23,6 @@ _proto.set = function(propertyName, value) {
 };
 
 _proto.get = function(propertyName) {
-	
 	switch(propertyName.trim().toLowerCase()) {
 		case "request":
 			return this.properties["request"];

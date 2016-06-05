@@ -1,6 +1,5 @@
 wormHelper = {
 	site: null,
-	siteMap: [],
 	refreshModule : function(path) {
 		var resolvePath = require.resolve(path);
 		delete require.cache[resolvePath];
@@ -29,19 +28,12 @@ var express = require("express");
 
 server.listen(3000);
 
-app.get("/", wormHelper.getSite);
+//app.get("/*/", function(request, response) {
+	
+//	response.end("diri ning sulod sa /*/");
+//});
 
-app.get("/index.html", wormHelper.getSite);
+app.get("/*", wormHelper.getSite);
 app.get("/*.js", wormHelper.getJS);
 app.get("/*.css", wormHelper.getCSS);
-
-app.get("/**/", function(req, res) {
-	var url = require("url");
-	
-	var parsedUrl = url.parse(req.url);
-	console.log(req.route.path);
-	res.end(req.route.path);
-});
-
-
 

@@ -12,13 +12,14 @@ var test = {
 
 test["Property2"] = "grrrr";
 
-console.log(test.Property2);
+
 var Animal = require("./mouse.js");
 
 var mouseTest = new Animal();
+var mouseTest1 = new Animal();
 
-console.log(mouseTest.getAge());
+mouseTest.ikug.katasun = "tama tama";
+mouseTest1.ikug.katasun = "taas";
 
-console.log(mouseTest.testProperty1);
+console.log(mouseTest.ikug.katasun);
 
-mouseTest.kinsako();
