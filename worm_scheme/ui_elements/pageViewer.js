@@ -39,7 +39,6 @@ _proto.render = function() {
 	var response = wormHelper.site.properties.response;
 	var myMap = this.properties.map;
 	
-	response.write(this.properties.urlParameter);
 	var pageType = wormHelper.refreshModule(myMap.childMap[myMap.defaultKey].modulePage);
 	var pageObject = new pageType();
 
