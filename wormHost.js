@@ -15,25 +15,24 @@ wormHelper = {
 		new wormIndex().render();
 	},
 	getJS: function(request, response) {
-		response.end("to do...");
+		response.end("js to do...");
 	},
 	getCSS: function(request, response) {
-		
+		response.end("css to do...");
+	},
+	getIco: function(request, response) {
+		response.end("ico to do...");
 	}
 }
-
+//url-structure:: /main-sub-sub-sub/criteria1-value1/criteria2-value2/criteria3-value3
 var express = require("express");
 	app = express(),
 	server = require("http").createServer(app);
 
 server.listen(3000);
 
-//app.get("/*/", function(request, response) {
-	
-//	response.end("diri ning sulod sa /*/");
-//});
-
-app.get("/*", wormHelper.getSite);
 app.get("/*.js", wormHelper.getJS);
 app.get("/*.css", wormHelper.getCSS);
+app.get("/*.ico", wormHelper.getIco);
+app.get("/*", wormHelper.getSite);
 

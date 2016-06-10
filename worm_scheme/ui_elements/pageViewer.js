@@ -7,6 +7,9 @@ function pageViewer() {
 	_parent.constructor.apply(this);
 }
 
+_proto.nextUrlParameter = '';
+_proto.myValue = '';
+
 _proto.get = function(propertyName) {
 	switch (propertyName.trim().toLowerCase()) {
 		case "map":
@@ -33,6 +36,10 @@ _proto.set = function(propertyName, value) {
 		default:
 			return _parent.set.call(this, propertyName, value);
 	}
+}
+
+_proto.remapUrl = function() {
+	
 }
 
 _proto.render = function() {

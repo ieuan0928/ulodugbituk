@@ -12,9 +12,15 @@ _proto.set = function(propertyName, value) {
 	switch(propertyName.trim().toLowerCase()) {
 		case "request":
 			this.properties["request"] = value;
+			return true;
 			break;
 		case "response":
 			this.properties["response"] = value;
+			return true;
+			break;
+		case "queryparameters":
+			this.properties["queryParameters"] = value;
+			return true;
 			break;
 		default:
 			return _parent.set(propertyName, value);
@@ -29,6 +35,9 @@ _proto.get = function(propertyName) {
 			break;
 		case "response":
 			return this.properties["response"];
+			break;
+		case "queryparameters"
+			return this.properties["queryParameters"];
 			break;
 		default:
 			return _parent.set(propertyName, value);

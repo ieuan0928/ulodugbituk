@@ -12,6 +12,7 @@ _proto.render = function() {
 	if ("pageViewerName" in siteMap) {
 		var pageViewer = pageObject[siteMap.pageViewerName];
 		
+		console.log(requestURL);
 		pageViewer.set("map", siteMap.child);
 		pageViewer.set("urlParameter", requestURL)
 	}
