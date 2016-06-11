@@ -15,11 +15,12 @@ _proto.get = function(propertyName) {
 		case "map":
 			return this.properties["map"];
 			break;
-		case "urlparameter":
-			return this.properties["urlParameter"];
+		case "urlmap":
+			return this.properties["urlMap"];
 			break;
 		default:
 			return _parent.get.call(this, propertyName);
+			break;
 	}
 }
 
@@ -29,27 +30,50 @@ _proto.set = function(propertyName, value) {
 			this.properties["map"] = value;
 			return true;
 			break;
-		case "urlparameter":
-			this.properties["urlParameter"] = value;
+		case "urlmap":
+			this.properties["urlMap"] = value;
 			return true;
 			break;
 		default:
 			return _parent.set.call(this, propertyName, value);
+			break;
 	}
 }
 
-_proto.remapUrl = function() {
-	
-}
-
 _proto.render = function() {
-	var response = wormHelper.site.properties.response;
 	var myMap = this.properties.map;
+	var urlMap = this.properties.urlMap;
 	
-	var pageType = wormHelper.refreshModule(myMap.childMap[myMap.defaultKey].modulePage);
-	var pageObject = new pageType();
+	var pageType = null;
+	var pageObject = null;
+	if (urlMap.length == 0) {
+		pageType = wormHelper.refreshModule(myMap.childMap[myMap.defaultKey].modulePage);
+		pageObject = new pageType();
+		pageObject.createElements();
+	}
+	else {
+		var urlLower = urlMap[0].toLowerCase();
+		if (urlLower in myMap.childMap) {
+			var map = myMap.childMap[urlLower];
+			pageType = wormHelper.refreshModule(map.modulePage);
 
-	pageObject.createElements();
+			pageObject = new pageType();
+			pageObject.createElements();
+						
+			if ('child' in map) {
+				var childPageViewer = pageObject[map.pageViewerName];
+				childPageViewer.set("map", map.child);
+				
+				urlMap.splice(0, 1);
+				childPageViewer.set("urlMap", urlMap);
+			}
+		}
+		else {
+			pageType = wormHelper.refreshModule(wormHelper.site.properties.errorPagePath);
+			pageObject = new pageType();
+			pageObject.createElements();
+		}
+	}
 	pageObject.render();
 }
 

@@ -8,8 +8,21 @@ module.exports = {
 				modulePage : "./wwPages/home.js"
 			},
 			stores : {
-				modulePage : "./wwPages/stores.js"
+				modulePage : "./wwPages/stores.js",
+				pageViewerName : "pageViewer1",
+				child : {
+					defaultKey : "listing",
+					childMap : {
+						listing : {
+							modulePage : "./wwPages/allStores.js"
+						},
+						search : {
+							modulePage : "./wwPages/searchStores.js"
+						} 
+					}
+				}
 			}
 		}
-	}
+	},
+	errorModulePage : "./wwPages/error.js"
 }
