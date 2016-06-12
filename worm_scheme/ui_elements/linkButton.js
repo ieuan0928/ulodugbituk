@@ -41,7 +41,7 @@ _proto.render = function() {
 	response.write("<a href='#'>");
 	
 	this.properties.content.render();
-	//console.log(this.properties.content);
+	
 	response.write("</a>");
 }
 
