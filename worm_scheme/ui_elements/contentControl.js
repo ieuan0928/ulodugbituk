@@ -17,7 +17,7 @@ _proto.set = function(propertyName, value) {
 		case "content":
 			if(value !== null && typeof value === 'object')
 			{
-				_proto.panel1 = new panel();
+				this.panel1 = new panel();
 				this.panel1.set("identifier", this.get("identifier") + this.panelId);
 				this.panel1.set("parent", value);
 			}
@@ -29,7 +29,7 @@ _proto.set = function(propertyName, value) {
 		case "identifier":
 			if(value !== null)
 			{
-				_proto.panel1.set("identifier", value + this.panelId);
+				this.panel1.set("identifier", value + this.panelId);
 			}
 			else
 			{
@@ -46,13 +46,13 @@ _proto.get = function(propertyName) {
 	
 	switch(propertyName.trim().toLowerCase()) {
 		case "content":
-			if(_proto.panel1 === null)
+			if(this.panel1 === null)
 			{
 				return this.properties["content"];
 			}
 			else
 			{
-				return _proto.panel1;
+				return this.panel1;
 			}
 			break;
 		default:
@@ -62,16 +62,17 @@ _proto.get = function(propertyName) {
 };
 
 _proto.render = function() {
-		var res = wormHelper.site.get("response");
+	console.log("test");
+	var res = wormHelper.site.get("response");
 	
-		if(_proto.panel1 === null)
-		{
-			res.write(this.get("content"));
-		}
-		else
-		{
-			_proto.panel1.render.call(this);
-		}
+	if(this.panel1 === null || this.panel1 === undefined)
+	{
+		res.write(this.properties.content);
+	}
+	else
+	{
+		this.panel1.render.call(this);
+	}
 }
 
 module.exports = contentControl;
