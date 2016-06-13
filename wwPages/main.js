@@ -18,7 +18,7 @@ _proto.createElements = function() {
 	this.linkButton1.set("parent", this);
 	this.linkButton2.set("parent", this);
 	this.mainViewer.set("parent", this);
-
+	this.linkButton1.set("pageViewer", this.mainViewer);
 	
 	this.linkButton1.set("content", "home");
 	this.linkButton2.set("content", "stores");
