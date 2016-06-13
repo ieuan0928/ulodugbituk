@@ -62,7 +62,6 @@ _proto.get = function(propertyName) {
 };
 
 _proto.render = function() {
-	console.log("test");
 	var res = wormHelper.site.get("response");
 	
 	if(this.panel1 === null || this.panel1 === undefined)

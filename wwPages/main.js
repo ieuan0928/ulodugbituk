@@ -9,7 +9,7 @@ _proto.constructor = main;
 function main() {
 	_parent.constructor.apply(this);
 	
-	this.pageViewer1 = new pageViewer();
+	this.mainViewer = new pageViewer();
 	this.linkButton1 = new linkButton();
 	this.linkButton2 = new linkButton();
 }
@@ -17,7 +17,7 @@ function main() {
 _proto.createElements = function() {
 	this.linkButton1.set("parent", this);
 	this.linkButton2.set("parent", this);
-	this.pageViewer1.set("parent", this);
+	this.mainViewer.set("parent", this);
 
 	
 	this.linkButton1.set("content", "home");

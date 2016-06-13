@@ -1,6 +1,6 @@
 module.exports = {
 	modulePage : "./wwPages/main.js",	
-	pageViewerName : "pageViewer1",
+	pageViewerName : "mainViewer",
 	child : {
 		defaultKey : "home",
 		childMap : {
