@@ -13,12 +13,15 @@ _proto.set = function(propertyName, value) {
 	switch(propertyName.trim().toLowerCase()) {
 		case "ismultiline":
 			this.properties["isMultiline"] = value;
+			return true;
 			break;
 		case "value":
 			this.properties["value"] = value;
+			return true;
 			break;
 		case "placeholder":
 			this.properties["placeHolder"] = value;
+			return true;
 			break;
 		default:
 			return _parent.set.call(this, propertyName, value);

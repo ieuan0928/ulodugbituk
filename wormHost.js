@@ -20,6 +20,9 @@ wormHelper = {
 	},
 	getCSS: function(request, response) {
 		
+	},
+	getImage: function(request, response) {
+		
 	}
 }
 
@@ -34,6 +37,7 @@ app.get("/", wormHelper.getSite);
 app.get("/index.html", wormHelper.getSite);
 app.get("/*.js", wormHelper.getJS);
 app.get("/*.css", wormHelper.getCSS);
+app.use(express.static(__dirname + '/sample_images'));
 
 app.get("/**/", function(req, res) {
 	var url = require("url");

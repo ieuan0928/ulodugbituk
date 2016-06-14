@@ -14,6 +14,7 @@ _proto.set = function(propertyName, value) {
 	switch(propertyName.trim().toLowerCase()) {
 		case "inlinereadyscripts":
 			this.properties["inlineReadyScripts"] = value;
+			return true;
 			break;
 		default:
 			return _parent.set.call(this, propertyName, value);

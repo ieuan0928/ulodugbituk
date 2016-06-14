@@ -2,14 +2,17 @@
 var _parent = wormHelper.refreshModule("./worm_scheme/ui_elements/controlBase.js").prototype,
 	_proto = contentControl.prototype = Object.create(_parent);
 	
-var panel = wormHelper.refreshModule("./worm_scheme/ui_elements/controlBase.js");
-var panelId = '_DefaultContent';
+var panel = wormHelper.refreshModule("./worm_scheme/ui_elements/panel.js");
 
 _proto.constructor = contentControl;
+_proto.panel1 = null
 
 function contentControl() {
 	_parent.constructor.apply(this);
+	this.panel1 = new panel();
 }
+
+var panelId = '_defaultContent';
 
 _proto.set = function(propertyName, value) {
 	
@@ -17,24 +20,30 @@ _proto.set = function(propertyName, value) {
 		case "content":
 			if(value !== null && typeof value === 'object')
 			{
-				_proto.panel1 = new panel();
-				this.panel1.set("identifier", this.get("identifier") + this.panelId);
-				this.panel1.set("parent", value);
+				console.log(value.get("identifier"));
+				this.properties["content"] = null;
+				this.panel1.set("identifier", value.get("identifier") + panelId);
+				this.panel1.set("className", value.get("className") + panelId);
+				this.panel1.addControl(value);
 			}
 			else
 			{
+				console.log("wala panel");
+				this.panel1 = null;
 				this.properties["content"] = value;
 			}
 			return true;
+			break;
 		case "identifier":
 			if(value !== null)
 			{
-				_proto.panel1.set("identifier", value + this.panelId);
+				this.panel1.set("identifier", value + panelId);
 			}
 			else
 			{
 				return _parent.set.call(this, propertyName, value);
 			}
+			return true;
 			break;
 		default:
 			return _parent.set.call(this, propertyName, value);
@@ -46,13 +55,13 @@ _proto.get = function(propertyName) {
 	
 	switch(propertyName.trim().toLowerCase()) {
 		case "content":
-			if(_proto.panel1 === null)
+			if(this.panel1 === null)
 			{
 				return this.properties["content"];
 			}
 			else
 			{
-				return _proto.panel1;
+				return this.panel1;
 			}
 			break;
 		default:
@@ -63,14 +72,16 @@ _proto.get = function(propertyName) {
 
 _proto.render = function() {
 		var res = wormHelper.site.get("response");
-	
-		if(_proto.panel1 === null)
+		
+		var content = this.get("content");
+		
+		if(this.panel1 === null)
 		{
-			res.write(this.get("content"));
+			res.write(content);
 		}
 		else
 		{
-			_proto.panel1.render.call(this);
+			this.panel1.render();
 		}
 }
 

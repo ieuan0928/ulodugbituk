@@ -12,15 +12,19 @@ _proto.set = function(propertyName, value) {
 	switch(propertyName.trim().toLowerCase()) {
 		case "classname":
 			this.properties["className"] = value;
+			return true;
 			break;
 		case "identifier":
 			this.properties["identifier"] = value;
+			return true;
 			break;
 		case "name":
 			this.properties["name"] = value;
+			return true;
 			break;
 		case "parent":
 			value.addControl(this);
+			return true;
 			break;
 		default:
 			return _parent.set.call(this, propertyName, value);
