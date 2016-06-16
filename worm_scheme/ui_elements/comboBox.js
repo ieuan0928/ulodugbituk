@@ -54,7 +54,7 @@ _proto.renderOptions = function(options) {
 	{
 		renderOptions = options[count];
 		res.write("<option value='" + renderOptions + "'>" + renderOptions + "</option>");
-		console.log("<option value='" + renderOptions + "'>" + renderOptions + "</option>");
+		//console.log("<option value='" + renderOptions + "'>" + renderOptions + "</option>");
 	}
 	
 };

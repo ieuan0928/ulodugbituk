@@ -17,6 +17,7 @@ function main() {
 _proto.createElements = function() {
 	this.linkButton1.set("parent", this);
 	this.linkButton2.set("parent", this);
+	this.mainViewer.set("identifier", "mainPageViewer");
 	this.mainViewer.set("parent", this);
 	this.linkButton1.set("pageViewer", this.mainViewer);
 	

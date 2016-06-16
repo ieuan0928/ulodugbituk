@@ -20,7 +20,7 @@ _proto.set = function(propertyName, value) {
 		case "content":
 			if(value !== null && typeof value === 'object')
 			{
-				console.log(value.get("identifier"));
+				//console.log(value.get("identifier"));
 				this.properties["content"] = null;
 				this.panel1.set("identifier", value.get("identifier") + panelId);
 				this.panel1.set("className", value.get("className") + panelId);
@@ -28,7 +28,7 @@ _proto.set = function(propertyName, value) {
 			}
 			else
 			{
-				console.log("wala panel");
+				//console.log("wala panel");
 				this.panel1 = null;
 				this.properties["content"] = value;
 			}

@@ -74,7 +74,14 @@ _proto.render = function() {
 			pageObject.createElements();
 		}
 	}
+	
+	var response = wormHelper.site.properties.response;
+	
+	response.write("<div id='" + this.properties.identifier + "'>");
+	pageObject.preRender();
 	pageObject.render();
+	pageObject.postRender();
+	response.write("</div>");
 }
 
 module.exports = pageViewer;
