@@ -33,6 +33,7 @@ _proto.set = function(propertyName, value) {
 };
 
 _proto.get = function(propertyName) {
+	
 	switch(propertyName.trim().toLowerCase()) {
 		case "classname":
 			return this.properties["className"];

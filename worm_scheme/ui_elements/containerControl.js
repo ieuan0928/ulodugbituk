@@ -16,7 +16,10 @@ _proto.addControl = function(child) {
 }
 
 _proto.preRender = function() {
-	
+	var cc = this.properties["childControls"];
+	for (var index in cc) {
+		cc[index].preRender();
+	}
 }
 
 _proto.render = function() {
