@@ -8,6 +8,7 @@ var checkBox = wormHelper.refreshModule("./worm_scheme/ui_elements/checkBox.js")
 var image = wormHelper.refreshModule("./worm_scheme/ui_elements/image.js");
 var radioButton = wormHelper.refreshModule("./worm_scheme/ui_elements/radioButton.js");
 var comboBox = wormHelper.refreshModule("./worm_scheme/ui_elements/comboBox.js");
+var option = wormHelper.refreshModule("./worm_scheme/ui_elements/option.js");
 
 _proto.constructor = home;
 
@@ -27,13 +28,17 @@ function home() {
 	this.checkBox3 = new checkBox();
 	this.checkBox4 = new checkBox();
 	this.image1 = new image();
+	this.image2 = new image();
 	this.labelWithImage = new label();
 	this.labelWithImage2 = new label();
 	this.labelWithImage3 = new label();
 	this.labelWithImage4 = new label();
+	this.labelWithImage5 = new label();
 	this.radioButton = new radioButton();
 	this.radioButton2 = new radioButton();
 	this.comboBox1 = new comboBox();
+	this.option1 = new option();
+	this.option2 = new option();
 	
 }
 
@@ -160,12 +165,6 @@ _proto.createElements = function() {
 	this.labelWithImage2.set("content", this.image1);*/
 	//end
 	
-	//image1
-	/*this.image1.set("identifier", "image_1_id");
-	this.image1.set("className", "image_1_class");
-	this.image1.set("imagePath", "sample_image.png");*/
-	//end
-	
 	//labelwithiamge3
 	/*this.labelWithImage3.set("identifier", "labelWithImage_3_id");
 	this.labelWithImage3.set("className", "labelWithImage_3_class");
@@ -199,6 +198,49 @@ _proto.createElements = function() {
 	this.radioButton2.set("content", this.labelWithImage);
 	this.radioButton2.set("parent", this);*/
 	//end
+	
+	//image1
+	/*this.image1.set("identifier", "image_1_id");
+	this.image1.set("className", "image_1_class");
+	this.image1.set("imagePath", "sample_image.png");
+	this.image1.set("parent", this);*/
+	//end
+	
+	//comboBox1
+	this.comboBox1.set("identifier", "comboBox1_id");
+	this.comboBox1.set("className", "comboBox1_class");
+	this.comboBox1.set("addOption", this.option1);
+	this.comboBox1.set("addOption", this.option2);
+	this.comboBox1.set("parent", this);
+	//end
+	
+	/*option start*/
+	this.option1.set("identifier", "option_id_1");
+	this.option1.set("className", "option_class_1");
+	this.option1.set("content", this.labelWithImage5);
+	/*end*/
+	
+	//option2
+	this.option2.set("identifier", "option_id_2");
+	this.option2.set("className", "option_class_2");
+	this.option2.set("content", "option2 without content");
+	//end
+	
+	//labelWithImage5
+	this.labelWithImage5.set("identifier", "labelWithImage5");
+	this.labelWithImage5.set("className", "labelWithImage5");
+	this.labelWithImage5.set("header", "p");
+	this.labelWithImage5.set("content", this.image2);
+	this.labelWithImage5.set("value", "option 1");
+	//end
+	
+	//image2
+	this.image2.set("identifier", "image_2_id");
+	this.image2.set("className", "image_2_class");
+	this.image2.set("imagePath", "smiley.jpeg");
+	//end
+	
+	
 }
 
 module.exports = home;

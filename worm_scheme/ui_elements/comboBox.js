@@ -6,26 +6,26 @@ _proto.constructor = comboBox;
 
 function comboBox() {
 	_parent.constructor.apply(this);
-	this.properties["options"] = [];
+	this.properties["options"] = new Array();
 }
 
 _proto.set = function(propertyName, value) {
-	
 	switch(propertyName.trim().toLowerCase()) {
 		case "type":
 			
 			if(value.trim().toLowerCase() == "dropdown")
 			{
-				this.properties["type"] = "";
+				this.properties["type"] = value;
 			}
-			else
+			else if(value.trim().toLowerCase() == "listselection")
 			{
 				this.properties["type"] = value;
 			}
-			
+			return true;
 			break;
-		case "option":
+		case "addoption":
 			this.properties["options"].push(value);
+			return true;
 			break;
 		default:
 			return _parent.set.call(this, propertyName, value);
@@ -34,7 +34,6 @@ _proto.set = function(propertyName, value) {
 };
 
 _proto.get = function(propertyName) {
-
 	switch(propertyName.trim().toLowerCase()) {
 		default:
 			return _parent.get.call(this, propertyName);
@@ -42,29 +41,48 @@ _proto.get = function(propertyName) {
 	}
 };
 
-_proto.renderOptions = function(options) {
-	var default_option = "<option value=''> -- Select an option -- </option>"; 
-	var options = this.properties["options"];
-	var count;
-	var renderOptions;
+_proto.renderOptions = function() {
 	
-	res.write(default_option);
-	
-	for(count in options)
+	for(var x = 0; this.properties["options"][x] !== undefined; x++)
 	{
-		renderOptions = options[count];
-		res.write("<option value='" + renderOptions + "'>" + renderOptions + "</option>");
-		console.log("<option value='" + renderOptions + "'>" + renderOptions + "</option>");
+		this.properties["options"][x].render();
 	}
-	
 };
 
 _proto.render = function() {
 	var res = wormHelper.site.get("response");
 	var concat = "_comboBox_container";
+	var concatSelector = "_comboBox_selector";
 	
-	res.write();
-	res.write();
+	res.write("<style type='text/css'>");
+	res.write("." + this.properties.className + "{");
+	res.write("width: 200px;");
+	res.write("height: 30px;");
+	res.write("border: 1px solid black;");
+	res.write("overflow: hidden;");
+	res.write("text-align: center;");
+	res.write("}");
+	
+	res.write("." + this.properties.className + concatSelector + "{");
+	res.write("height: 28px;");
+	res.write("width: 30px;");
+	res.write("float: right;");
+	res.write("margin: 1px 1px 1px 1px;");
+	res.write("background-color: black;");
+	res.write("}");
+	
+	res.write("." + this.properties.className + concatSelector + ":active {");
+	res.write("background-color: red;");
+	res.write("}");
+	
+	res.write("</style>");
+	
+	res.write("<div id='" + this.properties.identifier + concat + "' class='" + this.properties.className + concat + "'>");
+	res.write("<div id='" + this.properties.identifier + "' class='" + this.properties.className + "'>");
+	res.write("<div id='" + this.properties.identifier + concatSelector + "' class='" + this.properties.className + concatSelector + "'></div>");
+	this.renderOptions();
+	res.write("</div>");
+	res.write("</div>");
 }
 
 module.exports = comboBox;
