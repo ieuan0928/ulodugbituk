@@ -39,6 +39,7 @@ _proto.set = function(propertyName, value) {
 			break;
 	}
 }
+
 _proto.render = function() {
 	var myMap = this.properties.map;
 	var urlMap = this.properties.urlMap;
@@ -73,9 +74,7 @@ _proto.render = function() {
 			pageObject.createElements();
 		}
 	}
-	pageObject.preRender();
 	pageObject.render();
-	pageObject.postRender();
 }
 
 module.exports = pageViewer;

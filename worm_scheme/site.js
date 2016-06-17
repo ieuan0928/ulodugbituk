@@ -85,7 +85,6 @@ _proto.render = function(page) {
 	res.write("</head>");
 	res.write("<body>");
 
-	page.preRender();
 	page.render();
 	
 	res.write("</body>");

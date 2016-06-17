@@ -5,10 +5,11 @@ var _parent = wormHelper.refreshModule("./worm_scheme/ui_elements/controlBase.js
 var panel = wormHelper.refreshModule("./worm_scheme/ui_elements/panel.js");
 
 _proto.constructor = contentControl;
-_proto.panel1 = null;
+_proto.panel1 = null
 
 function contentControl() {
 	_parent.constructor.apply(this);
+	this.panel1 = new panel();
 }
 
 var panelId = '_defaultContent';
@@ -19,26 +20,23 @@ _proto.set = function(propertyName, value) {
 		case "content":
 			if(value !== null && typeof value === 'object')
 			{
-				/*this.properties["content"] = null;
-				this.panel1 = new panel();
-				this.panel1.addControl(value);*/
-				
-				
+				console.log(value.get("identifier"));
 				this.properties["content"] = null;
-				this.properties["contentPanel"] = new panel();
-				this.properties["contentPanel"].addControl(value);
+				this.panel1.set("identifier", value.get("identifier") + panelId);
+				this.panel1.set("className", value.get("className") + panelId);
+				this.panel1.addControl(value);
 			}
 			else
 			{
-				this.properties["contentPanel"] = null;
+				console.log("wala panel");
+				this.panel1 = null;
 				this.properties["content"] = value;
 			}
 			return true;
 			break;
-		/*case "identifier":
-			if(value !== null && typeof value === 'object')
+		case "identifier":
+			if(value !== null)
 			{
-				this.panel1 = new panel();
 				this.panel1.set("identifier", value + panelId);
 			}
 			else
@@ -46,7 +44,7 @@ _proto.set = function(propertyName, value) {
 				return _parent.set.call(this, propertyName, value);
 			}
 			return true;
-			break;*/
+			break;
 		default:
 			return _parent.set.call(this, propertyName, value);
 			break;
@@ -72,35 +70,19 @@ _proto.get = function(propertyName) {
 	}
 };
 
-_proto.preRender = function() {
-	
-	if(this.properties["contentPanel"] !== null)
-	{
-		var Id = "";
-		var className = "";
-		
-		var childProp = this.properties["contentPanel"].properties.childControls[0].properties;
-		
-		var Id = childProp.identifier;
-		var className = childProp.className;
-		
-		this.properties["contentPanel"].set("identifier", Id + panelId);
-		this.properties["contentPanel"].set("className", className + panelId);
-	}
-}
-
 _proto.render = function() {
-	this.preRender();
-	var res = wormHelper.site.get("response");
+		var res = wormHelper.site.get("response");
 		
-	if(this.properties.contentPanel == null)
-	{
-		res.write(this.properties["content"]);
-	}
-	else
-	{
-		this.properties.contentPanel.render();
-	}
+		var content = this.get("content");
+		
+		if(this.panel1 === null)
+		{
+			res.write(content);
+		}
+		else
+		{
+			this.panel1.render();
+		}
 }
 
 module.exports = contentControl;

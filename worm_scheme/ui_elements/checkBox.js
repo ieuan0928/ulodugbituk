@@ -25,10 +25,10 @@ _proto.set = function(propertyName, value) {
 			this.content.set(propertyName, value);
 			return true;
 			break;
-		/*case "identifier":
+		case "identifier":
 			this.content.set("identifier", value + contentId);
 			return _parent.set.call(this, propertyName, value);
-			break;*/
+			break;
 		default:
 			return _parent.set.call(this, propertyName, value);
 			break;
