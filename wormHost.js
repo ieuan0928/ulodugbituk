@@ -21,7 +21,19 @@ wormHelper = {
 		new wormIndex().render();
 	},
 	getJS: function(request, response) {
-		var resolvePath = require.resolve(wormHelper.jsBundle[request.url]);
+		var bundle = wormHelper.jsBundle;
+		
+		if (bundle == null) {
+			response.end("// javascript is not available...");
+			return false;
+		}
+		
+		if (!(request.url in bundle)) {
+			response.end("// javascript is not available...");
+			return false;
+		}
+		
+		var resolvePath = require.resolve(bundle[request.url]);
 		var fs = require('fs');
 		
 		fs.readFile(resolvePath, function(err, data) {
@@ -29,7 +41,10 @@ wormHelper = {
 				response.setHeader("Content-type", "text/javascript");
 				response.end(data);
 			}
-			else response.end("// javascript is not available...");
+			else {
+				response.end("// javascript is not available...");
+				return false;
+			}
 		});	
 	},
 	getCSS: function(request, response) {
