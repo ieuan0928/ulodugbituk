@@ -26,19 +26,18 @@ wormHelper = {
 	}
 }
 
+
+
 var express = require("express");
 	app = express(),
 	server = require("http").createServer(app);
+	
+app.use(express.static(__dirname + '/sample_images'));
 
 server.listen(3000);
 
 app.get("/*", wormHelper.getSite);
-
 app.get("/index.html", wormHelper.getSite);
 app.get("/*.js", wormHelper.getJS);
 app.get("/*.css", wormHelper.getCSS);
-app.use(express.static(__dirname + '/sample_images'));
-
-
-
 
