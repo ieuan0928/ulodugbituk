@@ -6,6 +6,21 @@ _proto.constructor = site;
 
 function site() {
 	_parent.constructor.apply(this);
+	
+	wormHelper.jsBundle = [];
+}
+
+_proto.jsBundler = function(index, path) {
+	wormHelper.jsBundle[index] = path;
+}
+
+_proto.renderJSBundle = function() {
+	var jsBundle = wormHelper.jsBundle;
+	var response = this.properties.response;
+	for (var index in jsBundle) {
+		response.write("<script src='" + index + "'></script>");
+		
+	}
 }
 
 _proto.splitAndGroom = function(stringObject, characterExplode) {
@@ -74,7 +89,7 @@ _proto.get = function(propertyName) {
 };
 
 _proto.render = function(page) {
-	var res = this.get("response");
+	var res = this.properties.response;
 	
 	page.createElements();
 	
@@ -82,6 +97,9 @@ _proto.render = function(page) {
 	res.write("<html>");
 	res.write("<head>");
 	res.write("<meta http-equiv='Content-Type' content='text/html; charset=utf-8' />");
+	
+	this.renderJSBundle();
+	
 	res.write("</head>");
 	res.write("<body>");
 

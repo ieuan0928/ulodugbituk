@@ -9,6 +9,8 @@ var pageViewer = wormHelper.refreshModule("./worm_scheme/ui_elements/pageViewer.
 function linkButton() {
 	_parent.constructor.apply(this);
 	
+	wormHelper.site.jsBundler("/ws_js/igit.js", "./worm_scheme/js/linkUrlHelper.js")
+	
 	this.properties["content"] = new contentControl();
 	this.properties["pageViewer"] = null;
 }
