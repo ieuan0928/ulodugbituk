@@ -32,20 +32,13 @@ var express = require("express");
 
 server.listen(3000);
 
-app.get("/", wormHelper.getSite);
+app.get("/*", wormHelper.getSite);
 
 app.get("/index.html", wormHelper.getSite);
 app.get("/*.js", wormHelper.getJS);
 app.get("/*.css", wormHelper.getCSS);
 app.use(express.static(__dirname + '/sample_images'));
 
-app.get("/**/", function(req, res) {
-	var url = require("url");
-	
-	var parsedUrl = url.parse(req.url);
-	console.log(req.route.path);
-	res.end(req.route.path);
-});
 
 
 
