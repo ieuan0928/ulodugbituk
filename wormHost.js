@@ -3,11 +3,23 @@ wormHelper = {
 	siteMap: [],
 	jsBundle: null,
 	cssBundle: null,
+	
+	generateUUID: function(formatString, baseNumber) {
+		var d = new Date().getTime();
+		var uuid = formatString.replace(/[xy]/g, function(c) {
+			var r = (d + Math.random()*baseNumber)%baseNumber | 0;
+			d = Math.floor(d/baseNumber);
+			return (c=='x' ? r : (r&0x3|0x8)).toString(baseNumber);
+		});
+		return uuid;
+	},
+	
 	refreshModule : function(path) {
 		var resolvePath = require.resolve(path);
 		delete require.cache[resolvePath];
 		return require(resolvePath);
 	},
+	
 	getSite : function(request, response) {
 		var siteModule = wormHelper.refreshModule("./worm_scheme/site.js");
 		var wormIndex = wormHelper.refreshModule("./wormIndex.js");
@@ -20,6 +32,7 @@ wormHelper = {
 		
 		new wormIndex().render();
 	},
+	
 	getJS: function(request, response) {
 		var bundle = wormHelper.jsBundle;
 		
@@ -47,9 +60,11 @@ wormHelper = {
 			}
 		});	
 	},
+	
 	getCSS: function(request, response) {
 		
 	},
+	
 	getImage: function(request, response) {
 		
 	}

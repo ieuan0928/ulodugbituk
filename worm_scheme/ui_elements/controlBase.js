@@ -6,6 +6,8 @@ _proto.constructor = controlBase;
 
 function controlBase() {
 	_parent.constructor.apply(this, arguments);
+	
+	this.properties["identifier"] = "cb-" + wormHelper.generateUUID("xxxxxx-xxxx", 36)
 }
 
 _proto.set = function(propertyName, value) {
@@ -15,7 +17,8 @@ _proto.set = function(propertyName, value) {
 			return true;
 			break;
 		case "identifier":
-			this.properties["identifier"] = value;
+			var uuID = wormHelper.generateUUID("xxxx", 36)
+			this.properties["identifier"] = value + "-" + uuID;
 			return true;
 			break;
 		case "name":

@@ -10,19 +10,39 @@ function main() {
 	_parent.constructor.apply(this);
 	
 	this.mainViewer = new pageViewer();
-	this.linkButton1 = new linkButton();
-	this.linkButton2 = new linkButton();
+	
+	this.homeLinkButton = new linkButton();
+	this.storesLinkButton = new linkButton();
+	this.storesListingLinkButton = new linkButton();
+	this.storesSearchLinkButton = new linkButton();
 }
 
 _proto.createElements = function() {
-	this.linkButton1.set("parent", this);
-	this.linkButton2.set("parent", this);
+	this.homeLinkButton.set("parent", this);
+	this.homeLinkButton.set("identifier", "homeLinkButton");
+	this.homeLinkButton.set("content", "home");
+	this.homeLinkButton.set("hyperTextReference", "Home");
+	this.homeLinkButton.set("linkType", linkButton.prototype.linkTypeEnumaration.SiteMap);
+	
+	this.storesLinkButton.set("parent", this);
+	this.storesLinkButton.set("identifier", "storesLinkButton");
+	this.storesLinkButton.set("content", "stores");
+	this.storesLinkButton.set("hyperTextReference", "Stores");
+	this.storesLinkButton.set("linkType", linkButton.prototype.linkTypeEnumaration.SiteMap);
+	
+	this.storesListingLinkButton.set("parent", this);
+	this.storesListingLinkButton.set("identifier", "storesListingLinkButton");
+	this.storesListingLinkButton.set("content", "Listing of Stores");
+	this.storesListingLinkButton.set("hyperTextReference", "Stores-Listing");
+	this.storesListingLinkButton.set("linkType", linkButton.prototype.linkTypeEnumaration.SiteMap);
+	
+	this.storesSearchLinkButton.set("parent", this);
+	this.storesSearchLinkButton.set("identifier", "storesSearchLinkButton");
+	this.storesSearchLinkButton.set("content", "Search Stores");
+	this.storesSearchLinkButton.set("hyperTextReference", "stores-search");
+	this.storesSearchLinkButton.set("linkType", linkButton.prototype.linkTypeEnumaration.SiteMap);
+	
 	this.mainViewer.set("parent", this);
-	this.linkButton1.set("pageViewer", this.mainViewer);
-	
-	this.linkButton1.set("content", "home");
-	this.linkButton2.set("content", "stores");
-	
 };
 
 

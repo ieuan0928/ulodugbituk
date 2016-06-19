@@ -92,6 +92,7 @@ _proto.render = function(page) {
 	var res = this.properties.response;
 	
 	page.createElements();
+	page.preRender();
 	
 	res.write("<!DOCTYPE html>");
 	res.write("<html>");
@@ -102,9 +103,9 @@ _proto.render = function(page) {
 	
 	res.write("</head>");
 	res.write("<body>");
-
-	page.preRender();
+	
 	page.render();
+	page.postRender();
 	
 	res.write("</body>");
 	res.end("</html>");
