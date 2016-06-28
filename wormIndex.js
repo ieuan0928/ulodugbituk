@@ -5,6 +5,9 @@ var siteMap = wormHelper.refreshModule("./siteMap.js");
 function wormIndex() {}
 
 _proto.render = function() {
+	var request = wormHelper.site.properties.request;
+	
+	console.log(request.body.testproperty);
 	var pageType = wormHelper.refreshModule(siteMap.modulePage);
 	var pageObject = new pageType();
 	wormHelper.site.set("errorPagePath", siteMap.errorModulePage)

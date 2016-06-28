@@ -7,8 +7,8 @@ wormHelper = {
 	generateUUID: function(formatString, baseNumber) {
 		var d = new Date().getTime();
 		var uuid = formatString.replace(/[xy]/g, function(c) {
-			var r = (d + Math.random()*baseNumber)%baseNumber | 0;
-			d = Math.floor(d/baseNumber);
+			var r = (d + Math.random() * baseNumber) % baseNumber | 0;
+			d = Math.floor(d / baseNumber);
 			return (c=='x' ? r : (r&0x3|0x8)).toString(baseNumber);
 		});
 		return uuid;
@@ -74,9 +74,12 @@ wormHelper = {
 
 var express = require("express");
 	app = express(),
+	bodyParser = require('body-parser'),
 	server = require("http").createServer(app);
 	
 app.use(express.static(__dirname + '/sample_images'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true })); 
 
 server.listen(3000);
 
