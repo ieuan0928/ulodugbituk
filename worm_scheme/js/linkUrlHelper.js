@@ -10,11 +10,10 @@
 			$(this).click(function(event) {
 				window.history.pushState('', '', $(this).attr("href"));
 				$.ajax({
+					url:"/",
 					type: "POST",
-					contentType: "application/json; charset=UTF-8",
 					data: {
-						testproperty: "test1",
-						test2P: "teste2"
+						urlMap : $(this).attr("href")
 					},
 					success: function(data) {
 						alert("test");

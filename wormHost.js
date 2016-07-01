@@ -23,8 +23,10 @@ wormHelper = {
 	getSite : function(request, response) {
 		var siteModule = wormHelper.refreshModule("./worm_scheme/site.js");
 		var wormIndex = wormHelper.refreshModule("./wormIndex.js");
-		
+
 		wormHelper.site = new siteModule();
+		
+		wormHelper.site.set("isPartialLoad", Object.keys(request.body).length > 0);
 		wormHelper.site.set("response", response);
 		wormHelper.site.set("request", request);
 		
@@ -67,6 +69,10 @@ wormHelper = {
 	
 	getImage: function(request, response) {
 		
+	},
+	
+	getRobotDotText: function(request, response) {
+		response.end("buhatunun pa ang robot dot text.")
 	}
 }
 
@@ -83,9 +89,13 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 server.listen(3000);
 
+app.post("/", wormHelper.getSite);
+
+app.get("/robots.txt", wormHelper.getRobotDotText)
 app.get("/*.js", wormHelper.getJS);
 app.get("/*", wormHelper.getSite);
 
 app.get("/*.css", wormHelper.getCSS);
+
 
 

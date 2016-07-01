@@ -7,7 +7,10 @@ function wormIndex() {}
 _proto.render = function() {
 	var request = wormHelper.site.properties.request;
 	
-	console.log(request.body.testproperty);
+	if (wormHelper.site.properties.isPartialLoad) {
+		console.log(request.body.urlMap);
+	}
+	
 	var pageType = wormHelper.refreshModule(siteMap.modulePage);
 	var pageObject = new pageType();
 	wormHelper.site.set("errorPagePath", siteMap.errorModulePage)

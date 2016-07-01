@@ -56,6 +56,10 @@ _proto.set = function(propertyName, value) {
 			this.properties["errorPagePath"] = value;
 			return true;
 			break;
+		case "ispartialload":
+			this.properties["isPartialLoad"] = value;
+			return true;
+			break;
 		default:
 			return _parent.set.call(this, propertyName, value);
 			break;
@@ -81,6 +85,9 @@ _proto.get = function(propertyName) {
 			break;
 		case "errorpagepath":
 			return this.properties["errorPagePath"];
+			break;
+		case "ispartialload":
+			return this.properties["isPartialLoad"];
 			break;
 		default:
 			return _parent.get.call(this, propertyName, value);
