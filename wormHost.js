@@ -23,10 +23,11 @@ wormHelper = {
 	getSite : function(request, response) {
 		var siteModule = wormHelper.refreshModule("./worm_scheme/site.js");
 		var wormIndex = wormHelper.refreshModule("./wormIndex.js");
-
+		var isPartialLoad = Object.keys(request.body).length > 0;
+		
 		wormHelper.site = new siteModule();
 		
-		wormHelper.site.set("isPartialLoad", Object.keys(request.body).length > 0);
+		wormHelper.site.set("isPartialLoad", isPartialLoad);
 		wormHelper.site.set("response", response);
 		wormHelper.site.set("request", request);
 		
@@ -71,6 +72,11 @@ wormHelper = {
 		
 	},
 	
+	postTest: function(request, response) {
+		response.setHeader("Content-Type", "text/json");
+		response.json({test: "tsk tsk tsk"});
+	},
+	
 	getRobotDotText: function(request, response) {
 		response.end("buhatunun pa ang robot dot text.")
 	}
@@ -89,7 +95,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 server.listen(3000);
 
-app.post("/", wormHelper.getSite);
+app.post("/", wormHelper.postTest);
 
 app.get("/robots.txt", wormHelper.getRobotDotText)
 app.get("/*.js", wormHelper.getJS);

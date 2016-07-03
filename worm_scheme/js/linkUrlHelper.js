@@ -2,8 +2,8 @@
 
 (function($) {
 	$.fn.asyncSiteMapLink = function(options) {
-		var setings = $.extend({
-			
+		var settings = $.extend({
+			siteMapOrdinal: null
 		}, options);
 		
 		return this.each(function() {
@@ -12,13 +12,15 @@
 				$.ajax({
 					url:"/",
 					type: "POST",
+				
 					data: {
 						urlMap : $(this).attr("href")
 					},
 					success: function(data) {
+						console.log(data);
 						alert("test");
 					},
-					error: function() {
+					error: function(jqXHR, textStatus, errorThrown) {
 						alert("error");
 					}
 				});
