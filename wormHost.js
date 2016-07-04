@@ -14,6 +14,10 @@ wormHelper = {
 		return uuid;
 	},
 	
+	writeResponse: function(response) {
+		wormHelper.site.response.write(response);
+	}
+	
 	refreshModule : function(path) {
 		var resolvePath = require.resolve(path);
 		delete require.cache[resolvePath];
