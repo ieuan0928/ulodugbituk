@@ -20,7 +20,7 @@ _proto.set = function(propertyName, value) {
 			return true;
 			break;
 		case "identifier":
-			this.properties["identifier"] = value + "-" + uuID;
+			this.properties["identifier"] = value;
 			return true;
 			break;
 		case "name":
