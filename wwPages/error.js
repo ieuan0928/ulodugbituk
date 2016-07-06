@@ -8,9 +8,7 @@ function error() {
 }
 
 _proto.render = function() {
-	var response = wormHelper.site.properties.response;
-	
-	response.write("Error Page");
+	wormHelper.writeResponse("Error Page");
 }
 
 module.exports = error;

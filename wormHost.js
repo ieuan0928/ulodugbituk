@@ -3,6 +3,7 @@ wormHelper = {
 	siteMap: [],
 	jsBundle: null,
 	cssBundle: null,
+	contentBuffer : null,
 	
 	generateUUID: function(formatString, baseNumber) {
 		var d = new Date().getTime();
@@ -15,8 +16,17 @@ wormHelper = {
 	},
 	
 	writeResponse: function(response) {
+		var siteProperties = wormHelper.site.properties;
 		
-		wormHelper.site.properties.response.write(response);
+		switch (siteProperties.isPartialLoad) {
+			case true:
+				wormHelper.contentBuffer += response;
+				break;
+			case false:
+				siteProperties.response.write(response);
+				break;
+		}
+		
 	},
 	
 	refreshModule : function(path) {
@@ -30,6 +40,7 @@ var routeMethods = {
 	getSite : function(request, response) {
 		var siteModule = wormHelper.refreshModule("./worm_scheme/site.js");
 		var wormIndex = wormHelper.refreshModule("./wormIndex.js");
+		console.log(Object.keys(request.body).length > 0);
 		var isPartialLoad = Object.keys(request.body).length > 0;
 		
 		wormHelper.site = new siteModule();
@@ -38,9 +49,19 @@ var routeMethods = {
 		wormHelper.site.set("response", response);
 		wormHelper.site.set("request", request);
 		
-		response.writeHead(200, {'Content-Type': 'text/html'});
+		if (isPartialLoad) {
+			wormHelper.contentBuffer = '';
+			response.setHeader("Content-Type", "text/json");
+		}
+		else {
+			response.writeHead(200, {'Content-Type': 'text/html'});
+		}
 		
 		new wormIndex().render();
+		if (isPartialLoad) {
+			response.json({contentBuffer: wormHelper.contentBuffer});
+			wormHelper.contentBuffer = null;
+		}
 	},
 	
 	getJS: function(request, response) {
@@ -79,13 +100,8 @@ var routeMethods = {
 		
 	},
 	
-	postTest: function(request, response) {
-		response.setHeader("Content-Type", "text/json");
-		response.json({test: "tsk tsk tsk"});
-	},
-	
 	getRobotDotText: function(request, response) {
-		response.end("buhatunun pa ang robot dot text.")
+		response.end("buhatunun pa ang robot dot text.");
 	}
 	
 }
@@ -101,8 +117,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 server.listen(3000);
 
-app.post("/", routeMethods.postTest);
+app.post("/favicon.ico", function() {});
+app.post("/", routeMethods.getSite);
 
+app.get("/favicon.ico", function() {});
 app.get("/robots.txt", routeMethods.getRobotDotText)
 app.get("/*.js", routeMethods.getJS);
 app.get("/*", routeMethods.getSite);

@@ -17,6 +17,7 @@ _proto.jsBundler = function(index, path) {
 _proto.renderJSBundle = function() {
 	var jsBundle = wormHelper.jsBundle;
 	var response = this.properties.response;
+	console.log(jsBundle);
 	for (var index in jsBundle) {
 		response.write("<script src='" + index + "'></script>");
 		
@@ -96,26 +97,32 @@ _proto.get = function(propertyName) {
 };
 
 _proto.render = function(page) {
-	var res = this.properties.response;
+	var prop = this.properties;
+	var res = prop.response;
 	
 	page.createElements();
 	page.preRender();
+	console.log(prop.isPartialLoad);
+	if (!prop.isPartialLoad) {
+		
+		res.write("<!DOCTYPE html>");
+		res.write("<html>");
+		res.write("<head>");
+		res.write("<meta http-equiv='Content-Type' content='text/html; charset=utf-8' />");
 	
-	res.write("<!DOCTYPE html>");
-	res.write("<html>");
-	res.write("<head>");
-	res.write("<meta http-equiv='Content-Type' content='text/html; charset=utf-8' />");
+		this.renderJSBundle();
 	
-	this.renderJSBundle();
-	
-	res.write("</head>");
-	res.write("<body>");
+		res.write("</head>");
+		res.write("<body>");
+	}
 	
 	page.render();
 	page.postRender();
 	
-	res.write("</body>");
-	res.end("</html>");
+	if (!prop.isPartialLoad){
+		res.write("</body>");
+		res.end("</html>");
+	}
 }
 
 module.exports = site;
