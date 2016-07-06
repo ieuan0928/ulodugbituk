@@ -42,7 +42,7 @@ _proto.set = function(propertyName, value) {
 _proto.render = function() {
 	var response = wormHelper.site.properties.response;
 	
-	response.write("<div id='" + this.properties.identifier + "'>");
+	wormHelper.writeResponse("<div id='" + this.properties.identifier + "'>");
 	
 	var myMap = this.properties.map;
 	var urlMap = this.properties.urlMap;
@@ -81,7 +81,7 @@ _proto.render = function() {
 	pageObject.render();
 	pageObject.postRender();
 	
-	response.write("</div>");
+	wormHelper.writeResponse("</div>");
 }
 
 module.exports = pageViewer;

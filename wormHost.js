@@ -15,8 +15,9 @@ wormHelper = {
 	},
 	
 	writeResponse: function(response) {
-		wormHelper.site.response.write(response);
-	}
+		
+		wormHelper.site.properties.response.write(response);
+	},
 	
 	refreshModule : function(path) {
 		var resolvePath = require.resolve(path);

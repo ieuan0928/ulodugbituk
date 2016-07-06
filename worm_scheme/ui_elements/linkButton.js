@@ -65,20 +65,20 @@ _proto.preRender = function() {
 _proto.render = function() {
 	var response = wormHelper.site.properties.response;
 	
-	response.write("<a id='" + this.properties.identifier + "' href='" + this.properties.hyperTextReference + "'><div>");
+	wormHelper.writeResponse("<a id='" + this.properties.identifier + "' href='" + this.properties.hyperTextReference + "'><div>");
 	
 	this.properties.content.render();
 	
-	response.write("</div></a>");
+	wormHelper.writeResponse("</div></a>");
 }
 
 _proto.postRender = function() {
 	if (this.properties.linkType == _proto.linkTypeEnumaration.SiteMap) {
 		var response = wormHelper.site.properties.response;
 	
-		response.write("<script>");
-	    response.write("$('#" + this.properties.identifier + "').asyncSiteMapLink()");
-		response.write("</script>");
+		wormHelper.writeResponse("<script>");
+	    wormHelper.writeResponse("$('#" + this.properties.identifier + "').asyncSiteMapLink()");
+		wormHelper.writeResponse("</script>");
 	}
 }
 
