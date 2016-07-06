@@ -45,13 +45,12 @@ _proto.get = function(propertyName) {
 };
 
 _proto.render = function() {
-	var res = wormHelper.site.get("response");
 	var concat = "_checkBox_container";
 	
-	res.write("<div id='" + this.properties.identifier + concat + "' class='" + this.properties.className + concat + "'>");
-	res.write("<input type='checkbox' id='" + this.properties.identifier + "' class='" + this.properties.className + "' name='" + this.properties.name + "' value='" + this.properties.value + "'></input>");
+	wormHelper.writeResponse("<div id='" + this.properties.identifier + concat + "' class='" + this.properties.className + concat + "'>");
+	wormHelper.writeResponse("<input type='checkbox' id='" + this.properties.identifier + "' class='" + this.properties.className + "' name='" + this.properties.name + "' value='" + this.properties.value + "'></input>");
 	this.content.render();
-	res.write("</div>");
+	wormHelper.writeResponse("</div>");
 	
 }
 

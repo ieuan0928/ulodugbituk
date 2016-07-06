@@ -48,8 +48,6 @@ _proto.get = function(propertyName) {
 };
 
 _proto.render = function() {
-	var res = wormHelper.site.get("response");
-	
 	var isMultiline = this.get("isMultiline");
 	var value = this.get("value");
 	var placeHolder = this.get("placeHolder");
@@ -61,16 +59,16 @@ _proto.render = function() {
 		case true:
 			var concat = "_textAreaContainer";
 		
-			res.write("<div class='" + className + concat + "' id='" + identifier + "'>");
-			res.write("<textarea class='" + className + "' id='" + identifier + "' name='" + name + "'>" + value + "</textarea>");
-			res.write("</div>");
+			wormHelper.writeResponse("<div class='" + className + concat + "' id='" + identifier + "'>");
+			wormHelper.writeResponse("<textarea class='" + className + "' id='" + identifier + "' name='" + name + "'>" + value + "</textarea>");
+			wormHelper.writeResponse("</div>");
 			break;
 		case false:
 			var concat = "_textBoxContainer";
 		
-			res.write("<div class='" + className + concat + "' id='" + identifier + "'>");
-			res.write("<input type='text' class='" + className + "' id='" + identifier + "' name='" + name + "' placeholder='" + placeHolder + "' value='" + value + "'></input>");
-			res.write("</div>");
+			wormHelper.writeResponse("<div class='" + className + concat + "' id='" + identifier + "'>");
+			wormHelper.writeResponse("<input type='text' class='" + className + "' id='" + identifier + "' name='" + name + "' placeholder='" + placeHolder + "' value='" + value + "'></input>");
+			wormHelper.writeResponse("</div>");
 			break;
 		default:
 			return true;

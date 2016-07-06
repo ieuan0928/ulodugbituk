@@ -40,12 +40,11 @@ _proto.get = function(propertyName) {
 };
 
 _proto.render = function() {
-	var res = wormHelper.site.get("response");
 	var concat = "_option_container";
 	
-	res.write("<div id='" + this.properties.identifier + concat + "' class='" + this.properties.className + concat + "'>");
+	wormHelper.writeResponse("<div id='" + this.properties.identifier + concat + "' class='" + this.properties.className + concat + "'>");
 	this.content.render();
-	res.write("</div>");
+	wormHelper.writeResponse("</div>");
 }
 
 module.exports = option;

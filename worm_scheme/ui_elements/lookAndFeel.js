@@ -226,6 +226,34 @@ _proto.set = function(propertyName, value) {
 			return true;
 			break;
 		
+		//height
+		case "height":
+			this.properties["height"] = value;
+			return true;
+			break;
+		case "minheight":
+			this.properties["minHeight"] = value;
+			return true;
+			break;
+		case "maxheight":
+			this.properties["maxHeight"] = value;
+			return true;
+			break;
+		
+		//width
+		case "width":
+			this.properties["width"] = value;
+			return true;
+			break;
+		case "minheight":
+			this.properties["minWidth"] = value;
+			return true;
+			break;
+		case "maxheight":
+			this.properties["maxWidth"] = value;
+			return true;
+			break;
+		
 		default:
 			return true;
 			break;

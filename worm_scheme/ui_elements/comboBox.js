@@ -50,39 +50,38 @@ _proto.renderOptions = function() {
 };
 
 _proto.render = function() {
-	var res = wormHelper.site.get("response");
 	var concat = "_comboBox_container";
 	var concatSelector = "_comboBox_selector";
 	
-	res.write("<style type='text/css'>");
-	res.write("." + this.properties.className + "{");
-	res.write("width: 200px;");
-	res.write("height: 30px;");
-	res.write("border: 1px solid black;");
-	res.write("overflow: hidden;");
-	res.write("text-align: center;");
-	res.write("}");
+	wormHelper.writeResponse("<style type='text/css'>");
+	wormHelper.writeResponse("." + this.properties.className + "{");
+	wormHelper.writeResponse("width: 200px;");
+	wormHelper.writeResponse("height: 30px;");
+	wormHelper.writeResponse("border: 1px solid black;");
+	wormHelper.writeResponse("overflow: hidden;");
+	wormHelper.writeResponse("text-align: center;");
+	wormHelper.writeResponse("}");
 	
-	res.write("." + this.properties.className + concatSelector + "{");
-	res.write("height: 28px;");
-	res.write("width: 30px;");
-	res.write("float: right;");
-	res.write("margin: 1px 1px 1px 1px;");
-	res.write("background-color: black;");
-	res.write("}");
+	wormHelper.writeResponse("." + this.properties.className + concatSelector + "{");
+	wormHelper.writeResponse("height: 28px;");
+	wormHelper.writeResponse("width: 30px;");
+	wormHelper.writeResponse("float: right;");
+	wormHelper.writeResponse("margin: 1px 1px 1px 1px;");
+	wormHelper.writeResponse("background-color: black;");
+	wormHelper.writeResponse("}");
 	
-	res.write("." + this.properties.className + concatSelector + ":active {");
-	res.write("background-color: red;");
-	res.write("}");
+	wormHelper.writeResponse("." + this.properties.className + concatSelector + ":active {");
+	wormHelper.writeResponse("background-color: red;");
+	wormHelper.writeResponse("}");
 	
-	res.write("</style>");
+	wormHelper.writeResponse("</style>");
 	
-	res.write("<div id='" + this.properties.identifier + concat + "' class='" + this.properties.className + concat + "'>");
-	res.write("<div id='" + this.properties.identifier + "' class='" + this.properties.className + "'>");
-	res.write("<div id='" + this.properties.identifier + concatSelector + "' class='" + this.properties.className + concatSelector + "'></div>");
+	wormHelper.writeResponse("<div id='" + this.properties.identifier + concat + "' class='" + this.properties.className + concat + "'>");
+	wormHelper.writeResponse("<div id='" + this.properties.identifier + "' class='" + this.properties.className + "'>");
+	wormHelper.writeResponse("<div id='" + this.properties.identifier + concatSelector + "' class='" + this.properties.className + concatSelector + "'></div>");
 	this.renderOptions();
-	res.write("</div>");
-	res.write("</div>");
+	wormHelper.writeResponse("</div>");
+	wormHelper.writeResponse("</div>");
 }
 
 module.exports = comboBox;

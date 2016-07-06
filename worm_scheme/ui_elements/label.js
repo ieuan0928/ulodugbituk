@@ -51,8 +51,6 @@ _proto.get = function(propertyName) {
 };
 
 _proto.render = function() {
-	var res = wormHelper.site.get("response");
-	
 	var concat = "_labelContainer";
 	var header = this.get("header");
 	var value = this.get("value");
@@ -60,10 +58,10 @@ _proto.render = function() {
 	var className = this.get("className");
 	var identifier = this.get("identifier");
 	
-	res.write("<div class='" + className + concat + "' id='" + identifier + concat + "'>");
-	res.write("<" + header + " class='" + className + "' id='" + identifier + "'>" + value + "</" + header + ">");
+	wormHelper.writeResponse("<div class='" + className + concat + "' id='" + identifier + concat + "'>");
+	wormHelper.writeResponse("<" + header + " class='" + className + "' id='" + identifier + "'>" + value + "</" + header + ">");
 	this.content.render();
-	res.write("</div>");
+	wormHelper.writeResponse("</div>");
 }
 
 module.exports = label;

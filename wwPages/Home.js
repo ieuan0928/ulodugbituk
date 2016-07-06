@@ -243,7 +243,7 @@ _proto.createElements = function() {
 	//test look and feel
 	this.image2.set("margintop", "30px");
 	this.image2.set("marginleft", "31px");
-	
+	this.image2.set("parent", this);
 	
 	
 	this.labelWithImage5.set("margintop", "60px");

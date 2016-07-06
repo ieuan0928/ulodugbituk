@@ -30,13 +30,11 @@ _proto.get = function(propertyName) {
 };
 
 _proto.render = function() {
-	var res = wormHelper.site.get("response");
-	
 	var concat = "_image_container";
 	
-	res.write("<div id='" + this.properties.identifier + concat + "' class='" + this.properties.className + concat + "'>");
-	res.write("<img id='" + this.properties.identifier + "' class='" + this.properties.className + "' src='" + this.properties.imagePath + "'></img>");
-	res.write("</div>");
+	wormHelper.writeResponse("<div id='" + this.properties.identifier + concat + "' class='" + this.properties.className + concat + "'>");
+	wormHelper.writeResponse("<img id='" + this.properties.identifier + "' class='" + this.properties.className + "' src='" + this.properties.imagePath + "'></img>");
+	wormHelper.writeResponse("</div>");
 	
 }
 

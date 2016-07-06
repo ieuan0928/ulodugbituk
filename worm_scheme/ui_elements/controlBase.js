@@ -86,6 +86,14 @@ _proto.set = function(propertyName, value) {
 		case "backgroundimage":
 		case "color":
 		
+		case "height":
+		case "minheight":
+		case "maxheight":
+		
+		case "width":
+		case "minwidth":
+		case "maxwidth":
+		
             this.lookAndFeel.set(propertyName, value);
 			return true;
 			break;
@@ -118,13 +126,12 @@ _proto.get = function(propertyName) {
 };
 
 _proto.render = function() {};
-_proto.preRender = function() {};
-
-
-_proto.postRender = function() {
+_proto.preRender = function() {
 	
+	wormHelper.writeResponse("<style>");
 		
-	
+	wormHelper.writeResponse("</style>");
 };
+_proto.postRender = function() {};
 
 module.exports = controlBase;
