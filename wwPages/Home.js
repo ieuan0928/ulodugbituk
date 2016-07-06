@@ -240,7 +240,18 @@ _proto.createElements = function() {
 	this.image2.set("imagePath", "smiley.jpeg");
 	//end
 	
+	//test look and feel
+	this.image2.set("margintop", "30px");
+	this.image2.set("marginleft", "31px");
 	
+	
+	
+	this.labelWithImage5.set("margintop", "60px");
+	this.labelWithImage5.set("marginleft", "61px");
+	
+	//get data
+	//console.log(this.image2.lookAndFeel);
+	//console.log(this.labelWithImage5.lookAndFeel);
 }
 
 module.exports = home;
