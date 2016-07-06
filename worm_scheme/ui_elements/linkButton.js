@@ -60,6 +60,8 @@ _proto.preRender = function() {
 	if (this.properties.linkType == _proto.linkTypeEnumaration.SiteMap) {
 		wormHelper.site.jsBundler("/ws_js/luh.js", "./worm_scheme/js/linkUrlHelper.js");
 	}
+	
+	_parent.preRender.call(this);
 }
 
 _proto.render = function() {
