@@ -254,6 +254,122 @@ _proto.set = function(propertyName, value) {
 			return true;
 			break;
 		
+		//to write in control base/////////////////////////////////////////////////////////////////
+		
+		//gradient
+		case "lineargradient":
+			this.properties["linearGradient"] = value;
+			return true;
+			break;
+		case "radialgradient":
+			this.properties["radialGradient"] = value;
+			return true;
+			break;
+		case "repeatinglineargradient":
+			this.properties["repeatingLinearGradient"] = value;
+			return true;
+			break;
+		case "repeatingradialgradient":
+			this.properties["repeatingRadialGradient"] = value;
+			return true;
+			break;
+		
+		//opacity
+		case "opacity":
+			this.properties["opacity"] = value;
+			return true;
+			break;
+		
+		//overflow
+		case "overflow":
+			this.properties["opacity"] = value;
+			return true;
+			break;
+		case "overflowx":
+			this.properties["overflowX"] = value;
+			return true;
+			break;
+		case "overflowy":
+			this.properties["overflowY"] = value;
+			return true;
+			break;
+			
+		//visibility and display
+		case "visibility":
+			this.properties["visibility"] = value;
+			return true;
+			break;
+		case "display":
+			this.properties["display"] = value;
+			return true;
+			break;
+			
+		//vertical-align
+		case "verticalalign":
+			this.properties["verticalAlign"] = value;
+			return true;
+			break;
+			
+		//z-index
+		case "zindex":
+			this.properties["zindex"] = value;
+			return true;
+			break;
+		
+		//text
+		case "textdecoration":
+			this.properties["textDecoration"] = value;
+			return true;
+			break;
+		case "fontsize":
+			this.properties["fontSize"] = value;
+			return true;
+			break;
+		case "fontfamily":	
+			this.properties["fontFamily"] = value;
+			return true;
+			break;
+		case "fontstyle":	
+			this.properties["fontStyle"] = value;
+			return true;
+			break;
+		case "fontvariant":
+			this.properties["fontVariant"] = value;
+			return true;
+			break;
+		case "fontweight":
+			this.properties["fontWeight"] = value;
+			return true;
+			break;
+		case "atfontface":
+			this.properties["atFontFace"] = value;
+			return true;
+			break;
+			
+		//list
+		case "liststyle":
+			this.properties["listStyle"] = value;
+			return true;
+			break;
+		case "liststyleimage":	
+			this.properties["listStyleImage"] = value;
+			return true;
+			break;
+		case "liststyleposition":
+			this.properties["listStylePosition"] = value;
+			return true;
+			break;
+		case "liststyletype":
+			this.properties["listStyleType"] = value;
+			return true;
+			break;	
+			
+		//cursor
+		case "cursor":
+			this.properties["cursor"] = value;
+			return true;
+			break;
+			
 		default:
 			return true;
 			break;

@@ -10,17 +10,16 @@ _proto.lookAndfeel = null;
 function controlBase() {
 	_parent.constructor.apply(this, arguments);
 	this.lookAndFeel = new lookAndFeelObj();
-	this.properties["identifier"] = "cb-" + wormHelper.generateUUID("xxxxxx-xxxx", 36)
+	this.properties["classCollection"] = [];
 }
 
 _proto.set = function(propertyName, value) {
 	switch(propertyName.trim().toLowerCase()) {
 		case "classname":
-			this.properties["className"] = value;
+			this.properties["classCollection"].push(value);
 			return true;
 			break;
 		case "identifier":
-			var uuID = wormHelper.generateUUID("xxxx", 36)
 			this.properties["identifier"] = value + "-" + uuID;
 			return true;
 			break;
@@ -94,6 +93,39 @@ _proto.set = function(propertyName, value) {
 		case "minwidth":
 		case "maxwidth":
 		
+		case "lineargradient":
+		case "radialgradient":
+		case "repeatinglineargradient":
+		case "repeatingradialgradient":
+		
+		case "opacity":
+		
+		case "overflow":
+		case "overflowx":
+		case "overflowy":
+		
+		case "visibility":
+		case "display":
+		
+		case "verticalalign":
+		
+		case "zindex":
+		
+		case "textdecoration":
+		case "fontsize":
+		case "fontfamily":
+		case "fontstyle":
+		case "fontvariant":
+		case "fontweight":
+		case "atfontface":
+		
+		case "liststyle":
+		case "liststyleimage":
+		case "liststyleposition":
+		case "liststyletype":
+		
+		case "cursor":
+		
             this.lookAndFeel.set(propertyName, value);
 			return true;
 			break;
@@ -125,13 +157,29 @@ _proto.get = function(propertyName) {
 	}
 };
 
+_proto.getClassses = function() {
+	
+	var classCollection = this.properties["classCollection"]
+	var count = 0;
+	var classResult = "";
+	
+	for(count; classCollection[count]; count++)
+	{
+		
+	}
+	
+};
+
 _proto.render = function() {};
-_proto.preRender = function() {
+_proto.preRender = function() {};
+_proto.postRender = function() {
+	
+	var classname = this.get("classname");
 	
 	wormHelper.writeResponse("<style>");
-		
+	wormHelper.writeResponse("." + classname + "{}");
 	wormHelper.writeResponse("</style>");
+	
 };
-_proto.postRender = function() {};
 
 module.exports = controlBase;

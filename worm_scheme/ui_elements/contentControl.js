@@ -91,11 +91,10 @@ _proto.preRender = function() {
 
 _proto.render = function() {
 	this.preRender();
-	var res = wormHelper.site.get("response");
 		
 	if(this.properties.contentPanel == null)
 	{
-		res.write(this.properties["content"]);
+		wormHelper.writeResponse(this.properties["content"]);
 	}
 	else
 	{
