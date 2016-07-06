@@ -119,6 +119,12 @@ _proto.get = function(propertyName) {
 
 _proto.render = function() {};
 _proto.preRender = function() {};
-_proto.postRender = function() {};
+
+
+_proto.postRender = function() {
+	
+		
+	
+};
 
 module.exports = controlBase;
