@@ -7,6 +7,9 @@ _proto.constructor = comboBox;
 function comboBox() {
 	_parent.constructor.apply(this);
 	this.properties["options"] = new Array();
+	
+	var default_class = "combo_Box_Default_Class";
+	this.set("className", default_class);
 }
 
 _proto.set = function(propertyName, value) {
@@ -54,7 +57,7 @@ _proto.render = function() {
 	var concatSelector = "_comboBox_selector";
 	
 	wormHelper.writeResponse("<style type='text/css'>");
-	wormHelper.writeResponse("." + this.properties.className + "{");
+	wormHelper.writeResponse("." + this.get("className") + "{");
 	wormHelper.writeResponse("width: 200px;");
 	wormHelper.writeResponse("height: 30px;");
 	wormHelper.writeResponse("border: 1px solid black;");
@@ -62,7 +65,7 @@ _proto.render = function() {
 	wormHelper.writeResponse("text-align: center;");
 	wormHelper.writeResponse("}");
 	
-	wormHelper.writeResponse("." + this.properties.className + concatSelector + "{");
+	wormHelper.writeResponse("." + this.get("className") + concatSelector + "{");
 	wormHelper.writeResponse("height: 28px;");
 	wormHelper.writeResponse("width: 30px;");
 	wormHelper.writeResponse("float: right;");
@@ -70,15 +73,15 @@ _proto.render = function() {
 	wormHelper.writeResponse("background-color: black;");
 	wormHelper.writeResponse("}");
 	
-	wormHelper.writeResponse("." + this.properties.className + concatSelector + ":active {");
+	wormHelper.writeResponse("." + this.get("className") + concatSelector + ":active {");
 	wormHelper.writeResponse("background-color: red;");
 	wormHelper.writeResponse("}");
 	
 	wormHelper.writeResponse("</style>");
 	
-	wormHelper.writeResponse("<div id='" + this.properties.identifier + concat + "' class='" + this.properties.className + concat + "'>");
-	wormHelper.writeResponse("<div id='" + this.properties.identifier + "' class='" + this.properties.className + "'>");
-	wormHelper.writeResponse("<div id='" + this.properties.identifier + concatSelector + "' class='" + this.properties.className + concatSelector + "'></div>");
+	wormHelper.writeResponse("<div id='" + this.properties.identifier + concat + "' class='" + this.get("className") + concat + "'>");
+	wormHelper.writeResponse("<div id='" + this.properties.identifier + "' class='" + this.get("classCollection") + "'>");
+	wormHelper.writeResponse("<div id='" + this.properties.identifier + concatSelector + "' class='" + this.get("className") + concatSelector + "'></div>");
 	this.renderOptions();
 	wormHelper.writeResponse("</div>");
 	wormHelper.writeResponse("</div>");

@@ -143,7 +143,17 @@ _proto.get = function(propertyName) {
 	
 	switch(propertyName.trim().toLowerCase()) {
 		case "classname":
-			return this.properties["className"];
+			if(this.properties["classCollection"][0] !== undefined)
+			{
+				return this.properties["classCollection"][0];
+			}
+			else 
+			{
+				return "";
+			}
+			break;
+		case "classcollection":
+			return this.getClasses();
 			break;
 		case "identifier":
 			return this.properties["identifier"];
@@ -157,27 +167,34 @@ _proto.get = function(propertyName) {
 	}
 };
 
-_proto.getClassses = function() {
+_proto.getClasses = function() {
 	
-	var classCollection = this.properties["classCollection"]
+	var classCollection = this.properties["classCollection"];
 	var count = 0;
 	var classResult = "";
 	
-	for(count; classCollection[count]; count++)
+	for(count; classCollection[count] !== undefined; count++)
 	{
-		
+		classResult += classCollection[count] + " ";
 	}
 	
+	return classResult;
 };
 
 _proto.render = function() {};
 _proto.preRender = function() {};
 _proto.postRender = function() {
 	
-	var classname = this.get("classname");
+	var classname = this.get("className");
 	
 	wormHelper.writeResponse("<style>");
-	wormHelper.writeResponse("." + classname + "{}");
+	wormHelper.writeResponse("." + classname + "{");
+	
+	if(this.lookAndFeel.marginTop !== undefined) {
+		wormHelper.writeResponse("margin-top: " + this.lookAndFeel.marginTop + ";");
+	}
+	
+	wormHelper.writeResponse("}");
 	wormHelper.writeResponse("</style>");
 	
 };

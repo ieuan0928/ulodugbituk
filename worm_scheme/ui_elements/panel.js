@@ -6,6 +6,9 @@ _proto.constructor = panel;
 
 function panel() {
 	_parent.constructor.apply(this);
+	
+	var default_class = "panel_Default_Class";
+	this.set("className", default_class);
 }
 
 _proto.set = function(propertyName, value) {

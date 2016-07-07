@@ -9,6 +9,9 @@ _proto.panel1 = null;
 
 function contentControl() {
 	_parent.constructor.apply(this);
+	
+	var default_class = "content_Default_Class";
+	this.set("className", default_class);
 }
 
 var panelId = '_defaultContent';
@@ -82,7 +85,7 @@ _proto.preRender = function() {
 		var childProp = this.properties["contentPanel"].properties.childControls[0].properties;
 		
 		var Id = childProp.identifier;
-		var className = childProp.className;
+		var className = this.properties["contentPanel"].properties.childControls[0].get("className");
 		
 		this.properties["contentPanel"].set("identifier", Id + panelId);
 		this.properties["contentPanel"].set("className", className + panelId);

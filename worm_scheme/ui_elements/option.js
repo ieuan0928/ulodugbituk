@@ -9,6 +9,9 @@ _proto.constructor = option;
 function option() {
 	_parent.constructor.apply(this);
 	this.content = new contentControl();
+	
+	var default_class = "option_Default_Class";
+	this.set("className", default_class);
 }
 
 var contentId = "_defaultContent";
@@ -42,7 +45,7 @@ _proto.get = function(propertyName) {
 _proto.render = function() {
 	var concat = "_option_container";
 	
-	wormHelper.writeResponse("<div id='" + this.properties.identifier + concat + "' class='" + this.properties.className + concat + "'>");
+	wormHelper.writeResponse("<div id='" + this.properties.identifier + concat + "' class='" + this.get("className") + concat + "'>");
 	this.content.render();
 	wormHelper.writeResponse("</div>");
 }

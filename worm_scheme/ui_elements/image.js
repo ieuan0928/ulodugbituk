@@ -6,6 +6,9 @@ _proto.constructor = image;
 
 function image() {
 	_parent.constructor.apply(this);
+	
+	var default_class = "image_Default_Class";
+	this.set("className", default_class);
 }
 
 _proto.set = function(propertyName, value) {
@@ -32,8 +35,8 @@ _proto.get = function(propertyName) {
 _proto.render = function() {
 	var concat = "_image_container";
 	
-	wormHelper.writeResponse("<div id='" + this.properties.identifier + concat + "' class='" + this.properties.className + concat + "'>");
-	wormHelper.writeResponse("<img id='" + this.properties.identifier + "' class='" + this.properties.className + "' src='" + this.properties.imagePath + "'></img>");
+	wormHelper.writeResponse("<div id='" + this.properties.identifier + concat + "' class='" + this.get("className") + concat + "'>");
+	wormHelper.writeResponse("<img id='" + this.properties.identifier + "' class='" + this.get("classCollection") + "' src='" + this.properties.imagePath + "'></img>");
 	wormHelper.writeResponse("</div>");
 	
 }

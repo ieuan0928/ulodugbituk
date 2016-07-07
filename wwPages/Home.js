@@ -236,7 +236,9 @@ _proto.createElements = function() {
 	
 	//image2
 	this.image2.set("identifier", "image_2_id");
-	this.image2.set("className", "image_2_class");
+	this.image2.set("className", "image_2_class_0");
+	this.image2.set("className", "image_2_class_1");
+	this.image2.set("className", "image_2_class_2");
 	this.image2.set("imagePath", "smiley.jpeg");
 	//end
 	

@@ -10,6 +10,9 @@ _proto.content = null;
 function label() {
 	_parent.constructor.apply(this);
 	this.content = new contentControl();
+	
+	var default_class = "label_Default_Class";
+	this.set("className", default_class);
 }
 
 _proto.set = function(propertyName, value) {
@@ -59,7 +62,7 @@ _proto.render = function() {
 	var identifier = this.get("identifier");
 	
 	wormHelper.writeResponse("<div class='" + className + concat + "' id='" + identifier + concat + "'>");
-	wormHelper.writeResponse("<" + header + " class='" + className + "' id='" + identifier + "'>" + value + "</" + header + ">");
+	wormHelper.writeResponse("<" + header + " class='" + this.get("classCollection") + "' id='" + identifier + "'>" + value + "</" + header + ">");
 	this.content.render();
 	wormHelper.writeResponse("</div>");
 }

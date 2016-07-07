@@ -10,6 +10,9 @@ _proto.content = null;
 function radioButton() {
 	_parent.constructor.apply(this);
 	this.content = new contentControl();
+	
+	var default_class = "radio_Button_Default_Class";
+	this.set("className", default_class);
 }
 
 var contentId = "_defaultContent";
@@ -47,8 +50,8 @@ _proto.get = function(propertyName) {
 _proto.render = function() {
 	var concat = "_radioButton_container";
 	
-	wormHelper.writeResponse("<div id='" + this.properties.identifier + concat + "' class='" + this.properties.className + concat + "'>");
-	wormHelper.writeResponse("<input type='radio' id='" + this.properties.identifier + "' class='" + this.properties.className + "' name='" + this.properties.name + "' value='" + this.properties.value + "'></input>");
+	wormHelper.writeResponse("<div id='" + this.properties.identifier + concat + "' class='" + this.get("className") + concat + "'>");
+	wormHelper.writeResponse("<input type='radio' id='" + this.properties.identifier + "' class='" + this.get("classCollection") + "' name='" + this.properties.name + "' value='" + this.properties.value + "'></input>");
 	this.content.render();
 	wormHelper.writeResponse("</div>");
 	

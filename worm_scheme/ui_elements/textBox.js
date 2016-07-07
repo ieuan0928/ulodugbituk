@@ -6,6 +6,9 @@ _proto.constructor = textBox;
 	
 function textBox() {
 	_parent.constructor.apply(this);
+	
+	var default_class = "text_Box_Default_Class";
+	this.set("className", default_class);
 }
 
 _proto.set = function(propertyName, value) {
@@ -60,14 +63,14 @@ _proto.render = function() {
 			var concat = "_textAreaContainer";
 		
 			wormHelper.writeResponse("<div class='" + className + concat + "' id='" + identifier + "'>");
-			wormHelper.writeResponse("<textarea class='" + className + "' id='" + identifier + "' name='" + name + "'>" + value + "</textarea>");
+			wormHelper.writeResponse("<textarea class='" + this.get("classCollection") + "' id='" + identifier + "' name='" + name + "'>" + value + "</textarea>");
 			wormHelper.writeResponse("</div>");
 			break;
 		case false:
 			var concat = "_textBoxContainer";
 		
 			wormHelper.writeResponse("<div class='" + className + concat + "' id='" + identifier + "'>");
-			wormHelper.writeResponse("<input type='text' class='" + className + "' id='" + identifier + "' name='" + name + "' placeholder='" + placeHolder + "' value='" + value + "'></input>");
+			wormHelper.writeResponse("<input type='text' class='" + this.get("classCollection") + "' id='" + identifier + "' name='" + name + "' placeholder='" + placeHolder + "' value='" + value + "'></input>");
 			wormHelper.writeResponse("</div>");
 			break;
 		default:
