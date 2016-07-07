@@ -42,6 +42,7 @@ _proto.createElements = function() {
 	this.storesSearchLinkButton.set("hyperTextReference", "stores-search");
 	this.storesSearchLinkButton.set("linkType", linkButton.prototype.linkTypeEnumaration.SiteMap);
 	
+	this.mainViewer.set("identifier", "mainViewer");
 	this.mainViewer.set("parent", this);
 };
 

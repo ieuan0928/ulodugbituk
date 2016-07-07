@@ -17,7 +17,7 @@ _proto.jsBundler = function(index, path) {
 _proto.renderJSBundle = function() {
 	var jsBundle = wormHelper.jsBundle;
 	var response = this.properties.response;
-	console.log(jsBundle);
+	
 	for (var index in jsBundle) {
 		response.write("<script src='" + index + "'></script>");
 		
@@ -61,6 +61,11 @@ _proto.set = function(propertyName, value) {
 			this.properties["isPartialLoad"] = value;
 			return true;
 			break;
+		case "urlmap":
+			var explodeUrl = this.splitAndGroom(value, "/");
+			this.properties["urlMap"] = this.splitAndGroom(explodeUrl[0], "-");
+			return true;
+			break;
 		default:
 			return _parent.set.call(this, propertyName, value);
 			break;
@@ -102,7 +107,7 @@ _proto.render = function(page) {
 	
 	page.createElements();
 	page.preRender();
-	console.log(prop.isPartialLoad);
+	
 	if (!prop.isPartialLoad) {
 		
 		res.write("<!DOCTYPE html>");

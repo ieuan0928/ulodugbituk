@@ -21,13 +21,13 @@ _proto.createElements = function() {
 	this.pageViewer1.set("identifier", "pageViewer1");
 	
 	this.storesListingLinkButton.set("parent", this);
-	this.storesListingLinkButton.set("identifier", "storesListingLinkButton");
+	this.storesListingLinkButton.set("identifier", "stores_ListingLinkButton");
 	this.storesListingLinkButton.set("hyperTextReference", "stores-listing");
 	this.storesListingLinkButton.set("content", "Listing of Stores");
 	this.storesListingLinkButton.set("linkType", linkButton.prototype.linkTypeEnumaration.SiteMap);
 	
 	this.storesSearchLinkButton.set("parent", this);
-	this.storesSearchLinkButton.set("identifier", "storesSearchLinkButton");
+	this.storesSearchLinkButton.set("identifier", "stores_SearchLinkButton");
 	this.storesSearchLinkButton.set("hyperTextReference", "stores-search");
 	this.storesSearchLinkButton.set("content", "storesSearchLinkButton");
 	this.storesSearchLinkButton.set("linkType", linkButton.prototype.linkTypeEnumaration.SiteMap);

@@ -12,7 +12,6 @@
 				$.ajax({
 					url:"/",
 					type: "POST",
-				
 					data: {
 						urlMap : $(this).attr("href")
 					},

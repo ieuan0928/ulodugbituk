@@ -4,6 +4,7 @@ wormHelper = {
 	jsBundle: null,
 	cssBundle: null,
 	contentBuffer : null,
+	pageViewerName: null,
 	
 	generateUUID: function(formatString, baseNumber) {
 		var d = new Date().getTime();
@@ -40,20 +41,22 @@ var routeMethods = {
 	getSite : function(request, response) {
 		var siteModule = wormHelper.refreshModule("./worm_scheme/site.js");
 		var wormIndex = wormHelper.refreshModule("./wormIndex.js");
-		console.log(Object.keys(request.body).length > 0);
+		
 		var isPartialLoad = Object.keys(request.body).length > 0;
 		
 		wormHelper.site = new siteModule();
 		
 		wormHelper.site.set("isPartialLoad", isPartialLoad);
 		wormHelper.site.set("response", response);
-		wormHelper.site.set("request", request);
+		
 		
 		if (isPartialLoad) {
+			wormHelper.site.set("urlMap", request.body.urlMap);
 			wormHelper.contentBuffer = '';
 			response.setHeader("Content-Type", "text/json");
 		}
 		else {
+			wormHelper.site.set("request", request);
 			response.writeHead(200, {'Content-Type': 'text/html'});
 		}
 		
