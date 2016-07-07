@@ -7,8 +7,8 @@ function allStores() {
 	_parent.constructor.apply(this);
 }
 
-_proto.render = function() {	
-	wormHelper.writeResponse("all stores..");
+_proto.render = function() {
+	wormHelper.writeResponse("<div>all stores..</div>");
 }
 
 module.exports = allStores;

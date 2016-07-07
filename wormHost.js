@@ -19,15 +19,14 @@ wormHelper = {
 	writeResponse: function(response) {
 		var siteProperties = wormHelper.site.properties;
 		
-		switch (siteProperties.isPartialLoad) {
-			case true:
-				wormHelper.contentBuffer += response;
-				break;
-			case false:
-				siteProperties.response.write(response);
-				break;
-		}
+		if (siteProperties.isPartialLoad == true) {
 		
+			wormHelper.contentBuffer += "tae";
+		
+		}
+		else {
+			siteProperties.response.write(response);
+		}		
 	},
 	
 	refreshModule : function(path) {
@@ -41,9 +40,8 @@ var routeMethods = {
 	getSite : function(request, response) {
 		var siteModule = wormHelper.refreshModule("./worm_scheme/site.js");
 		var wormIndex = wormHelper.refreshModule("./wormIndex.js");
-		
+
 		var isPartialLoad = Object.keys(request.body).length > 0;
-		
 		wormHelper.site = new siteModule();
 		
 		wormHelper.site.set("isPartialLoad", isPartialLoad);
@@ -61,9 +59,13 @@ var routeMethods = {
 		}
 		
 		new wormIndex().render();
+		
 		if (isPartialLoad) {
-			response.json({contentBuffer: wormHelper.contentBuffer});
-			wormHelper.contentBuffer = null;
+			response.json({
+				contentBuffer: wormHelper.contentBuffer,
+				pageViewerName: wormHelper.pageViewerName
+			});
+			//wormHelper.contentBuffer = null;
 		}
 	},
 	
@@ -121,7 +123,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 server.listen(3000);
 
 app.post("/favicon.ico", function() {});
-app.post("/", routeMethods.getSite);
+app.post("/*", routeMethods.getSite);
 
 app.get("/favicon.ico", function() {});
 app.get("/robots.txt", routeMethods.getRobotDotText)

@@ -8,12 +8,14 @@ _proto.render = function() {
 	var site = wormHelper.site;
 	var siteProp = site.properties;
 	var request = siteProp.request;
-
+	var urlMap = siteProp.urlMap;
+	
 	if (siteProp.isPartialLoad) {
-		//for ()
+		var index = siteProp.urlMap.length - 2;
+		
+		wormHelper.pageViewerName = (siteMap.child.childMap[urlMap[urlMap.length - 2].toLowerCase()]).pageViewerName;
 	}
 	else {
-	
 		var pageType = wormHelper.refreshModule(siteMap.modulePage);
 		var pageObject = new pageType();
 		site.set("errorPagePath", siteMap.errorModulePage)
@@ -21,7 +23,7 @@ _proto.render = function() {
 			var pageViewer = pageObject[siteMap.pageViewerName];
 		
 			pageViewer.set("map", siteMap.child);
-			pageViewer.set("urlMap", siteProp.urlMap);
+			pageViewer.set("urlMap", urlMap);
 		}
 		site.render(pageObject);
 	}
