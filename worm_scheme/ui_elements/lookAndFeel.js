@@ -11,14 +11,6 @@ function lookAndFeel() {
 _proto.set = function(propertyName, value) {
 	switch(propertyName.trim().toLowerCase()) {
 		//margin
-		case "margin":
-			this.properties["marginTop"] = value;
-			this.properties["marginLeft"] = value;
-			this.properties["marginRight"] = value;
-			this.properties["marginBottom"] = value;
-			return true;
-			break;
-		
 		case "margintop":
 			this.properties["marginTop"] = value;
 			return true;
@@ -37,14 +29,6 @@ _proto.set = function(propertyName, value) {
 			break;	
 			
 		//padding	
-		case "padding":
-			this.properties["paddingTop"] = value;
-			this.properties["paddingLeft"] = value;
-			this.properties["paddingRight"] = value;
-			this.properties["paddingBottom"] = value;
-			return true;
-			break;
-		
 		case "paddingtop":
 			this.properties["paddingTop"] = value;
 			return true;
@@ -63,14 +47,6 @@ _proto.set = function(propertyName, value) {
 			break;
 			
 		//border
-		case "border":
-			this.properties["borderTop"] = value;
-			this.properties["borderLeft"] = value;
-			this.properties["borderRight"] = value;
-			this.properties["borderBottom"] = value;
-			return true;
-			break;
-			
 		case "bordertop":
 			this.properties["borderTop"] = value;
 			return true;
@@ -89,14 +65,6 @@ _proto.set = function(propertyName, value) {
 			break;
 		
 		//border-color
-		case "bordercolor":
-			this.properties["borderColorTop"] = value;
-			this.properties["borderColorLeft"] = value;
-			this.properties["borderColorRight"] = value;
-			this.properties["borderColorBottom"] = value;
-			return true;
-			break;
-		
 		case "bordercolortop":
 			this.properties["borderColorTop"] = value;
 			return true;
@@ -115,14 +83,6 @@ _proto.set = function(propertyName, value) {
 			break;
 		
 		//border-style
-		case "borderstyle":
-			this.properties["borderTopStyle"] = value;
-			this.properties["borderLeftStyle"] = value;
-			this.properties["borderRightStyle"] = value;
-			this.properties["borderBottomStyle"] = value;
-			return true;
-			break;
-			
 		case "bordertopstyle":
 			this.properties["borderTopStyle"] = value;
 			return true;
@@ -141,14 +101,6 @@ _proto.set = function(propertyName, value) {
 			break;
 		
 		//border-width
-		case "borderwidth":
-			this.properties["borderTopWidth"] = value;
-			this.properties["borderLeftWidth"] = value;
-			this.properties["borderRightWidth"] = value;
-			this.properties["borderBottomWidth"] = value;
-			return true;
-			break;
-			
 		case "bordertopwidth":
 			this.properties["borderTopWidth"] = value;
 			return true;
@@ -167,11 +119,6 @@ _proto.set = function(propertyName, value) {
 			break;
 		
 		//border-radius
-		case "borderradius":
-			this.properties["borderRadius"] = value;
-			return true;
-			break;
-			
 		case "bordertopleftradius":
 			this.properties["borderTopLeftRadius"] = value;
 			return true;
@@ -190,11 +137,6 @@ _proto.set = function(propertyName, value) {
 			break;
 		
 		//background
-		case "background":
-			this.properties["background"] = value;
-			return true;
-			break;
-			
 		case "backgroundcolor":
 			this.properties["backgroundColor"] = value;
 			return true;
@@ -253,8 +195,6 @@ _proto.set = function(propertyName, value) {
 			this.properties["maxWidth"] = value;
 			return true;
 			break;
-		
-		//to write in control base/////////////////////////////////////////////////////////////////
 		
 		//gradient
 		case "lineargradient":

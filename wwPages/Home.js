@@ -16,10 +16,15 @@ function home() {
 	_parent.constructor.apply(this);
 	
 	this.textBox1 = new textBox();
+	this.textBox2 = new textBox();
+	this.textBox3 = new textBox();
+	this.textBox4 = new textBox();
+	this.textBox5 = new textBox();
 	this.textArea1 = new textBox();
 	this.panel1 = new panel();
 	this.panel2 = new panel();
 	this.panel3 = new panel();
+	this.panelImage = new panel();
 	this.label1 = new label();
 	this.label2 = new label();
 	this.labelWithContent = new label();
@@ -29,6 +34,7 @@ function home() {
 	this.checkBox4 = new checkBox();
 	this.image1 = new image();
 	this.image2 = new image();
+	this.image3 = new image();
 	this.labelWithImage = new label();
 	this.labelWithImage2 = new label();
 	this.labelWithImage3 = new label();
@@ -243,16 +249,51 @@ _proto.createElements = function() {
 	//end
 	
 	//test look and feel
-	this.image2.set("margintop", "30px");
-	this.image2.set("marginleft", "31px");
-	this.image2.set("parent", this);
+	this.image3.set("imagePath", "smiley.jpeg");
+	this.image3.set("parent", this.panelImage);
+	this.image3.set("identifier", "image3_id");
 	
+	this.panelImage.set("backgroundcolor", "#4B4B4B");
+	this.panelImage.set("margintop", "0px");
+	this.panelImage.set("paddingtop", "10px");
+	this.panelImage.set("paddingleft", "10px");
+	this.panelImage.set("paddingright", "10px");
+	this.panelImage.set("paddingbottom", "10px");
+	this.panelImage.set("height", "50px");
+	this.panelImage.set("width", "100px");
+	this.panelImage.set("color", "blue");
+	this.panelImage.set("identifier", "panelImage_1_id");
+	this.panelImage.set("parent", this);
 	
-	this.labelWithImage5.set("margintop", "60px");
-	this.labelWithImage5.set("marginleft", "61px");
+	this.textBox2.set("identifier", "tb_2_id");
+	this.textBox2.set("isMultiline", false);
+	this.textBox2.set("placeHolder", "tb 2");
+	this.textBox2.set("value", "");
+	this.textBox2.set("parent", this);
+	
+	this.textBox3.set("identifier", "tb_3_id");
+	this.textBox3.set("isMultiline", false);
+	this.textBox3.set("placeHolder", "tb 3");
+	this.textBox3.set("value", "");
+	this.textBox3.set("parent", this);
+	
+	this.textBox4.set("identifier", "tb_4_id");
+	this.textBox4.set("isMultiline", false);
+	this.textBox4.set("placeHolder", "tb 4");
+	this.textBox4.set("value", "");
+	this.textBox4.set("parent", this);
+	
+	this.textBox5.set("identifier", "tb_5_id");
+	this.textBox5.set("isMultiline", false);
+	this.textBox5.set("placeHolder", "tb 5");
+	this.textBox5.set("value", "");
+	this.textBox5.set("parent", this);
+	
+	//this.labelWithImage5.set("margintop", "60px");
+	//this.labelWithImage5.set("marginleft", "61px");
 	
 	//get data
-	//console.log(this.image2.lookAndFeel);
+	//console.log(this.image3.lookAndFeel);
 	//console.log(this.labelWithImage5.lookAndFeel);
 }
 

@@ -26,6 +26,7 @@ wormHelper = {
 		case false: 
 			siteProperties.response.write(response);
 			break;
+		}
 	},
 	
 	refreshModule : function(path) {
