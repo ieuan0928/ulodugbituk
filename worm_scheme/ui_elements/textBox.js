@@ -2,7 +2,7 @@
 var _parent = wormHelper.refreshModule("./worm_scheme/ui_elements/controlBase.js").prototype,
 	_proto = textBox.prototype = Object.create(_parent);
 	
-_proto.constructor = textBox;	
+_proto.constructor = textBox;		
 	
 function textBox() {
 	_parent.constructor.apply(this);
@@ -62,14 +62,14 @@ _proto.render = function() {
 		case true:
 			var concat = "_textAreaContainer";
 		
-			wormHelper.writeResponse("<div class='" + className + concat + "' id='" + identifier + "'>");
+			wormHelper.writeResponse("<div class='" + className + concat + "' id='" + identifier + concat + "'>");
 			wormHelper.writeResponse("<textarea class='" + this.get("classCollection") + "' id='" + identifier + "' name='" + name + "'>" + value + "</textarea>");
 			wormHelper.writeResponse("</div>");
 			break;
 		case false:
 			var concat = "_textBoxContainer";
 		
-			wormHelper.writeResponse("<div class='" + className + concat + "' id='" + identifier + "'>");
+			wormHelper.writeResponse("<div class='" + className + concat + "' id='" + identifier + concat + "'>");
 			wormHelper.writeResponse("<input type='text' class='" + this.get("classCollection") + "' id='" + identifier + "' name='" + name + "' placeholder='" + placeHolder + "' value='" + value + "'></input>");
 			wormHelper.writeResponse("</div>");
 			break;

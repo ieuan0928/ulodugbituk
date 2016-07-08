@@ -2,7 +2,7 @@
 var _parent = wormHelper.refreshModule("./worm_scheme/ui_elements/uiBase.js").prototype,
 	_proto = controlBase.prototype = Object.create(_parent);
 
-var lookAndFeelObj = wormHelper.refreshModule("./worm_scheme/ui_elements/lookAndFeel.js"); 	
+var lookAndFeelObj = wormHelper.refreshModule("./worm_scheme/ui_elements/lookAndFeel.js");
 	
 _proto.constructor = controlBase;
 _proto.lookAndfeel = null;
@@ -178,6 +178,10 @@ _proto.getClasses = function() {
 	}
 	
 	return classResult;
+};
+
+_proto.getStyleSameClass = function() {
+	
 };
 
 _proto.render = function() {};
