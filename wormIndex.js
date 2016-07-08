@@ -9,11 +9,13 @@ _proto.render = function() {
 	var siteProp = site.properties;
 	var request = siteProp.request;
 	var urlMap = siteProp.urlMap;
+	var child = siteMap.child;
 	
 	if (siteProp.isPartialLoad) {
 		var index = siteProp.urlMap.length - 2;
+		if (index < 0) index = 0;
 		
-		wormHelper.pageViewerName = (siteMap.child.childMap[urlMap[urlMap.length - 2].toLowerCase()]).pageViewerName;
+		wormHelper.pageViewerName = (child.childMap[urlMap[urlMap.length - 2].toLowerCase()]).pageViewerName;
 	}
 	else {
 		var pageType = wormHelper.refreshModule(siteMap.modulePage);
@@ -22,7 +24,7 @@ _proto.render = function() {
 		if ("pageViewerName" in siteMap) {
 			var pageViewer = pageObject[siteMap.pageViewerName];
 		
-			pageViewer.set("map", siteMap.child);
+			pageViewer.set("map", child);
 			pageViewer.set("urlMap", urlMap);
 		}
 		site.render(pageObject);

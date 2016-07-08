@@ -19,14 +19,13 @@ wormHelper = {
 	writeResponse: function(response) {
 		var siteProperties = wormHelper.site.properties;
 		
-		if (siteProperties.isPartialLoad == true) {
-		
-			wormHelper.contentBuffer += "tae";
-		
-		}
-		else {
+		switch (siteProperties.isPartialLoad) {
+		case true:		
+			wormHelper.contentBuffer += response;
+			break;
+		case false: 
 			siteProperties.response.write(response);
-		}		
+			break;
 	},
 	
 	refreshModule : function(path) {
