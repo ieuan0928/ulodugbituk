@@ -17,7 +17,7 @@
 					},
 					success: function(data) {
 						console.log(data);
-						$("#" + data.pageViewerName).html("bullshit");
+						$("#" + data.pageViewerName).html(data.contentBuffer);
 					},
 					error: function(jqXHR, textStatus, errorThrown) {
 						alert("error");

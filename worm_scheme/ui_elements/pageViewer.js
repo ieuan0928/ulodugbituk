@@ -41,8 +41,8 @@ _proto.set = function(propertyName, value) {
 }
 _proto.render = function() {
 	var response = wormHelper.site.properties.response;
-	
-	wormHelper.writeResponse("<div id='" + this.properties.identifier + "'>");
+	var isPartialLoad = wormHelper.site.properties.isPartialLoad;
+	if (!isPartialLoad) wormHelper.writeResponse("<div id='" + this.properties.identifier + "'>");
 	
 	var myMap = this.properties.map;
 	var urlMap = this.properties.urlMap;
@@ -55,6 +55,7 @@ _proto.render = function() {
 		pageObject.createElements();
 	}
 	else {
+		
 		var urlLower = urlMap[0].toLowerCase();
 		if (urlLower in myMap.childMap) {
 			var map = myMap.childMap[urlLower];
@@ -81,7 +82,7 @@ _proto.render = function() {
 	pageObject.render();
 	pageObject.postRender();
 	
-	wormHelper.writeResponse("</div>");
+	if (!isPartialLoad) wormHelper.writeResponse("</div>");
 }
 
 module.exports = pageViewer;

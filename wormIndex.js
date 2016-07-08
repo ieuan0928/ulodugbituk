@@ -11,16 +11,42 @@ _proto.render = function() {
 	var urlMap = siteProp.urlMap;
 	var child = siteMap.child;
 	
+	var pageType;
+	
+	site.set("errorPagePath", siteMap.errorModulePage);
+	
 	if (siteProp.isPartialLoad) {
-		var index = siteProp.urlMap.length - 2;
-		if (index < 0) index = 0;
+		var index = urlMap.length - 2;
+		var map;
+		if (index < 0) {
+			map = siteMap;
+			wormHelper.pageViewerName = siteMap.pageViewerName;
+			pageType = wormHelper.refreshModule(siteMap.modulePage);
+		}
+		else {
+			map = child.childMap[urlMap[index].toLowerCase()];
+			console.log(map);
+			wormHelper.pageViewerName = map.pageViewerName;
+			pageType = wormHelper.refreshModule(map.modulePage);
+		}
 		
-		wormHelper.pageViewerName = (child.childMap[urlMap[urlMap.length - 2].toLowerCase()]).pageViewerName;
+		urlMap.splice(0, 1);
+		
+		var responsePage = new pageType();
+		
+		responsePage.createElements();
+		var responseViewer = responsePage[wormHelper.pageViewerName];
+		responseViewer.set("map", map.child);
+		responseViewer.set("urlMap", urlMap);
+		
+		responseViewer.preRender();
+		responseViewer.render();
+		responseViewer.postRender();
 	}
 	else {
-		var pageType = wormHelper.refreshModule(siteMap.modulePage);
+		pageType = wormHelper.refreshModule(siteMap.modulePage);
 		var pageObject = new pageType();
-		site.set("errorPagePath", siteMap.errorModulePage)
+		
 		if ("pageViewerName" in siteMap) {
 			var pageViewer = pageObject[siteMap.pageViewerName];
 		
