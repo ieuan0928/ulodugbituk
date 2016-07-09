@@ -5,6 +5,8 @@ _proto.constructor = pageViewer;
 
 function pageViewer() {
 	_parent.constructor.apply(this);
+
+	this.properties["mustRenderContainer"] = true;
 }
 
 _proto.nextUrlParameter = '';
@@ -14,13 +16,12 @@ _proto.get = function(propertyName) {
 	switch (propertyName.trim().toLowerCase()) {
 		case "map":
 			return this.properties["map"];
-			break;
 		case "urlmap":
 			return this.properties["urlMap"];
-			break;
+		case "mustrendercontainer":
+			return this.properties["mustRenderContainer"];
 		default:
 			return _parent.get.call(this, propertyName);
-			break;
 	}
 }
 
@@ -29,20 +30,20 @@ _proto.set = function(propertyName, value) {
 		case "map":
 			this.properties["map"] = value;
 			return true;
-			break;
 		case "urlmap":
 			this.properties["urlMap"] = value;
 			return true;
-			break;
+		case "mustrendercontainer":
+			this.properties["mustRenderContainer"] = value;
+			return true;
 		default:
 			return _parent.set.call(this, propertyName, value);
-			break;
 	}
 }
 _proto.render = function() {
 	var response = wormHelper.site.properties.response;
-	var isPartialLoad = wormHelper.site.properties.isPartialLoad;
-	if (!isPartialLoad) wormHelper.writeResponse("<div id='" + this.properties.identifier + "'>");
+	var mustRenderContainer = this.properties["mustRenderContainer"];
+	if (mustRenderContainer) wormHelper.writeResponse("<div id='" + this.properties.identifier + "'>");
 	
 	var myMap = this.properties.map;
 	var urlMap = this.properties.urlMap;
@@ -82,7 +83,7 @@ _proto.render = function() {
 	pageObject.render();
 	pageObject.postRender();
 	
-	if (!isPartialLoad) wormHelper.writeResponse("</div>");
+	if (mustRenderContainer) wormHelper.writeResponse("</div>");
 }
 
 module.exports = pageViewer;

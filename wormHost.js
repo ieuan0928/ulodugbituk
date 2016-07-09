@@ -46,26 +46,28 @@ var routeMethods = {
 		
 		wormHelper.site.set("isPartialLoad", isPartialLoad);
 		wormHelper.site.set("response", response);
-		
-		
+
 		if (isPartialLoad) {
 			wormHelper.site.set("urlMap", request.body.urlMap);
 			wormHelper.contentBuffer = '';
-			response.setHeader("Content-Type", "text/json");
+			response.setHeader("Content-Type", "application/json");
 		}
 		else {
-			wormHelper.site.set("request", request);
 			response.writeHead(200, {'Content-Type': 'text/html'});
+			wormHelper.site.set("request", request);
 		}
 		
 		new wormIndex().render();
 		
 		if (isPartialLoad) {
-			response.json({
+			
+			var result = {
 				contentBuffer: wormHelper.contentBuffer,
 				pageViewerName: wormHelper.pageViewerName
-			});
-			//wormHelper.contentBuffer = null;
+			}
+			
+			response.json(result);
+
 		}
 	},
 	
@@ -122,10 +124,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 server.listen(3000);
 
-app.post("/favicon.ico", function() {});
+app.post("/favicon.ico", function(request, response) { response.end(); });
 app.post("/*", routeMethods.getSite);
 
-app.get("/favicon.ico", function() {});
+app.get("/favicon.ico", function(request, response) { response.end(); });
 app.get("/robots.txt", routeMethods.getRobotDotText)
 app.get("/*.js", routeMethods.getJS);
 app.get("/*", routeMethods.getSite);

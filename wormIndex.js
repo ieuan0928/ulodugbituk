@@ -24,18 +24,17 @@ _proto.render = function() {
 			pageType = wormHelper.refreshModule(siteMap.modulePage);
 		}
 		else {
-			map = child.childMap[urlMap[index].toLowerCase()];
-			console.log(map);
+			map = child.childMap[urlMap[index].toLowerCase()];;
 			wormHelper.pageViewerName = map.pageViewerName;
 			pageType = wormHelper.refreshModule(map.modulePage);
+			urlMap.splice(0, 1);
 		}
-		
-		urlMap.splice(0, 1);
 		
 		var responsePage = new pageType();
 		
 		responsePage.createElements();
 		var responseViewer = responsePage[wormHelper.pageViewerName];
+		responseViewer.set("mustRenderContainer", false);
 		responseViewer.set("map", map.child);
 		responseViewer.set("urlMap", urlMap);
 		
