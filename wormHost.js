@@ -18,12 +18,12 @@ wormHelper = {
 		var siteProperties = wormHelper.site.properties;
 		
 		switch (siteProperties.isPartialLoad) {
-		case true:		
-			siteProperties.contentBuffer += response;
-			break;
-		case false: 
-			siteProperties.response.write(response);
-			break;
+			case true:
+				siteProperties.contentBuffer += response;
+				break;
+			default: 
+				siteProperties.response.write(response);
+				break;
 		}
 	},
 	
@@ -137,6 +137,3 @@ app.get("/*.js", routeMethods.getJS);
 app.get("/*", routeMethods.getSite);
 
 app.get("/*.css", routeMethods.getCSS);
-
-
-
