@@ -3,8 +3,6 @@ wormHelper = {
 	siteMap: [],
 	jsBundle: null,
 	cssBundle: null,
-	contentBuffer : null,
-	pageViewerName: null,
 	
 	generateUUID: function(formatString, baseNumber) {
 		var d = new Date().getTime();
@@ -21,7 +19,7 @@ wormHelper = {
 		
 		switch (siteProperties.isPartialLoad) {
 		case true:		
-			wormHelper.contentBuffer += response;
+			siteProperties.contentBuffer += response;
 			break;
 		case false: 
 			siteProperties.response.write(response);
@@ -44,30 +42,28 @@ var routeMethods = {
 		var isPartialLoad = Object.keys(request.body).length > 0;
 		wormHelper.site = new siteModule();
 		
-		wormHelper.site.set("isPartialLoad", isPartialLoad);
-		wormHelper.site.set("response", response);
+		var site = wormHelper.site;
+
+		site.set("isPartialLoad", isPartialLoad);
+		site.set("response", response);
 
 		if (isPartialLoad) {
-			wormHelper.site.set("urlMap", request.body.urlMap);
-			wormHelper.contentBuffer = '';
+			site.set("urlMap", request.body.urlMap);
+			site.set("urlRefreshOrdinal", request.body.urlRefreshOrdinal);
 			response.setHeader("Content-Type", "application/json");
 		}
 		else {
 			response.writeHead(200, {'Content-Type': 'text/html'});
-			wormHelper.site.set("request", request);
+			site.set("request", request);
 		}
 		
 		new wormIndex().render();
 		
 		if (isPartialLoad) {
-			
-			var result = {
-				contentBuffer: wormHelper.contentBuffer,
-				pageViewerName: wormHelper.pageViewerName
-			}
-			
-			response.json(result);
-
+			response.json({
+				contentBuffer: site.get("contentBuffer"),
+				pageViewerName: site.get("pageViewerName")
+			});
 		}
 	},
 	

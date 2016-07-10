@@ -16,24 +16,29 @@ _proto.render = function() {
 	site.set("errorPagePath", siteMap.errorModulePage);
 	
 	if (siteProp.isPartialLoad) {
-		var index = urlMap.length - 2;
+		var index;
 		var map;
-		if (index < 0) {
+
+		if (isNaN(siteProp.urlRefreshOrdinal)) index = urlMap.length - 2;
+		else index = 0;
+		
+		if (index <= 0) {
 			map = siteMap;
-			wormHelper.pageViewerName = siteMap.pageViewerName;
+			site.set("pageViewerName", siteMap.pageViewerName);
 			pageType = wormHelper.refreshModule(siteMap.modulePage);
 		}
 		else {
 			map = child.childMap[urlMap[index].toLowerCase()];;
-			wormHelper.pageViewerName = map.pageViewerName;
+			site.set("pageViewerName", map.pageViewerName);
 			pageType = wormHelper.refreshModule(map.modulePage);
+			
 			urlMap.splice(0, 1);
 		}
 		
 		var responsePage = new pageType();
 		
 		responsePage.createElements();
-		var responseViewer = responsePage[wormHelper.pageViewerName];
+		var responseViewer = responsePage[site.get("pageViewerName")];
 		responseViewer.set("mustRenderContainer", false);
 		responseViewer.set("map", map.child);
 		responseViewer.set("urlMap", urlMap);

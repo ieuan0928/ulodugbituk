@@ -7,6 +7,9 @@ _proto.constructor = site;
 function site() {
 	_parent.constructor.apply(this);
 	
+	this.properties["contentBuffer"] = '';
+	this.properties["urlRefreshOrdinal"] = null;
+
 	wormHelper.jsBundle = [];
 }
 
@@ -48,27 +51,30 @@ _proto.set = function(propertyName, value) {
 			this.properties["queryParameters"] = explodeUrl;
 			
 			return true;
-			break;
 		case "response":
 			this.properties["response"] = value;
 			return true;
-			break;
 		case "errorpagepath":
 			this.properties["errorPagePath"] = value;
 			return true;
-			break;
 		case "ispartialload":
 			this.properties["isPartialLoad"] = value;
 			return true;
-			break;
 		case "urlmap":
 			var explodeUrl = this.splitAndGroom(value, "/");
 			this.properties["urlMap"] = this.splitAndGroom(explodeUrl[0], "-");
 			return true;
-			break;
+		case "contentbuffer":
+			this.properties["contentBuffer"] = value;
+			return true;
+		case "pageviewername":
+			this.properties["pageViewerName"] = value;
+			return true;
+		case "urlrefreshordinal":
+			this.properties["urlRefreshOrdinal"] = value;
+			return true;
 		default:
 			return _parent.set.call(this, propertyName, value);
-			break;
 	}
 };
 
@@ -76,28 +82,26 @@ _proto.get = function(propertyName) {
 	switch(propertyName.trim().toLowerCase()) {
 		case "request":
 			return this.properties["request"];
-			break;
 		case "response":
 			return this.properties["response"];
-			break;
 		case "requesturl":
 			return this.properties["requestUrl"];
-			break;
 		case "urlmap":
 			return this.properties["urlMap"];
-			break;
 		case "queryparameters":
 			return this.properties["queryParameters"];
-			break;
 		case "errorpagepath":
 			return this.properties["errorPagePath"];
-			break;
 		case "ispartialload":
 			return this.properties["isPartialLoad"];
-			break;
+		case "contentbuffer":
+			return this.properties["contentBuffer"];
+		case "pageviewername":
+			return this.properties["pageViewerName"];
+		case "urlrefreshordinal":
+			return this.properties["urlRefreshOrdinal"]
 		default:
 			return _parent.get.call(this, propertyName, value);
-			break;
 	}
 };
 

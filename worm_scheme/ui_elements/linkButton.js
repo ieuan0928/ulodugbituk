@@ -23,16 +23,14 @@ _proto.get = function(propertyName) {
 	switch (propertyName.trim().toLowerCase()) {
 		case "content":
 			return this.properties.content.get("content");
-			break;
 		case "hypertextreference":
 			return this.properties["hyperTextReference"];
-			break;
 		case "linktype":
 			return this.properties["linkType"];
-			break;
+		case "urlrefreshordinal":
+			return this.properties["urlRefreshOrdinal"];
 		default:
 			return _parent.get.call(this, propertyName);
-			break;
 	}
 }
 
@@ -41,18 +39,17 @@ _proto.set = function(propertyName, value) {
 		case "content":
 			this.properties.content.set("content", value);
 			return true;
-			break;
 		case "linktype":
 			this.properties["linkType"] = value;
 			return true;
-			break;
 		case "hypertextreference":
 			this.properties["hyperTextReference"] = value;
 			return true;
-			break;
+		case "urlrefreshordinal":
+			this.properties["urlRefreshOrdinal"] = value;
+			return true;
 		default:
 			return _parent.set.call(this, propertyName, value);
-			break;
 	}
 }
 
@@ -79,7 +76,13 @@ _proto.postRender = function() {
 		var response = wormHelper.site.properties.response;
 	
 		wormHelper.writeResponse("<script>");
-	    wormHelper.writeResponse("$('#" + this.properties.identifier + "').asyncSiteMapLink()");
+	    wormHelper.writeResponse("$('#" + this.properties.identifier + "').asyncSiteMapLink({");
+		var urlRefreshOrdinal = this.properties["urlRefreshOrdinal"];
+		if (!isNaN(urlRefreshOrdinal)) {
+			wormHelper.writeResponse("urlRefreshOrdinal: " + urlRefreshOrdinal);
+		}
+		wormHelper.writeResponse("})");
+		
 		wormHelper.writeResponse("</script>");
 	}
 }

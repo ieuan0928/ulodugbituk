@@ -3,7 +3,7 @@
 (function($) {
 	$.fn.asyncSiteMapLink = function(options) {
 		var settings = $.extend({
-			siteMapOrdinal: null
+			urlRefreshOrdinal: null,
 		}, options);
 		
 		return this.each(function() {
@@ -13,7 +13,8 @@
 					url:"/",
 					type: "POST",
 					data: {
-						urlMap : $(this).attr("href")
+						urlMap : $(this).attr("href"),
+						urlRefreshOrdinal: settings.urlRefreshOrdinal
 					},
 					success: function(data) {
 						console.log(data);
