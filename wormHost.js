@@ -102,6 +102,14 @@ var routeMethods = {
 	getImage: function(request, response) {
 		
 	},
+
+	getFavIcon: function(request, response) {
+		var path = require.resolve('./webWormsIcon.ico');
+		var fs = require('fs');
+  		var img = fs.readFileSync(path);
+  		response.writeHead(200, {"Content-Type": "image/x-icon"});
+  		response.end(img,'binary');
+	},
 	
 	getRobotDotText: function(request, response) {
 		response.end("buhatunun pa ang robot dot text.");
@@ -120,10 +128,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 server.listen(3000);
 
-app.post("/favicon.ico", function(request, response) { response.end(); });
+app.post("/favicon.ico", routeMethods.getFavIcon);
 app.post("/*", routeMethods.getSite);
 
-app.get("/favicon.ico", function(request, response) { response.end(); });
+app.get("/favicon.ico", routeMethods.getFavIcon);
 app.get("/robots.txt", routeMethods.getRobotDotText)
 app.get("/*.js", routeMethods.getJS);
 app.get("/*", routeMethods.getSite);
