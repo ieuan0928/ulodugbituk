@@ -1,6 +1,6 @@
 
 
-var _parent = wormHelper.refreshModule("./worm_scheme/propertyEntity.js").prototype,
+var _parent = wormHelper.refreshModule("./worm_scheme/renderBase.js").prototype,
 	_proto = uiBase.prototype = Object.create(_parent);
 	
 _proto.constructor = uiBase;
@@ -15,10 +15,8 @@ _proto.set = function(propertyName, value) {
 		case "inlinereadyscripts":
 			this.properties["inlineReadyScripts"] = value;
 			return true;
-			break;
 		default:
 			return _parent.set.call(this, propertyName, value);
-			break;
 	}
 };
 
@@ -27,15 +25,9 @@ _proto.get = function(propertyName) {
 	switch(propertyName.trim().toLowerCase()) {
 		case "inlinereadyscripts":
 			return this.properties["inlineReadyScripts"];
-			break;
 		default:
 			return _parent.get.call(this, propertyName);
-			break;
 	}
 };
-
-_proto.render = function() {};
-_proto.preRender = function() {};
-_proto.postRender = function() {};
 
 module.exports = uiBase;

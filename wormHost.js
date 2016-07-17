@@ -36,6 +36,7 @@ wormHelper = {
 
 var routeMethods = {
 	getSite : function(request, response) {
+		console.log(request.headers.host);
 		var siteModule = wormHelper.refreshModule("./worm_scheme/site.js");
 		var wormIndex = wormHelper.refreshModule("./wormIndex.js");
 
