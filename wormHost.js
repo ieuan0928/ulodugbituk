@@ -3,6 +3,7 @@ wormHelper = {
 	siteMap: [],
 	jsBundle: null,
 	cssBundle: null,
+	domainConfig: null,
 	
 	generateUUID: function(formatString, baseNumber) {
 		var d = new Date().getTime();
@@ -34,11 +35,33 @@ wormHelper = {
 	}
 }
 
+var encapsulateMethods = {
+	createDomainConfig : function(hostHeader) {
+		var wormDomains = wormHelper.refreshModule("./wormDomain.js");
+		var hostNames = wormDomains.hostNames;
+		var subDomainKey = '';
+		
+
+		for (var i in hostNames) {
+			var hostName = "." + hostNames[i];
+			if (hostHeader.indexOf(hostName) > -1) {
+				subDomainKey = hostHeader.replace(hostName, "");
+				break;
+			}
+		}
+
+		if (subDomainKey.length == 0) subDomainKey = wormDomains.default;
+		
+		var subDomain = wormDomains.subDomains[subDomainKey];
+		return subDomain;
+	}
+}
+
 var routeMethods = {
 	getSite : function(request, response) {
-		console.log(request.headers.host);
+		wormHelper.domainConfig = createDomainConfig.spliceHostName(request.headers.host);
 		var siteModule = wormHelper.refreshModule("./worm_scheme/site.js");
-		var wormIndex = wormHelper.refreshModule("./wormIndex.js");
+		var wormIndex = wormHelper.refreshModule(wormHelper.domainConfig.index);
 
 		var isPartialLoad = Object.keys(request.body).length > 0;
 		wormHelper.site = new siteModule();
