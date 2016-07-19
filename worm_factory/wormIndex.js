@@ -1,6 +1,6 @@
 
 var _proto = wormIndex.prototype;
-var siteMap = wormHelper.refreshModule("./siteMap.js");
+var siteMap = wormHelper.refreshModule(wormHelper.domainConfig.siteMap);
 
 function wormIndex() {}
 

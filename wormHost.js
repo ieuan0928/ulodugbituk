@@ -4,6 +4,7 @@ wormHelper = {
 	jsBundle: null,
 	cssBundle: null,
 	domainConfig: null,
+	siteMap: null,
 	
 	generateUUID: function(formatString, baseNumber) {
 		var d = new Date().getTime();
@@ -59,7 +60,8 @@ var encapsulateMethods = {
 
 var routeMethods = {
 	getSite : function(request, response) {
-		wormHelper.domainConfig = createDomainConfig.spliceHostName(request.headers.host);
+		wormHelper.domainConfig = encapsulateMethods.createDomainConfig(request.headers.host);
+		
 		var siteModule = wormHelper.refreshModule("./worm_scheme/site.js");
 		var wormIndex = wormHelper.refreshModule(wormHelper.domainConfig.index);
 
