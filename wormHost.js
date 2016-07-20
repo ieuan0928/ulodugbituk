@@ -4,8 +4,7 @@ wormHelper = {
 	jsBundle: null,
 	cssBundle: null,
 	domainConfig: null,
-	siteMap: null,
-	
+		
 	generateUUID: function(formatString, baseNumber) {
 		var d = new Date().getTime();
 		var uuid = formatString.replace(/[xy]/g, function(c) {

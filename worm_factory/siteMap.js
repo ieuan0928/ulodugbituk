@@ -1,5 +1,5 @@
 module.exports = {
-	modulePage : "./wwPages/main.js",	
+	modulePage : "./worm_factory/wwPages/mainPage.js",	
 	pageViewerName : "mainViewer",
 	child : {
 		defaultKey : "home",
