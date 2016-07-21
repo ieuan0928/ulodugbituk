@@ -1,4 +1,4 @@
-var _parent = wormHelper.refreshModule("./worm_scheme/ui_elements/containerControl.js"),
+var _parent = wormHelper.refreshModule("./worm_scheme/ui_elements/containerControl.js").prototype,
     _proto = gridControl.prototype = Object.create(_parent);
 
 function gridControl() {
@@ -26,5 +26,8 @@ _proto.set = function(propertyName, value) {
     }
 }
 
+_proto.render = function() {
+    wormHelper.writeResponse("<div>test data</div>");
+}
 
 module.exports = gridControl;
