@@ -5,8 +5,6 @@ var _parent = wormHelper.refreshModule("./worm_scheme/ui_elements/lookAndFeel.js
 var _proto = lookAndFeelSameClass.prototype;
 
 _proto.constructor = lookAndFeelSameClass;
-_proto.inputBox = null;
-_proto.image = null;
 
 function lookAndFeelSameClass() {
 	_parent.constructor.apply(this, arguments);
