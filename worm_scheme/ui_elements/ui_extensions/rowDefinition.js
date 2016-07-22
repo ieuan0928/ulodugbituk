@@ -1,10 +1,11 @@
 var _parent = wormHelper.refreshModule("./worm_scheme/propertyEntity.js").prototype,
     _proto = rowDefinition.prototype = Object.create(_parent);
 
+_proto.constructor = rowDefinition;
+
 function rowDefinition() { 
     _parent.constructor.apply(this);
 }
-
 
 _proto.get = function(propertyName) {
     switch (propertyName.trim().toLowerCase()) {

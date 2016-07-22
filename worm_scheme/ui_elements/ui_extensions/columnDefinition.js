@@ -1,6 +1,8 @@
 var _parent = wormHelper.refreshModule("./worm_scheme/propertyEntity.js").prototype,
     _proto = columnDefinition.prototype = Object.create(_parent);
 
+_proto.constructor = columnDefinition;
+
 function columnDefinition() {
     _parent.constructor.apply(this);
 }
