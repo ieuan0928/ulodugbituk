@@ -10,9 +10,6 @@ var radioButton = wormHelper.refreshModule("./worm_scheme/ui_elements/radioButto
 var comboBox = wormHelper.refreshModule("./worm_scheme/ui_elements/comboBox.js");
 var option = wormHelper.refreshModule("./worm_scheme/ui_elements/option.js");
 
-//styling same class
-var lookAndFeelSameClassObj = wormHelper.refreshModule("./worm_scheme/ui_elements/lookAndFeelSameClass.js");
-
 _proto.constructor = home;
 
 function home() {
@@ -48,10 +45,6 @@ function home() {
 	this.comboBox1 = new comboBox();
 	this.option1 = new option();
 	this.option2 = new option();
-	
-	//styling same class
-	this.sameClassStylingTextBox = new lookAndFeelSameClassObj();
-	this.sameClassStylingImage = new lookAndFeelSameClassObj();
 }
 
 
@@ -293,24 +286,8 @@ _proto.createElements = function() {
 	this.textBox5.set("isMultiline", false);
 	this.textBox5.set("placeHolder", "tb 5");
 	this.textBox5.set("value", "");
-	this.textBox5.set("backgroundcolor", "violet");
+	this.textBox5.set("backgroundColor", "violet");
 	this.textBox5.set("parent", this);
-	
-	//console.log(this.textBox5.lookAndFeelSameClass);
-	//console.log(this.textBox5.lookAndFeel);
-	
-	//this.labelWithImage5.set("margintop", "60px");
-	//this.labelWithImage5.set("marginleft", "61px");
-	
-	//get data
-	//console.log(this.image3.lookAndFeel);
-	//console.log(this.labelWithImage5.lookAndFeel);
-	
-	this.sameClassStylingTextBox.set("backgroundcolor", "red");
-	this.sameClassStylingImage.set("width", "100px");
-	
-	//console.log(this.sameClassStylingTextBox);
-	//console.log(this.sameClassStylingImage);
 }
 
 module.exports = home;
