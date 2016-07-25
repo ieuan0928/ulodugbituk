@@ -11,6 +11,7 @@ function pageViewer() {
 
 _proto.nextUrlParameter = '';
 _proto.myValue = '';
+_proto.pageObject = null;
 
 _proto.get = function(propertyName) {
 	switch (propertyName.trim().toLowerCase()) {
@@ -40,24 +41,18 @@ _proto.set = function(propertyName, value) {
 			return _parent.set.call(this, propertyName, value);
 	}
 }
+
 _proto.preRender = function() {
+	_parent.preRender.call(this);
 
-}
-
-_proto.render = function() {
-	var response = wormHelper.site.properties.response;
-	var mustRenderContainer = this.properties["mustRenderContainer"];
-	if (mustRenderContainer) wormHelper.writeResponse("<div id='" + this.properties.identifier + "'>");
-	
 	var myMap = this.properties.map;
 	var urlMap = this.properties.urlMap;
-	
 	var pageType = null;
-	var pageObject = null;
+	
 	if (urlMap.length == 0) {
 		pageType = wormHelper.refreshModule(myMap.childMap[myMap.defaultKey].modulePage);
-		pageObject = new pageType();
-		pageObject.createElements();
+		this.pageObject = new pageType();
+		this.pageObject.createElements();
 	}
 	else {
 		
@@ -66,8 +61,8 @@ _proto.render = function() {
 			var map = myMap.childMap[urlLower];
 			pageType = wormHelper.refreshModule(map.modulePage);
 
-			pageObject = new pageType();
-			pageObject.createElements();
+			this.pageObject = new pageType();
+			this.pageObject.createElements();
 						
 			if ('child' in map) {
 				var childPageViewer = pageObject[map.pageViewerName];
@@ -79,15 +74,29 @@ _proto.render = function() {
 		}
 		else {
 			pageType = wormHelper.refreshModule(wormHelper.site.properties.errorPagePath);
-			pageObject = new pageType();
-			pageObject.createElements();
+			this.pageObject = new pageType();
+			this.pageObject.createElements();
 		}
 	}
-	pageObject.preRender();
-	pageObject.render();
-	pageObject.postRender();
+
+	this.pageObject.preRender();
+}
+
+_proto.render = function() {
+	var response = wormHelper.site.properties.response;
+	var mustRenderContainer = this.properties["mustRenderContainer"];
+	if (mustRenderContainer) wormHelper.writeResponse("<div id='" + this.properties.identifier + "'>");
+	
+	this.pageObject.render();
+	
 	
 	if (mustRenderContainer) wormHelper.writeResponse("</div>");
+}
+
+_proto.postRender = function() {
+	this.pageObject.postRender();
+
+	_parent.postRender.call(this);
 }
 
 module.exports = pageViewer;
