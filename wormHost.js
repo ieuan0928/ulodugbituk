@@ -121,6 +121,21 @@ var routeMethods = {
 	},
 	
 	getCSS: function(request, response) {
+		var bundle = wormHelper.cssBundle;
+		
+		if (bundle == null) {
+			response.end("// css is not available...");
+			return false;
+		}
+		
+		if (!(request.url in bundle)) {
+			response.end("// css is not available...");
+			return false;
+		}
+		
+		var resolvePath = require.resolve(bundle[request.url]);
+		
+		
 		
 	},
 	

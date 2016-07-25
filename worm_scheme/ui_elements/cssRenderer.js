@@ -18,7 +18,10 @@ _proto.render = function() {
 	wormHelper.writeResponse("padding-left: " + textBoxStylingObject.paddingTop + ";");
 	wormHelper.writeResponse("padding-right: " + textBoxStylingObject.paddingRight + ";");
 	wormHelper.writeResponse("padding-bottom: " + textBoxStylingObject.paddingBottom + ";");
-		
+	
+	//background
+	wormHelper.writeResponse("background-color: " + textBoxStylingObject.backgroundColor + ";");
+	
 	wormHelper.writeResponse("}");
 	
 }

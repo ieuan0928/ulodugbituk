@@ -50,6 +50,12 @@ _proto.get = function(propertyName) {
 	}
 };
 
+_proto.preRender = function() {
+	wormHelper.site.cssBundler("/ws_css/default_text_box.css", "./styles/textBoxStylingObject.js");
+	
+	_parent.preRender.call(this);
+}
+
 _proto.render = function() {
 	var isMultiline = this.get("isMultiline");
 	var value = this.get("value");

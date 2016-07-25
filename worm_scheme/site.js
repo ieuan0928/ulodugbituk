@@ -11,6 +11,7 @@ function site() {
 	this.properties["urlRefreshOrdinal"] = null;
 
 	wormHelper.jsBundle = [];
+	wormHelper.cssBundle = [];
 }
 
 _proto.jsBundler = function(index, path) {
@@ -23,7 +24,19 @@ _proto.renderJSBundle = function() {
 	
 	for (var index in jsBundle) {
 		response.write("<script src='" + index + "'></script>");
-		
+	}
+}
+
+_proto.cssBundler = function(index, path) {
+	wormHelper.cssBundle[index] = path;
+}
+
+_proto.renderCSSBundle = function() {
+	var cssBundle = wormHelper.cssBundle;
+	var response = this.properties.response;
+	
+	for (var index in cssBundle) {
+		response.write("<link href='" + index + "'></link>");
 	}
 }
 
@@ -120,6 +133,7 @@ _proto.render = function(page) {
 		res.write("<meta http-equiv='Content-Type' content='text/html; charset=utf-8' />");
 	
 		this.renderJSBundle();
+		this.renderCSSBundle();
 	
 		res.write("</head>");
 		res.write("<body>");

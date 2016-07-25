@@ -40,6 +40,10 @@ _proto.set = function(propertyName, value) {
 			return _parent.set.call(this, propertyName, value);
 	}
 }
+_proto.preRender = function() {
+
+}
+
 _proto.render = function() {
 	var response = wormHelper.site.properties.response;
 	var mustRenderContainer = this.properties["mustRenderContainer"];

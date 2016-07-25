@@ -1,12 +1,14 @@
 module.exports = {
 	//margin
-	marginTop : "50px",	
-	marginLeft : "55px",
-	marginRight : "60px",
-	marginBottom : "65px",
+	marginTop : "5px",	
+	marginLeft : "5px",
+	marginRight : "5px",
+	marginBottom : "5px",
 	//padding
 	paddingTop : "5px",
-	paddingLeft : "10px",
-	paddingRight : "15px",
-	paddingBottom : "20px"
+	paddingLeft : "5px",
+	paddingRight : "5px",
+	paddingBottom : "5px",
+	//background
+	backgroundColor : "red"
 }
