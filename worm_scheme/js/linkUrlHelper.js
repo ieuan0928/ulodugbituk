@@ -1,5 +1,3 @@
-// Javascript to do: linkUrlHelper.js
-
 (function($) {
 	$.fn.asyncSiteMapLink = function(options) {
 		var settings = $.extend({
