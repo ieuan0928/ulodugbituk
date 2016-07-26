@@ -5,6 +5,10 @@ _proto.constructor = rowDefinition;
 
 function rowDefinition() { 
     _parent.constructor.apply(this);
+
+    this.properties["height"] = 10;
+    this.properties["minHeight"] = 10;
+    this.properties["maxHeight"] = 10;
 }
 
 _proto.get = function(propertyName) {

@@ -5,6 +5,10 @@ _proto.constructor = columnDefinition;
 
 function columnDefinition() {
     _parent.constructor.apply(this);
+
+    this.properties["width"] = 10;
+    this.properties["minWidth"] = 10;
+    this.properties["maxWidth"] = 10;
 }
 
 _proto.get = function(propertyName) {

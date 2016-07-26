@@ -22,7 +22,7 @@ function mainPage() {
 _proto.createElements = function() {
     this.gridControl1.set("parent", this);
 
-    console.log(this.row1 instanceof rowDefinition);
+    this.gridControl1.set("identifier", "factory_gridControl1")
     this.gridControl1.addRowDefinition(this.row1);
     this.gridControl1.addRowDefinition(this.row2);
     this.gridControl1.addColumnDefinition(this.column1);

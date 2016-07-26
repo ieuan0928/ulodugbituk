@@ -46,6 +46,8 @@ _proto.addRowDefinition = function(newRowDefinition) {
 }
 
 _proto.preRender = function() {
+    _parent.preRender.call(this);
+
     var childControls = this.properties.childControls;
 
     for (var index in childControls) {
@@ -58,11 +60,28 @@ _proto.preRender = function() {
         }
     }
 
-    _parent.preRender.call(this);
+    wormHelper.site.jsBundler("/ws_js/gcb.js", "./worm_scheme/js/gridBehavior.js")
 }
 
 _proto.render = function() {
-    wormHelper.writeResponse("<div>test data</div>");
+    if (!this.properties.identifier) throw new EvalError("Must have property identifier.");
+
+    wormHelper.writeResponse("<div id='" + this.properties.identifier + "'>");
+    wormHelper.writeResponse("test lang...");
+    wormHelper.writeResponse("</div>");
+}
+
+_proto.postRender = function() {
+    wormHelper.writeResponse("<script>");
+    wormHelper.writeResponse("$('#" + this.properties.identifier + "').applyGridBehavior({");
+    wormHelper.writeResponse("rowDefinitions:" + JSON.stringify(this.properties.rowDefinitions, {
+        indent: ' ',
+        singleQuotes: false,
+        inlineCharacterLimit: 100
+}) + ",");
+    wormHelper.writeResponse("columnDefinitions:" + this.properties.columnDefinitions);
+    wormHelper.writeResponse("});");
+    wormHelper.writeResponse("</script>");
 }
 
 module.exports = gridControl;
