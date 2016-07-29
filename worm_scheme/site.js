@@ -23,7 +23,7 @@ _proto.renderJSBundle = function() {
 	var response = this.properties.response;
 	
 	for (var index in jsBundle) {
-		response.write("<script src='" + index + "'></script>");
+		response.write("<script type='text/javascript' src='" + index + "'></script>");
 	}
 }
 
@@ -36,7 +36,7 @@ _proto.renderCSSBundle = function() {
 	var response = this.properties.response;
 	
 	for (var index in cssBundle) {
-		response.write("<link href='" + index + "'></link>");
+		response.write("<link rel='stylesheet' type='text/css' href='" + index + "'></link>");
 	}
 }
 

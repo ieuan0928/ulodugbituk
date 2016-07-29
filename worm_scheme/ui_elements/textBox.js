@@ -51,7 +51,7 @@ _proto.get = function(propertyName) {
 };
 
 _proto.preRender = function() {
-	wormHelper.site.cssBundler("/ws_css/default_text_box.css", "./styles/textBoxStylingObject.js");
+	wormHelper.site.cssBundler("./ws_css/default_text_box.css", "./styles/textBoxStylingObject.js");
 	
 	_parent.preRender.call(this);
 }
