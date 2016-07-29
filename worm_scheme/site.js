@@ -9,9 +9,6 @@ function site() {
 	
 	this.properties["contentBuffer"] = '';
 	this.properties["urlRefreshOrdinal"] = null;
-
-	wormHelper.jsBundle = [];
-	wormHelper.cssBundle = [];
 }
 
 _proto.jsBundler = function(index, path) {

@@ -22,7 +22,7 @@ _proto.set = function(propertyName, value) {
     }
 }
 
-_proto.render = function() {
+_proto.render = function(response) {
     wormHelper.writeResponse(".text_Box_Default_Class {");
     //margin
     wormHelper.writeResponse("margin-top: " + this.properties.styleObject.marginTop + ";");

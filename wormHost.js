@@ -1,8 +1,8 @@
 wormHelper = {
     site: null,
     siteMap: [],
-    jsBundle: null,
-    cssBundle: null,
+    jsBundle: [],
+    cssBundle: [],
     domainConfig: null,
 
     generateUUID: function(formatString, baseNumber) {
@@ -119,9 +119,12 @@ var routeMethods = {
     },
 
     getCSS: function(request, response) {
+        var site = wormHelper.site;
+        site.set("response", response);
+        site.set("isPartialLoad", false);
+
         response.writeHead(200, { 'Content-Type': 'text/css' });
         var bundle = wormHelper.cssBundle;
-        console.log(request.url);
 
         if (bundle == null) {
             response.end("// css is not available...");
@@ -133,7 +136,6 @@ var routeMethods = {
             return false;
         }
 
-
         var styleObject = wormHelper.refreshModule(bundle["." + request.url]);
         var cssRenderer = wormHelper.refreshModule("./worm_scheme/ui_elements/cssRenderer.js");
         var cr = new cssRenderer();
@@ -141,7 +143,7 @@ var routeMethods = {
         cr.set("styleObject", styleObject);
         cr.render();
 
-//        response.end("/* pakyu nimo */");
+        response.end();
     },
 
     getImage: function(request, response) {},
