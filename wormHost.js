@@ -28,6 +28,10 @@ wormHelper = {
         }
     },
 
+    writeObject: function(objectToWrite) {
+        hostHelper.objectToString(objectToWrite);
+    },
+
     refreshModule: function(path) {
         var resolvePath = require.resolve(path);
         delete require.cache[resolvePath];
@@ -35,12 +39,42 @@ wormHelper = {
     }
 }
 
-var encapsulateMethods = {
+var hostHelper = {
+    keyValueToString : function(key, value) {
+        wormHelper.writeResponse(key.toString() + ":");
+        switch (typeof value) {
+            case "string":
+                wormHelper.writeResponse("'" + value + "'");
+                break;
+            case "number":
+            case "boolean":
+                wormHelper.writeResponse(value.toString());
+                break;
+            case "object":
+                hostHelper.objectToString(value);
+                break;                
+        }
+    },
+    
+    objectToString : function(objectToConvert) {
+        wormHelper.writeResponse("{");
+        var keys = Object.keys(objectToConvert);
+        var count = keys.length;
+
+        hostHelper.keyValueToString(keys[0], objectToConvert[keys[0]]);
+
+        for (var index = 1; index < count; index++) {
+            wormHelper.writeResponse(",");
+            
+            hostHelper.keyValueToString(keys[index], objectToConvert[keys[index]]);
+        }
+        wormHelper.writeResponse("}");
+    },
+
     createDomainConfig: function(hostHeader) {
         var wormDomains = wormHelper.refreshModule("./wormDomain.js");
         var hostNames = wormDomains.hostNames;
         var subDomainKey = '';
-
 
         for (var i in hostNames) {
             var hostName = "." + hostNames[i];
@@ -59,7 +93,7 @@ var encapsulateMethods = {
 
 var routeMethods = {
     getSite: function(request, response) {
-        wormHelper.domainConfig = encapsulateMethods.createDomainConfig(request.headers.host);
+        wormHelper.domainConfig = hostHelper.createDomainConfig(request.headers.host);
 
         var siteModule = wormHelper.refreshModule("./worm_scheme/site.js");
         var wormIndex = wormHelper.refreshModule(wormHelper.domainConfig.index);

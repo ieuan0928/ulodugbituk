@@ -74,12 +74,13 @@ _proto.render = function() {
 _proto.postRender = function() {
     wormHelper.writeResponse("<script>");
     wormHelper.writeResponse("$('#" + this.properties.identifier + "').applyGridBehavior({");
-    wormHelper.writeResponse("rowDefinitions:" + JSON.stringify(this.properties.rowDefinitions, {
-        indent: ' ',
-        singleQuotes: false,
-        inlineCharacterLimit: 100
-}) + ",");
-    wormHelper.writeResponse("columnDefinitions:" + this.properties.columnDefinitions);
+
+    wormHelper.writeResponse("rowDefinitions:" );
+    wormHelper.writeObject(this.properties.rowDefinitions) 
+    wormHelper.writeResponse(",");
+    wormHelper.writeResponse("columnDefinitions:");
+    wormHelper.writeObject(this.properties.columnDefinitions);
+    
     wormHelper.writeResponse("});");
     wormHelper.writeResponse("</script>");
 }
