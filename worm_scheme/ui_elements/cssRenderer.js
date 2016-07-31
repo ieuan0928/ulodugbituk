@@ -9,7 +9,12 @@ function cssRenderer() {
 }
 
 _proto.get = function(propertyName) {
-
+    switch (propertyName.trim().toLowerCase()) {
+        case "styleobject":
+            return this.properties["styleObject"];
+        default:
+            return _parent.get.call(this, propertyName);
+    }
 }
 
 _proto.set = function(propertyName, value) {

@@ -18,19 +18,15 @@ _proto.set = function(propertyName, value) {
 		case "classname":
 			this.properties["classCollection"].push(value);
 			return true;
-			break;
 		case "identifier":
 			this.properties["identifier"] = value;
 			return true;
-			break;
 		case "name":
 			this.properties["name"] = value;
 			return true;
-			break;
 		case "parent":
 			value.addControl(this);
 			return true;
-			break;
 			
 		///////////////////////////////look and feel//////////////////////////////////////////////////	
 		
@@ -117,17 +113,12 @@ _proto.set = function(propertyName, value) {
 		case "liststyletype":
 		
 		case "cursor":
-		
             this.lookAndFeel.set(propertyName, value);
 			return true;
-			break;
 		
 		///////////////////////////////look and feel//////////////////////////////////////////////////
-			
-			
 		default:
 			return _parent.set.call(this, propertyName, value);
-			break;
 	}
 };
 
@@ -143,10 +134,8 @@ _proto.get = function(propertyName) {
 			{
 				return "";
 			}
-			break;
 		case "classcollection":
 			return this.getClasses();
-			break;
 		case "identifier":
 			if(this.properties["identifier"] !== undefined)
 			{
@@ -156,13 +145,10 @@ _proto.get = function(propertyName) {
 			{
 				return "";
 			}
-			break;
 		case "name":
 			return this.properties["name"];
-			break;
 		default:
 			return _parent.get.call(this, propertyName);
-			break;
 	}
 };
 

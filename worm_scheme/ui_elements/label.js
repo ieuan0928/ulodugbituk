@@ -21,18 +21,14 @@ _proto.set = function(propertyName, value) {
 		case "value":
 			this.properties["value"] = value;
 			return true;
-			break;
 		case "header":
 			this.properties["header"] = value;
 			return true;
-			break;
 		case "content":
 			this.content.set(propertyName, value);
 			return true;
-			break;
 		default:
 			return _parent.set.call(this, propertyName, value);
-			break;
 	}
 };
 
@@ -40,16 +36,12 @@ _proto.get = function(propertyName) {
 	switch(propertyName.trim().toLowerCase()) {
 		case "value":
 			return this.properties["value"];
-			break;
 		case "header":
 			return this.properties["header"];
-			break;
 		case "content":
 			return this.content.get["content"];
-			break;
 		default:
 			return _parent.get.call(this, propertyName);
-			break;
 	}
 };
 

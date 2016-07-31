@@ -67,7 +67,9 @@ _proto.render = function() {
     if (!this.properties.identifier) throw new EvalError("Must have property identifier.");
 
     wormHelper.writeResponse("<div id='" + this.properties.identifier + "'>");
-    wormHelper.writeResponse("test lang...");
+    
+    _parent.render.call(this);
+
     wormHelper.writeResponse("</div>");
 }
 
@@ -80,7 +82,7 @@ _proto.postRender = function() {
     wormHelper.writeResponse(",");
     wormHelper.writeResponse("columnDefinitions:");
     wormHelper.writeObject(this.properties.columnDefinitions);
-    
+
     wormHelper.writeResponse("});");
     wormHelper.writeResponse("</script>");
 }
