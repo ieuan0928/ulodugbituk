@@ -18,6 +18,10 @@ _proto.set = function(propertyName, value) {
 			this.properties["imagePath"] = value;
 			return true;
 			break;
+		case "fakepath":
+			this.properties["fakePath"] = value;
+			return true;
+			break;
 		default:
 			return _parent.set.call(this, propertyName, value);
 			break;
@@ -32,13 +36,17 @@ _proto.get = function(propertyName) {
 	}
 };
 
+_proto.preRender = function() {
+	wormHelper.site.JPEGBundler("." + this.properties.fakePath, "." + this.properties.imagePath);
+};
+
 _proto.render = function() {
 	var concat = "_image_container";
 	
 	wormHelper.writeResponse("<div id='" + this.properties.identifier + concat + "' class='" + this.get("className") + concat + "'>");
-	wormHelper.writeResponse("<img id='" + this.properties.identifier + "' class='" + this.get("classCollection") + "' src='" + this.properties.imagePath + "'></img>");
+	wormHelper.writeResponse("<img id='" + this.properties.identifier + "' class='" + this.get("classCollection") + "' src='" + this.properties.fakePath + "'></img>");
 	wormHelper.writeResponse("</div>");
 	
-}
+};
 
 module.exports = image;

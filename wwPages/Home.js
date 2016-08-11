@@ -248,11 +248,15 @@ _proto.createElements = function() {
 	//end
 	
 	//test look and feel
-	this.image3.set("imagePath", "smiley.jpeg");
-	this.image3.set("parent", this.panelImage);
+	this.image3.set("fakePath", "/ws_JPEGImage/fakepath.jpeg");
+	this.image3.set("imagePath", "/sample_images/smiley.jpeg");
+	//this.image3.set("parent", this.panelImage);
+	this.image3.set("parent", this);
 	this.image3.set("identifier", "image3_id");
+	this.image3.set("width", "50px");
+	this.image3.set("height", "50px");
 	
-	this.panelImage.set("backgroundcolor", "#4B4B4B");
+	/*this.panelImage.set("backgroundcolor", "#4B4B4B");
 	this.panelImage.set("margintop", "0px");
 	this.panelImage.set("paddingtop", "10px");
 	this.panelImage.set("paddingleft", "10px");
@@ -262,7 +266,7 @@ _proto.createElements = function() {
 	this.panelImage.set("width", "100px");
 	this.panelImage.set("color", "blue");
 	this.panelImage.set("identifier", "panelImage_1_id");
-	this.panelImage.set("parent", this);
+	this.panelImage.set("parent", this);*/
 	
 	this.textBox2.set("identifier", "tb_2_id");
 	this.textBox2.set("isMultiline", false);

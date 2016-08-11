@@ -37,6 +37,10 @@ _proto.renderCSSBundle = function() {
 	}
 }
 
+_proto.JPEGBundler = function(index, path) {
+	wormHelper.imageBundle[index] = path;
+}
+
 _proto.splitAndGroom = function(stringObject, characterExplode) {
 	var result = stringObject.split(characterExplode);
 	for (var index in result) 

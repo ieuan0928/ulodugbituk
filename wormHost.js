@@ -3,6 +3,7 @@ wormHelper = {
     siteMap: [],
     jsBundle: [],
     cssBundle: [],
+	imageBundle: [],
     domainConfig: null,
 
     generateUUID: function(formatString, baseNumber) {
@@ -180,7 +181,40 @@ var routeMethods = {
         response.end();
     },
 
-    getImage: function(request, response) {},
+    getImage: function(request, response) {
+		var site = wormHelper.site;
+        site.set("response", response);
+        site.set("isPartialLoad", false);
+		
+        var bundle = wormHelper.imageBundle;
+		
+		if (bundle == null) {
+            response.end("// image is not available...");
+            return false;
+        }
+
+		console.log(request.url);
+		
+        if (!(("." + request.url) in bundle)) {
+            response.end("// image is not available...");
+            return false;
+        }
+		else
+		{
+			var resolvePath = require.resolve(bundle["." + request.url]);
+			var fs = require('fs');
+			
+			fs.readFile(resolvePath, function(err, data) {
+				if (!err) {
+					response.writeHead(200, { 'Content-Type': 'image/jpeg' });
+					response.end(data);
+				} else {
+					response.end("// image is not available...");
+					return false;
+				}
+			});
+		}
+	},
 
     getFavIcon: function(request, response) {
         var path = require.resolve('./webWormsIcon.ico');
@@ -214,5 +248,6 @@ app.get("/favicon.ico", routeMethods.getFavIcon);
 app.get("/robots.txt", routeMethods.getRobotDotText)
 app.get("/*.js", routeMethods.getJS);
 app.get("/*.css", routeMethods.getCSS);
+app.get("/*.jpeg", routeMethods.getImage);
 
 app.get("/*", routeMethods.getSite);
