@@ -22,6 +22,10 @@ _proto.set = function(propertyName, value) {
 			this.properties["fakePath"] = value;
 			return true;
 			break;
+		case "imagefiletype":
+			this.properties["imageFileType"] = value;
+			return true;
+			break;
 		default:
 			return _parent.set.call(this, propertyName, value);
 			break;
@@ -37,14 +41,52 @@ _proto.get = function(propertyName) {
 };
 
 _proto.preRender = function() {
-	wormHelper.site.JPEGBundler("." + this.properties.fakePath, "." + this.properties.imagePath);
+	
+	var imageFileType = this.properties.imageFileType;
+	
+	if(imageFileType !== "undefined")
+	{
+		switch(imageFileType.trim().toLowerCase()){
+			case "jpeg":
+				wormHelper.site.JPEGBundler("." + this.properties.fakePath, "." + this.properties.imagePath);
+				return true;
+				break;
+			case "jpg":
+				wormHelper.site.JPGBundler("." + this.properties.fakePath, "." + this.properties.imagePath);
+				return true;
+				break;
+			case "png":
+				wormHelper.site.PNGBundler("." + this.properties.fakePath, "." + this.properties.imagePath);
+				return true;
+				break;
+			case "svg":
+				wormHelper.site.SVGBundler("." + this.properties.fakePath, "." + this.properties.imagePath);
+				return true;
+				break;
+			case "gif":
+				wormHelper.site.GIFBundler("." + this.properties.fakePath, "." + this.properties.imagePath);
+				return true;
+				break;
+			default:
+				return true;
+				break;
+		}
+	}
+	else
+	{
+		return false;
+	}
+	
 };
 
 _proto.render = function() {
 	var concat = "_image_container";
+	var inlineStyle = "";
+	
+	var inlineStyle = this.getInlineStlye();
 	
 	wormHelper.writeResponse("<div id='" + this.properties.identifier + concat + "' class='" + this.get("className") + concat + "'>");
-	wormHelper.writeResponse("<img id='" + this.properties.identifier + "' class='" + this.get("classCollection") + "' src='" + this.properties.fakePath + "'></img>");
+	wormHelper.writeResponse("<img style='" + inlineStyle + "' id='" + this.properties.identifier + "' class='" + this.get("classCollection") + "' src='" + this.properties.fakePath + "'></img>");
 	wormHelper.writeResponse("</div>");
 	
 };

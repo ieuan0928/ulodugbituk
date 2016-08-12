@@ -38,7 +38,23 @@ _proto.renderCSSBundle = function() {
 }
 
 _proto.JPEGBundler = function(index, path) {
-	wormHelper.imageBundle[index] = path;
+	wormHelper.JPEGBundle[index] = path;
+}
+
+_proto.JPGBundler = function(index, path) {
+	wormHelper.JPGBundle[index] = path;
+}
+
+_proto.PNGBundler = function(index, path) {
+	wormHelper.PNGBundle[index] = path;
+}
+
+_proto.SVGBundler = function(index, path) {
+	wormHelper.SVGBundle[index] = path;
+}
+
+_proto.GIFBundler = function(index, path) {
+	wormHelper.GIFBundle[index] = path;
 }
 
 _proto.splitAndGroom = function(stringObject, characterExplode) {

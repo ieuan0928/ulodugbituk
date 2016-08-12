@@ -3,7 +3,11 @@ wormHelper = {
     siteMap: [],
     jsBundle: [],
     cssBundle: [],
-	imageBundle: [],
+	JPEGBundle: [],
+	JPGBundle: [],
+	PNGBundle: [],
+	SVGBundle: [],
+	GIFBundle: [],
     domainConfig: null,
 
     generateUUID: function(formatString, baseNumber) {
@@ -181,19 +185,17 @@ var routeMethods = {
         response.end();
     },
 
-    getImage: function(request, response) {
+    getJPEGImages: function(request, response) {
 		var site = wormHelper.site;
         site.set("response", response);
         site.set("isPartialLoad", false);
 		
-        var bundle = wormHelper.imageBundle;
+        var bundle = wormHelper.JPEGBundle;
 		
 		if (bundle == null) {
             response.end("// image is not available...");
             return false;
         }
-
-		console.log(request.url);
 		
         if (!(("." + request.url) in bundle)) {
             response.end("// image is not available...");
@@ -207,6 +209,138 @@ var routeMethods = {
 			fs.readFile(resolvePath, function(err, data) {
 				if (!err) {
 					response.writeHead(200, { 'Content-Type': 'image/jpeg' });
+					response.end(data);
+				} else {
+					response.end("// image is not available...");
+					return false;
+				}
+			});
+		}
+	},
+	
+	getJPGImages: function(request, response) {
+		var site = wormHelper.site;
+        site.set("response", response);
+        site.set("isPartialLoad", false);
+		
+        var bundle = wormHelper.JPGBundle;
+		
+		if (bundle == null) {
+            response.end("// image is not available...");
+            return false;
+        }
+		
+        if (!(("." + request.url) in bundle)) {
+            response.end("// image is not available...");
+            return false;
+        }
+		else
+		{
+			var resolvePath = require.resolve(bundle["." + request.url]);
+			var fs = require('fs');
+			
+			fs.readFile(resolvePath, function(err, data) {
+				if (!err) {
+					response.writeHead(200, { 'Content-Type': 'image/jpg' });
+					response.end(data);
+				} else {
+					response.end("// image is not available...");
+					return false;
+				}
+			});
+		}
+	},
+	
+	getPNGImages: function(request, response) {
+		var site = wormHelper.site;
+        site.set("response", response);
+        site.set("isPartialLoad", false);
+		
+        var bundle = wormHelper.PNGBundle;
+		
+		if (bundle == null) {
+            response.end("// image is not available...");
+            return false;
+        }
+		
+        if (!(("." + request.url) in bundle)) {
+            response.end("// image is not available...");
+            return false;
+        }
+		else
+		{
+			var resolvePath = require.resolve(bundle["." + request.url]);
+			var fs = require('fs');
+			
+			fs.readFile(resolvePath, function(err, data) {
+				if (!err) {
+					response.writeHead(200, { 'Content-Type': 'image/png' });
+					response.end(data);
+				} else {
+					response.end("// image is not available...");
+					return false;
+				}
+			});
+		}
+	},
+	
+	getSVGImages: function(request, response) {
+		var site = wormHelper.site;
+        site.set("response", response);
+        site.set("isPartialLoad", false);
+		
+        var bundle = wormHelper.SVGBundle;
+		
+		if (bundle == null) {
+            response.end("// image is not available...");
+            return false;
+        }
+		
+        if (!(("." + request.url) in bundle)) {
+            response.end("// image is not available...");
+            return false;
+        }
+		else
+		{
+			var resolvePath = require.resolve(bundle["." + request.url]);
+			var fs = require('fs');
+			
+			fs.readFile(resolvePath, function(err, data) {
+				if (!err) {
+					response.writeHead(200, { 'Content-Type': 'image/svg+xml' });
+					response.end(data);
+				} else {
+					response.end("// image is not available...");
+					return false;
+				}
+			});
+		}
+	},
+	
+	getGIFImages: function(request, response) {
+		var site = wormHelper.site;
+        site.set("response", response);
+        site.set("isPartialLoad", false);
+		
+        var bundle = wormHelper.GIFBundle;
+		
+		if (bundle == null) {
+            response.end("// image is not available...");
+            return false;
+        }
+		
+        if (!(("." + request.url) in bundle)) {
+            response.end("// image is not available...");
+            return false;
+        }
+		else
+		{
+			var resolvePath = require.resolve(bundle["." + request.url]);
+			var fs = require('fs');
+			
+			fs.readFile(resolvePath, function(err, data) {
+				if (!err) {
+					response.writeHead(200, { 'Content-Type': 'image/gif' });
 					response.end(data);
 				} else {
 					response.end("// image is not available...");
@@ -248,6 +382,10 @@ app.get("/favicon.ico", routeMethods.getFavIcon);
 app.get("/robots.txt", routeMethods.getRobotDotText)
 app.get("/*.js", routeMethods.getJS);
 app.get("/*.css", routeMethods.getCSS);
-app.get("/*.jpeg", routeMethods.getImage);
+app.get("/*.jpeg", routeMethods.getJPEGImages);
+app.get("/*.jpg", routeMethods.getJPGImages);
+app.get("/*.png", routeMethods.getPNGImages);
+app.get("/*.svg", routeMethods.getSVGImages);
+app.get("/*.gif", routeMethods.getGIFImages);
 
 app.get("/*", routeMethods.getSite);
