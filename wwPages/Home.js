@@ -35,6 +35,10 @@ function home() {
 	this.image1 = new image();
 	this.image2 = new image();
 	this.image3 = new image();
+	this.image4 = new image();
+	this.image5 = new image();
+	this.image6 = new image();
+	this.image7 = new image();
 	this.labelWithImage = new label();
 	this.labelWithImage2 = new label();
 	this.labelWithImage3 = new label();
@@ -248,11 +252,48 @@ _proto.createElements = function() {
 	//end
 	
 	//test look and feel
-	this.image3.set("imagePath", "smiley.jpeg");
-	this.image3.set("parent", this.panelImage);
+	this.image3.set("fakePath", "/ws_JPEGImage/fakepath.jpeg");
+	this.image3.set("imagePath", "/sample_images/smiley.jpeg");
+	this.image3.set("imagefiletype", "jpeg");
+	//this.image3.set("parent", this.panelImage);
+	this.image3.set("parent", this);
 	this.image3.set("identifier", "image3_id");
+	this.image3.set("width", "50px");
+	this.image3.set("height", "50px");
 	
-	this.panelImage.set("backgroundcolor", "#4B4B4B");
+	this.image4.set("parent", this);
+	this.image4.set("fakePath", "/hello.png");
+	this.image4.set("imagePath", "/sample_images/hello.png");
+	this.image4.set("imagefiletype", "png");
+	this.image4.set("identifier", "image4_id");
+	this.image4.set("width", "100px");
+	this.image4.set("height", "100px");
+	
+	this.image5.set("parent", this);
+	this.image5.set("fakePath", "/jpgfakepath.jpg");
+	this.image5.set("imagePath", "/sample_images/jpg.jpg");
+	this.image5.set("imagefiletype", "jpg");
+	this.image5.set("identifier", "image5_id");
+	this.image5.set("width", "130px");
+	this.image5.set("height", "130px");
+	
+	this.image6.set("parent", this);
+	this.image6.set("fakePath", "/svg.svg");
+	this.image6.set("imagePath", "/sample_images/svg.svg");
+	this.image6.set("imagefiletype", "svg");
+	this.image6.set("identifier", "image6_id");
+	this.image6.set("width", "150px");
+	this.image6.set("height", "150px");
+	
+	this.image7.set("parent", this);
+	this.image7.set("fakePath", "/banana.gif");
+	this.image7.set("imagePath", "/sample_images/banana.gif");
+	this.image7.set("imagefiletype", "gif");
+	this.image7.set("identifier", "image7_id");
+	this.image7.set("width", "150px");
+	this.image7.set("height", "150px");
+	
+	/*this.panelImage.set("backgroundcolor", "#4B4B4B");
 	this.panelImage.set("margintop", "0px");
 	this.panelImage.set("paddingtop", "10px");
 	this.panelImage.set("paddingleft", "10px");
@@ -262,7 +303,7 @@ _proto.createElements = function() {
 	this.panelImage.set("width", "100px");
 	this.panelImage.set("color", "blue");
 	this.panelImage.set("identifier", "panelImage_1_id");
-	this.panelImage.set("parent", this);
+	this.panelImage.set("parent", this);*/
 	
 	this.textBox2.set("identifier", "tb_2_id");
 	this.textBox2.set("isMultiline", false);
@@ -283,6 +324,7 @@ _proto.createElements = function() {
 	this.textBox4.set("parent", this);
 	
 	this.textBox5.set("identifier", "tb_5_id");
+	this.textBox5.set("name", "tb_5_name");
 	this.textBox5.set("isMultiline", false);
 	this.textBox5.set("placeHolder", "tb 5");
 	this.textBox5.set("value", "");

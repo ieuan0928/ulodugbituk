@@ -63,20 +63,23 @@ _proto.render = function() {
 	var className = this.get("className");
 	var identifier = this.get("identifier");
 	var name = this.get("name");
+	var inlineStyle = "";
+	
+	var inlineStyle = this.getInlineStlye();
 	
 	switch(isMultiline) {
 		case true:
 			var concat = "_textAreaContainer";
 		
 			wormHelper.writeResponse("<div class='" + className + concat + "' id='" + identifier + concat + "'>");
-			wormHelper.writeResponse("<textarea class='" + this.get("classCollection") + "' id='" + identifier + "' name='" + name + "'>" + value + "</textarea>");
+			wormHelper.writeResponse("<textarea style='" + inlineStyle + "' class='" + this.get("classCollection") + "' id='" + identifier + "' name='" + name + "'>" + value + "</textarea>");
 			wormHelper.writeResponse("</div>");
 			break;
 		case false:
 			var concat = "_textBoxContainer";
 		
 			wormHelper.writeResponse("<div class='" + className + concat + "' id='" + identifier + concat + "'>");
-			wormHelper.writeResponse("<input type='text' class='" + this.get("classCollection") + "' id='" + identifier + "' name='" + name + "' placeholder='" + placeHolder + "' value='" + value + "'></input>");
+			wormHelper.writeResponse("<input style='" + inlineStyle + "' type='text' class='" + this.get("classCollection") + "' id='" + identifier + "' name='" + name + "' placeholder='" + placeHolder + "' value='" + value + "'></input>");
 			wormHelper.writeResponse("</div>");
 			break;
 		default:
