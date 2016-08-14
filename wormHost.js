@@ -34,7 +34,7 @@ wormHelper = {
     },
 
     writeObject: function(objectToWrite) {
-        hostHelper.objectToString(objectToWrite);
+        hostMethods.objectToString(objectToWrite);
     },
 
     refreshModule: function(path) {
@@ -44,7 +44,7 @@ wormHelper = {
     }
 }
 
-var hostHelper = {
+var hostMethods = {
     keyValueToString : function(key, value) {
         wormHelper.writeResponse(key.toString() + ":");
         switch (typeof value) {
@@ -56,7 +56,7 @@ var hostHelper = {
                 wormHelper.writeResponse(value.toString());
                 break;
             case "object":
-                hostHelper.objectToString(value);
+                hostMethods.objectToString(value);
                 break;                
         }
     },
@@ -66,12 +66,12 @@ var hostHelper = {
         var keys = Object.keys(objectToConvert);
         var count = keys.length;
 
-        hostHelper.keyValueToString(keys[0], objectToConvert[keys[0]]);
+        hostMethods.keyValueToString(keys[0], objectToConvert[keys[0]]);
 
         for (var index = 1; index < count; index++) {
             wormHelper.writeResponse(",");
             
-            hostHelper.keyValueToString(keys[index], objectToConvert[keys[index]]);
+            hostMethods.keyValueToString(keys[index], objectToConvert[keys[index]]);
         }
         wormHelper.writeResponse("}");
     },
@@ -98,7 +98,7 @@ var hostHelper = {
 
 var routeMethods = {
     getSite: function(request, response) {
-        wormHelper.domainConfig = hostHelper.createDomainConfig(request.headers.host);
+        wormHelper.domainConfig = hostMethods.createDomainConfig(request.headers.host);
 
         var siteModule = wormHelper.refreshModule("./worm_scheme/site.js");
         var wormIndex = wormHelper.refreshModule(wormHelper.domainConfig.index);

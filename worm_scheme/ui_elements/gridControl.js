@@ -3,6 +3,7 @@ var _parent = wormHelper.refreshModule("./worm_scheme/ui_elements/containerContr
 
 var columnDefintion = wormHelper.refreshModule("./worm_scheme/ui_elements/ui_extensions/columnDefinition.js");
 var rowDefinition = wormHelper.refreshModule("./worm_scheme/ui_elements/ui_extensions/rowDefinition.js");
+var gridProperty = wormHelper.refreshModule("./worm_scheme/ui_elements/ui_extensions/gridProperty.js");
 
 _proto.constructor = gridControl;
 
@@ -11,6 +12,47 @@ function gridControl() {
 
     this.properties["rowDefinitions"] = [];
     this.properties["columnDefinitions"] = [];
+}
+
+gridControl.ensureGridProperty = function(element) {
+    if (!("gridProperty" in element.properties)) 
+        element.properties.gridProperty = new gridProperty();
+
+    return element.properties.gridProperty;
+}
+
+gridControl.getGridProperty = function(element, propertyName) {
+    var gridProperty = gridControl.ensureGridProperty(element);
+
+    switch (propertyName.trim().toLowerCase()) {
+        case "column":
+            return gridProperty.get("column");
+        case "row":
+            return gridProperty.get("row");
+        case "columnspan":
+            return gridProperty.get("columnSpan");
+        case "rowspan":
+            return gridProperty.get("rowSpan");
+        default:
+            throw "Invalid Property: GridProperty does not contain specified Property";
+    }
+}
+
+gridControl.setGridProperty = function(element, proertyName, value) {
+    var gridProperty = gridControl.ensureGridProperty(element);
+
+    switch (propertyName.trim().toLowerCase()) {
+        case "column":
+            return gridProperty.set("column", value);
+        case "row":
+            return gridProperty.set("row", value);
+        case "columnspan":
+            return gridProperty.set("columnSpan", value);
+        case "rowspan":
+            return gridProperty.set("rowSpan", value);
+        default:
+            throw "Invalid Property: GridProperty does not contain specified Property.";
+    }
 }
 
 _proto.get = function(propertyName) {
@@ -68,7 +110,15 @@ _proto.render = function() {
 
     wormHelper.writeResponse("<div id='" + this.properties.identifier + "'>");
     
-    _parent.render.call(this);
+    var childControls = this.properties.childControls;
+    for (var index in childControls) {
+        var childControl = childControls[index];
+        var gridProperty = gridControl.ensureGridProperty(childControl);
+
+        wormHelper.writeResponse("<div data-row='" + gridProperty.get("row") + "' data-rowSpan='" + gridProperty.get("rowSpan") + "' data-column='" + gridProperty.get("column") + "' data-columnSpan='" + gridProperty.get("columnSpan") + "'>");
+        childControl.render();
+        wormHelper.writeResponse("</div>");
+    }
 
     wormHelper.writeResponse("</div>");
 }
