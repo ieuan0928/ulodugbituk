@@ -8,12 +8,12 @@
 
         var elements = [];
 
-        window.addEventListener("resize", function() {
-            console.log("test bullshit");
-        });
-
         return this.each(function() {
-
+            var me = $(this);
+            $(window).resize(function() {
+                //alert($(this).attr("id"));
+               
+            });
         });
     }
 

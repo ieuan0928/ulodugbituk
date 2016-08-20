@@ -34,6 +34,7 @@ wormHelper = {
     },
 
     writeObject: function(objectToWrite) {
+        
         hostMethods.objectToString(objectToWrite);
     },
 
@@ -45,8 +46,7 @@ wormHelper = {
 }
 
 var hostMethods = {
-    keyValueToString : function(key, value) {
-        wormHelper.writeResponse(key.toString() + ":");
+    writeValue : function(value) {
         switch (typeof value) {
             case "string":
                 wormHelper.writeResponse("'" + value + "'");
@@ -60,20 +60,66 @@ var hostMethods = {
                 break;                
         }
     },
+
+    getImage : function (request, response, contentType, imageBundle) {
+		var site = wormHelper.site;
+        site.set("response", response);
+        site.set("isPartialLoad", false);
+		
+        var bundle = wormHelper.JPEGBundle;
+		
+		if (bundle == null) {
+            response.end("// image is not available...");
+            return false;
+        }
+		
+        if (!(("." + request.url) in bundle)) {
+            response.end("// image is not available...");
+            return false;
+        }
+		else
+		{
+			var resolvePath = require.resolve(bundle["." + request.url]);
+			var fs = require('fs');
+			
+			fs.readFile(resolvePath, function(err, data) {
+				if (!err) {
+					response.writeHead(200, { 'Content-Type':  });
+					response.end(data);
+				} else {
+					response.end("// image is not available...");
+					return false;
+				}
+			});
+		}
+    },
+
+    keyValueToString : function(key, value) {
+        wormHelper.writeResponse(key.toString() + ":");
+        hostMethods.writeValue(value);
+    },
     
     objectToString : function(objectToConvert) {
-        wormHelper.writeResponse("{");
-        var keys = Object.keys(objectToConvert);
-        var count = keys.length;
+        
+        if ((typeof objectToConvert) == "object" ) { 
+            var keys = Object.keys(objectToConvert);
+            var count = keys.length;
 
-        hostMethods.keyValueToString(keys[0], objectToConvert[keys[0]]);
+            wormHelper.writeResponse("{");
+            if (count > 0) {
+                hostMethods.keyValueToString(keys[0], objectToConvert[keys[0]]);
 
-        for (var index = 1; index < count; index++) {
-            wormHelper.writeResponse(",");
+                for (var index = 1; index < count; index++) {
+                    wormHelper.writeResponse(",");
             
-            hostMethods.keyValueToString(keys[index], objectToConvert[keys[index]]);
+                    hostMethods.keyValueToString(keys[index], objectToConvert[keys[index]]);
+                }
+            }
+            wormHelper.writeResponse("}");
         }
-        wormHelper.writeResponse("}");
+        else {
+            hostMethods.writeValue(objectToConvert);
+        }
     },
 
     createDomainConfig: function(hostHeader) {
@@ -186,168 +232,19 @@ var routeMethods = {
     },
 
     getJPEGImages: function(request, response) {
-		var site = wormHelper.site;
-        site.set("response", response);
-        site.set("isPartialLoad", false);
-		
-        var bundle = wormHelper.JPEGBundle;
-		
-		if (bundle == null) {
-            response.end("// image is not available...");
-            return false;
-        }
-		
-        if (!(("." + request.url) in bundle)) {
-            response.end("// image is not available...");
-            return false;
-        }
-		else
-		{
-			var resolvePath = require.resolve(bundle["." + request.url]);
-			var fs = require('fs');
-			
-			fs.readFile(resolvePath, function(err, data) {
-				if (!err) {
-					response.writeHead(200, { 'Content-Type': 'image/jpeg' });
-					response.end(data);
-				} else {
-					response.end("// image is not available...");
-					return false;
-				}
-			});
-		}
-	},
-	
-	getJPGImages: function(request, response) {
-		var site = wormHelper.site;
-        site.set("response", response);
-        site.set("isPartialLoad", false);
-		
-        var bundle = wormHelper.JPGBundle;
-		
-		if (bundle == null) {
-            response.end("// image is not available...");
-            return false;
-        }
-		
-        if (!(("." + request.url) in bundle)) {
-            response.end("// image is not available...");
-            return false;
-        }
-		else
-		{
-			var resolvePath = require.resolve(bundle["." + request.url]);
-			var fs = require('fs');
-			
-			fs.readFile(resolvePath, function(err, data) {
-				if (!err) {
-					response.writeHead(200, { 'Content-Type': 'image/jpg' });
-					response.end(data);
-				} else {
-					response.end("// image is not available...");
-					return false;
-				}
-			});
-		}
+        hostMethods.getImage(request, response, 'image/jpeg', wormHelper.JPEGBundle);
 	},
 	
 	getPNGImages: function(request, response) {
-		var site = wormHelper.site;
-        site.set("response", response);
-        site.set("isPartialLoad", false);
-		
-        var bundle = wormHelper.PNGBundle;
-		
-		if (bundle == null) {
-            response.end("// image is not available...");
-            return false;
-        }
-		
-        if (!(("." + request.url) in bundle)) {
-            response.end("// image is not available...");
-            return false;
-        }
-		else
-		{
-			var resolvePath = require.resolve(bundle["." + request.url]);
-			var fs = require('fs');
-			
-			fs.readFile(resolvePath, function(err, data) {
-				if (!err) {
-					response.writeHead(200, { 'Content-Type': 'image/png' });
-					response.end(data);
-				} else {
-					response.end("// image is not available...");
-					return false;
-				}
-			});
-		}
+        hostMethods.getImage(request, response, 'image/png', wormHelper.PNGBundle);
 	},
 	
 	getSVGImages: function(request, response) {
-		var site = wormHelper.site;
-        site.set("response", response);
-        site.set("isPartialLoad", false);
-		
-        var bundle = wormHelper.SVGBundle;
-		
-		if (bundle == null) {
-            response.end("// image is not available...");
-            return false;
-        }
-		
-        if (!(("." + request.url) in bundle)) {
-            response.end("// image is not available...");
-            return false;
-        }
-		else
-		{
-			var resolvePath = require.resolve(bundle["." + request.url]);
-			var fs = require('fs');
-			
-			fs.readFile(resolvePath, function(err, data) {
-				if (!err) {
-					response.writeHead(200, { 'Content-Type': 'image/svg+xml' });
-					response.end(data);
-				} else {
-					response.end("// image is not available...");
-					return false;
-				}
-			});
-		}
+        hostMethods.getImage(request, response, 'image/svg+xml', wormHelper.SVGBundle);
 	},
 	
 	getGIFImages: function(request, response) {
-		var site = wormHelper.site;
-        site.set("response", response);
-        site.set("isPartialLoad", false);
-		
-        var bundle = wormHelper.GIFBundle;
-		
-		if (bundle == null) {
-            response.end("// image is not available...");
-            return false;
-        }
-		
-        if (!(("." + request.url) in bundle)) {
-            response.end("// image is not available...");
-            return false;
-        }
-		else
-		{
-			var resolvePath = require.resolve(bundle["." + request.url]);
-			var fs = require('fs');
-			
-			fs.readFile(resolvePath, function(err, data) {
-				if (!err) {
-					response.writeHead(200, { 'Content-Type': 'image/gif' });
-					response.end(data);
-				} else {
-					response.end("// image is not available...");
-					return false;
-				}
-			});
-		}
+        hostMethods.getImage(request, response, 'image/gif', wormHelper.GIFBundle);
 	},
 
     getFavIcon: function(request, response) {

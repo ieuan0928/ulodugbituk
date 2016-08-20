@@ -11,6 +11,7 @@ function mainPage() {
 
     this.panel1 = new panel();
     this.gridControl1 = new gridControl();
+    this.gridControl2 = new gridControl();
 
     this.row1 = new rowDefinition();
     this.row2 = new rowDefinition();
@@ -20,8 +21,11 @@ function mainPage() {
 }
 
 _proto.createElements = function() {
+    this.gridControl2.set("parent", this);
+    this.gridControl2.set("identifier", "factory_gridControl2");
+
     this.gridControl1.set("parent", this);
-    this.gridControl1.set("identifier", "factory_gridControl1")
+    this.gridControl1.set("identifier", "factory_gridControl1");
     this.gridControl1.addRowDefinition(this.row1);
     this.gridControl1.addRowDefinition(this.row2);
     this.gridControl1.addColumnDefinition(this.column1);
@@ -34,6 +38,7 @@ _proto.createElements = function() {
     this.panel1.set("paddingRight", "10px");
     this.panel1.set("paddingLeft", "10px");
     this.panel1.set("backgroundColor", "red");
+    
 }
 
 module.exports = mainPage;
