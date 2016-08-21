@@ -11,7 +11,7 @@
         return this.each(function() {
             var me = $(this);
             $(window).resize(function() {
-                //alert($(this).attr("id"));
+                var childElements = me.children();
                
             });
         });

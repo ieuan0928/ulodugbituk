@@ -62,12 +62,6 @@ var hostMethods = {
     },
 
     getImage : function (request, response, contentType, imageBundle) {
-		var site = wormHelper.site;
-        site.set("response", response);
-        site.set("isPartialLoad", false);
-		
-        var bundle = wormHelper.JPEGBundle;
-		
 		if (bundle == null) {
             response.end("// image is not available...");
             return false;
@@ -79,12 +73,12 @@ var hostMethods = {
         }
 		else
 		{
-			var resolvePath = require.resolve(bundle["." + request.url]);
+            var resolvePath = require.resolve(imageBundle["." + request.url]);
 			var fs = require('fs');
 			
 			fs.readFile(resolvePath, function(err, data) {
 				if (!err) {
-					response.writeHead(200, { 'Content-Type':  });
+					response.writeHead(200, { 'Content-Type': contentType });
 					response.end(data);
 				} else {
 					response.end("// image is not available...");
@@ -231,6 +225,10 @@ var routeMethods = {
         response.end();
     },
 
+    getJPGImages: function(request, response) {
+        hostMethods.getImage(request, response, 'image/jpeg', wormHelper.JPGBundle);
+	},
+
     getJPEGImages: function(request, response) {
         hostMethods.getImage(request, response, 'image/jpeg', wormHelper.JPEGBundle);
 	},
@@ -266,7 +264,6 @@ app = express(),
     bodyParser = require('body-parser'),
     server = require("http").createServer(app);
 
-//app.use(express.static(__dirname + '/sample_images'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
