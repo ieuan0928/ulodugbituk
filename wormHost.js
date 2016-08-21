@@ -62,12 +62,12 @@ var hostMethods = {
     },
 
     getImage : function (request, response, contentType, imageBundle) {
-		if (bundle == null) {
+		if (imageBundle == null) {
             response.end("// image is not available...");
             return false;
         }
 		
-        if (!(("." + request.url) in bundle)) {
+        if (!(("." + request.url) in imageBundle)) {
             response.end("// image is not available...");
             return false;
         }
