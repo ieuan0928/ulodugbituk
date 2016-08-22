@@ -94,7 +94,6 @@ var hostMethods = {
     },
     
     objectToString : function(objectToConvert) {
-        
         if ((typeof objectToConvert) == "object" ) { 
             var keys = Object.keys(objectToConvert);
             var count = keys.length;

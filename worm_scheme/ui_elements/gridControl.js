@@ -38,7 +38,7 @@ gridControl.getGridProperty = function(element, propertyName) {
     }
 }
 
-gridControl.setGridProperty = function(element, proertyName, value) {
+gridControl.setGridProperty = function(element, propertyName, value) {
     var gridProperty = gridControl.ensureGridProperty(element);
 
     switch (propertyName.trim().toLowerCase()) {
@@ -89,18 +89,6 @@ _proto.addRowDefinition = function(newRowDefinition) {
 
 _proto.preRender = function() {
     _parent.preRender.call(this);
-
-    var childControls = this.properties.childControls;
-
-    for (var index in childControls) {
-        var childProperties = childControls[index].properties;
-
-        if (!('grid' in childProperties)) {
-            var gridProperty = wormHelper.refreshModule("./worm_scheme/ui_elements/ui_extensions/gridProperty.js");
-
-            childProperties.gridProperty = new gridProperty();           
-        }
-    }
 
     wormHelper.site.jsBundler("/ws_js/gcb.js", "./worm_scheme/js/gridBehavior.js")
 }
