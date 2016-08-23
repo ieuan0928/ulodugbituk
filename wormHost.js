@@ -226,19 +226,19 @@ var routeMethods = {
 
     getJPGImages: function(request, response) {
         hostMethods.getImage(request, response, 'image/jpeg', wormHelper.JPGBundle);
-	},
+    },
 
     getJPEGImages: function(request, response) {
         hostMethods.getImage(request, response, 'image/jpeg', wormHelper.JPEGBundle);
-	},
+    },
 	
 	getPNGImages: function(request, response) {
         hostMethods.getImage(request, response, 'image/png', wormHelper.PNGBundle);
-	},
+    },
 	
 	getSVGImages: function(request, response) {
         hostMethods.getImage(request, response, 'image/svg+xml', wormHelper.SVGBundle);
-	},
+    },
 	
 	getGIFImages: function(request, response) {
         hostMethods.getImage(request, response, 'image/gif', wormHelper.GIFBundle);
@@ -255,7 +255,6 @@ var routeMethods = {
     getRobotDotText: function(request, response) {
         response.end("buhatunun pa ang robot dot text.");
     }
-
 }
 
 var express = require("express");
