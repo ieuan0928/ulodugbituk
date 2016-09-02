@@ -6,21 +6,55 @@
             columnDefinitions: []
         }, options);
 
-        var gridPoints = {
-            rows : [],
-            columns: []
-        };
-
-        var columnPoint = function() {
-            this.definition = {};
-            this.leftOffset = 0;
-            this.width = 0;
-        };
-        
-        var elements = [];
-
         return this.each(function() {
             var me = $(this);
+            var getMyProperties = function() {
+                return {
+                    clientRect : me[0].getBoundingClientRect(),
+                    paddingTop: parseInt(me.css("padding-top")),
+                    paddingRight: parseInt(me.css("padding-right")),
+                    paddingBottom: parseInt(me.css("padding-bottom")),
+                    paddingLeft: parseInt(me.css("padding-left")),
+                    containerWidth: null,
+                    containerHeight: null,
+                    getContainerWidth: function() {
+                        if (!this.containerWidth) {
+                            this.containerWidth = this.clientRect.width - this.paddingRight - this.paddingLeft;
+
+                            if (this.containerWidth < 0) this.containerWidth = 0;
+                        }
+                        return this.containerWidth;
+                    },
+                    getContainerHeight: function() {
+                        if (!this.containerHeight) {
+                            this.containerHeight = this.clientHeight - this.paddingTop - this.paddingBottom;
+
+                            if (this.containerHeight < 0) this.containerHeight = 0;
+                        }
+
+                        return this.containerHeight;
+                    }
+                }
+            };
+
+
+            var elements = [];
+           
+            var gridPoints = {
+                rows : [],
+                columns: []
+            };
+
+            var columnPoint = function() {
+                this.definition = {};
+                this.leftOffset = 0;
+                this.width = 0;
+                this.isFixedWidth = false;
+            };
+
+            var computeColumnPoints = function() {
+
+            }
 
             var createColumnPoints = function(gridControl) {
                 gridPoints.columns = [];
@@ -44,6 +78,8 @@
 
                         gridPoint.columns.push(newPoint);
                     }
+
+                    computeColumnPoints();
                 }
             };
 
