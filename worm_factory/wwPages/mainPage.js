@@ -20,8 +20,16 @@ function mainPage() {
 }
 
 _proto.createElements = function() {
+    this.column2.set("width", "*");
+
     this.gridControl1.set("parent", this);
+    this.gridControl1.set("height", "100px");
+    this.gridControl1.set("width", "600px");
     this.gridControl1.set("identifier", "factory_gridControl1");
+    this.gridControl1.set("paddingLeft", "10px");
+    this.gridControl1.set("paddingTop", "10px");
+    this.gridControl1.set("paddingBottom", "10px");
+    this.gridControl1.set("paddingRight", "10px");
     this.gridControl1.addRowDefinition(this.row1);
     this.gridControl1.addColumnDefinition(this.column1);
     this.gridControl1.addColumnDefinition(this.column2);

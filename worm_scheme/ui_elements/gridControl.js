@@ -96,8 +96,10 @@ _proto.preRender = function() {
 _proto.render = function() {
     if (!this.properties.identifier) throw new EvalError("Must have property identifier.");
 
-    wormHelper.writeResponse("<div id='" + this.properties.identifier + "'>");
-    
+    var inlineStyle = this.getInlineStlye();
+
+    wormHelper.writeResponse("<div id='" + this.properties.identifier + "' style='" + inlineStyle + "'>");
+    wormHelper.writeResponse("<div class='gridClient' style='height:inherit; width:inherit'>");
     var childControls = this.properties.childControls;
     for (var index in childControls) {
         var childControl = childControls[index];
@@ -108,6 +110,7 @@ _proto.render = function() {
         wormHelper.writeResponse("</div>");
     }
 
+    wormHelper.writeResponse("</div>");
     wormHelper.writeResponse("</div>");
 }
 
