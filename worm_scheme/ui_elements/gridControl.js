@@ -105,7 +105,7 @@ _proto.render = function() {
         var childControl = childControls[index];
         var gridProperty = gridControl.ensureGridProperty(childControl);
 
-        wormHelper.writeResponse("<div data-row='" + gridProperty.get("row") + "' data-rowSpan='" + gridProperty.get("rowSpan") + "' data-column='" + gridProperty.get("column") + "' data-columnSpan='" + gridProperty.get("columnSpan") + "'>");
+        wormHelper.writeResponse("<div style='position:absolute; float:left' data-row='" + gridProperty.get("row") + "' data-rowSpan='" + gridProperty.get("rowSpan") + "' data-column='" + gridProperty.get("column") + "' data-columnSpan='" + gridProperty.get("columnSpan") + "'>");
         childControl.render();
         wormHelper.writeResponse("</div>");
     }

@@ -22,8 +22,10 @@ _proto.get = function(propertyName) {
 _proto.render = function() {
 	var className = this.get("className");
 	var identifier = this.get("identifier");
-	
-	wormHelper.writeResponse("<div class='" + className + "' id='" + identifier + "'>");
+
+	var inlineStyle = this.getInlineStlye();
+	//  wormHelper.writeResponse("<div id='" + this.properties.identifier + "' style='" + inlineStyle + "'>");
+	wormHelper.writeResponse("<div class='" + className + "' id='" + identifier + "' style='" + inlineStyle + "' >");
 	
 	_parent.render.call(this);
 	

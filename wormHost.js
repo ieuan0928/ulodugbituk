@@ -47,18 +47,22 @@ wormHelper = {
 
 var hostMethods = {
     writeValue : function(value) {
-        switch (typeof value) {
-            case "string":
-                wormHelper.writeResponse("'" + value + "'");
-                break;
-            case "number":
-            case "boolean":
-                wormHelper.writeResponse(value.toString());
-                break;
-            case "object":
-                hostMethods.objectToString(value);
-                break;                
+        if (value) {
+            switch (typeof value) {
+                case "string":
+                    wormHelper.writeResponse("'" + value + "'");
+                    break;
+                case "number":
+                case "boolean":
+                    wormHelper.writeResponse(value.toString());
+                    break;
+                case "array":
+                case "object":
+                    hostMethods.objectToString(value);
+                    break;                
+            }
         }
+        else wormHelper.writeResponse("null");
     },
 
     getImage : function (request, response, contentType, imageBundle) {
