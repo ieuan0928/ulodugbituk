@@ -25,14 +25,14 @@
             var calculatePoints = function(points, definitionProperties, pointProperties) {
                 var currentLoc = 0;
 
-                for (var pIndex in points) {
+                var count = points.length;
+                for (var pIndex = 0; pIndex < count; pIndex++) {
                     var point = points[pIndex];
                     var definition = point.definition;
 
                     point[pointProperties.location] = currentLoc;
-                    point[pointProperties.isFixed] = true;
 
-                    currentLoc += parseInt(definition.properties[definitionProperties.size]);
+                    currentLoc += parseInt(point[pointProperties.size]);
                 }
             }
 
@@ -132,7 +132,7 @@
                     }
 
                     newPoint[pointProperties.maxSize] = defProperties[definitionProperties.maxSize];
-                    newPoint[pointProperties.maxSize] = defProperties[definitionProperties.minSize];
+                    newPoint[pointProperties.minSize] = defProperties[definitionProperties.minSize];
                     pointCollection.push(newPoint);
                 }
 
@@ -156,12 +156,12 @@
 
                 createPoints(settings.columnDefinitions, gridPoints.columns, columnPoint, mySpaceCoord.width, { 
                     size: "width", minSize: "minWidth", maxSize: "maxWidth"}, {
-                    location: "leftOffset", size: "width", isFixed: "isFixedWidth"
+                    location: "leftOffset", size: "width", isFixed: "isFixedWidth", minSize: "minWidth", maxSize: "maxWidth"
                 });
                 
                 createPoints(settings.rowDefinitions, gridPoints.rows, rowPoint, mySpaceCoord.height, {
                     size: "height", minSize: "minHeight", maxSize: "maxHeight"}, {
-                    location: "topOffset", size: "height", isFixed: "isFixedHeight"                
+                    location: "topOffset", size: "height", isFixed: "isFixedHeight", minSize: "minHeight", maxSize: "maxHeight"            
                 });
 
                 var childCount = childElements.length;
