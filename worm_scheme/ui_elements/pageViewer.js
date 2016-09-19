@@ -65,11 +65,13 @@ _proto.preRender = function() {
 			this.pageObject.createElements();
 						
 			if ('child' in map) {
-				var childPageViewer = pageObject[map.pageViewerName];
-				childPageViewer.set("map", map.child);
+				if (map.pageViewerName in this.pageObject) {
+					var childPageViewer = this.pageObject[map.pageViewerName];
+					childPageViewer.set("map", map.child);
 				
-				urlMap.splice(0, 1);
-				childPageViewer.set("urlMap", urlMap);
+					urlMap.splice(0, 1);
+					childPageViewer.set("urlMap", urlMap);
+				}
 			}
 		}
 		else {

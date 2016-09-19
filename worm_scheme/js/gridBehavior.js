@@ -32,7 +32,7 @@
 
                     point[pointProperties.location] = currentLoc;
 
-                    currentLoc += parseInt(point[pointProperties.size]);
+                    currentLoc += parseFloat(point[pointProperties.size]);
                 }
             }
 
@@ -43,7 +43,7 @@
                 for (var ctr = 0; ctr < count; ctr++) {
                     var pointDefinition = pointCollection[ctr];
                     if (!pointDefinition[pointProperties.isFixed]) {
-                        var size = parseInt(pointDefinition.definition.properties[definitionProperties.size]); 
+                        var size = parseFloat(pointDefinition.definition.properties[definitionProperties.size]); 
                         result += size ? size : 1;
                     }
                 }
@@ -51,14 +51,17 @@
                 return result;
             }
 
-            var getUsedSpace = function(pointCollection, pointProperties) {
+            var getUsedSpace = function(pointCollection, pointProperties, definitionProperties) {
                 var result = 0;
 
                 var count = pointCollection.length;
                 for (var ctr = 0; ctr < count; ctr++) {
                     var pointDefinition = pointCollection[ctr];
                     if (pointDefinition[pointProperties.isFixed]) {
-                        result += parseInt(pointDefinition[pointProperties.size]);
+                        result += parseFloat(pointDefinition[pointProperties.size]);
+                    }
+                    else if (pointDefinition.definition.properties[definitionProperties.size].trim().toLowerCase() == "auto") {
+                        result += parseFloat(pointDefinition[pointProperties.size]);
                     }
                 }
                 return result;
@@ -66,7 +69,7 @@
 
             var setupUnfixedSizes = function(pointCollection, pointProperties, definitionProperties, spaceSize) {
                 var starsShareCount = getStarsShareCount(pointCollection, pointProperties, definitionProperties);
-                var spaceAvailable = spaceSize - getUsedSpace(pointCollection, pointProperties);
+                var spaceAvailable = spaceSize - getUsedSpace(pointCollection, pointProperties, definitionProperties);
                 var spaceValue = spaceAvailable / starsShareCount;
                 var mustResetup = false;
 
@@ -75,14 +78,14 @@
                 var count = pointCollection.length;
                 for (var ctr = 0; ctr < count; ctr++) {
                     var pointDef = pointCollection[ctr];
-
-                    if (!pointDef[pointProperties.isFixed]) {
+                    var size = pointDef.definition.properties[definitionProperties.size];
+                    if (!pointDef[pointProperties.isFixed] && (typeof(size) == "string") && (size.endsWith("*"))) {
                         if (spaceAvailable == 0) {
                             pointDef[pointProperties.size] = 0;
                             pointDef[pointProperties.isFixed] = true;
                         }
                         else {
-                            var defSize = parseInt(pointDef.definition.properties[definitionProperties.size]);
+                            var defSize = parseFloat(pointDef.definition.properties[definitionProperties.size]);
                             var pdStarShare = defSize ? defSize : 1;
                              
                             var size = spaceValue * pdStarShare;
@@ -90,13 +93,13 @@
                             var min = pointDef[pointProperties.minSize];
                             var isFixed = false;
 
-                            if (max && size > parseInt(max)) {
+                            if (max && size > parseFloat(max)) {
                                 mustResetup = true;
                                 size = max;
                                 isFixed = true;
                             }
 
-                            if (min && size < parseInt(min)) {
+                            if (min && size < parseFloat(min)) {
                                 mustResetup = true;
                                 size = min;
                                 isFixed = true;
@@ -111,7 +114,30 @@
                 if (mustResetup) setupUnfixedSizes(pointCollection, pointProperties, definitionProperties, spaceSize);
             }
 
-            var createPoints = function(definitions, pointCollection, pointObject, spaceSize, definitionProperties, pointProperties) {
+            var calculateAutoSizes = function(childElements, childElementProperties, pointCollection, pointProperties, definitionProperties) {
+                var pcCount = pointCollection.length;
+                var mustRecalculate = false;
+                for (var pcCtr = 0; pcCtr < pcCount; pcCtr++) {
+                    var currentPoint = pointCollection[pcCtr];
+                    var size = currentPoint.definition.properties[definitionProperties.size];
+
+                    if (!currentPoint[pointProperties.isFixed] && size.trim().toLowerCase() == "auto") {
+                        var ceCount = childElements.length;
+                        for (var ceCtr = 0; ceCtr < ceCount; ceCtr++) {
+                            var element = childElements[ceCtr];
+                            var dataIndex = parseInt(element.getAttribute(childElementProperties.dataIndex));
+                            var dataSpan = parseInt(element.getAttribute(childElementProperties.dataSpan));
+
+                            if (pcCtr == dataIndex + dataSpan - 1) {
+                                currentPoint[pointProperties.size] = parseFloat(element.children[0].getBoundingClientRect()["width"]);
+                            }
+                        } 
+                    }
+                }
+                if (mustRecalculate) calculateAutoSizes(childElements, childElementProperties, pointCollection, pointProperties, definitionProperties);
+            }
+
+            var createPoints = function(definitions, pointCollection, pointObject, spaceSize, childElements, definitionProperties, pointProperties, childElementProperties) {
                 for (var dIndex in definitions) {
                     var definition = definitions[dIndex];
                     var defProperties = definition.properties;
@@ -125,9 +151,12 @@
                         newPoint[pointProperties.size] = size;
                         newPoint[pointProperties.isFixed] = false;
                     }
-                    else if ((typeof(size) == "string") && (size.trim().toLowerCase() == "auto")) {}
+                    else if ((typeof(size) == "string") && (size.trim().toLowerCase() == "auto")) {
+                        gridPoints.hasAuto = true;
+                        newPoint[pointProperties.isFixed] = false;
+                    }
                     else {
-                        newPoint[pointProperties.size] = parseInt(size);
+                        newPoint[pointProperties.size] = parseFloat(size);
                         newPoint[pointProperties.isFixed] = true;
                     }
 
@@ -136,6 +165,7 @@
                     pointCollection.push(newPoint);
                 }
 
+                if (gridPoints.hasAuto) calculateAutoSizes(childElements, childElementProperties, pointCollection, pointProperties, definitionProperties);
                 if (gridPoints.hasStar) setupUnfixedSizes(pointCollection, pointProperties, definitionProperties, spaceSize);
                 calculatePoints(pointCollection, definitionProperties, pointProperties);
             }
@@ -144,7 +174,7 @@
                 var size = 0;
 
                 for (var ctr = 0; ctr < spanSize; ctr++) {
-                    size += pointCollection[ctr + parseInt(defLoc)][sizeProperty];
+                    size += pointCollection[ctr + parseFloat(defLoc)][sizeProperty];
                 }
 
                 return size;
@@ -154,15 +184,17 @@
                 gridPoints = { rows:[], columns:[], hasStar: false, hasAuto: false };
                 mySpaceCoord = mySpace[0].getBoundingClientRect();
 
-                createPoints(settings.columnDefinitions, gridPoints.columns, columnPoint, mySpaceCoord.width, { 
+                createPoints(settings.columnDefinitions, gridPoints.columns, columnPoint, mySpaceCoord.width, childElements, { 
                     size: "width", minSize: "minWidth", maxSize: "maxWidth"}, {
-                    location: "leftOffset", size: "width", isFixed: "isFixedWidth", minSize: "minWidth", maxSize: "maxWidth"
-                });
+                    location: "leftOffset", size: "width", isFixed: "isFixedWidth", minSize: "minWidth", maxSize: "maxWidth"}, {
+                    dataIndex: "data-column", dataSpan: "data-columnspan", coordSize: "width" }    
+                );
                 
-                createPoints(settings.rowDefinitions, gridPoints.rows, rowPoint, mySpaceCoord.height, {
+                createPoints(settings.rowDefinitions, gridPoints.rows, rowPoint, mySpaceCoord.height, childElements, {
                     size: "height", minSize: "minHeight", maxSize: "maxHeight"}, {
-                    location: "topOffset", size: "height", isFixed: "isFixedHeight", minSize: "minHeight", maxSize: "maxHeight"            
-                });
+                    location: "topOffset", size: "height", isFixed: "isFixedHeight", minSize: "minHeight", maxSize: "maxHeight"}, {
+                    dataIndex: "data-row", dataSpan: "data-rowspan", coordSize: "height" }
+                );
 
                 var childCount = childElements.length;
                 for (var ctr = 0; ctr < childCount; ctr++) {
