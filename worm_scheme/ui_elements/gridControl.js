@@ -99,7 +99,7 @@ _proto.render = function() {
     var inlineStyle = this.getInlineStlye();
 
     wormHelper.writeResponse("<div id='" + this.properties.identifier + "' style='" + inlineStyle + "'>");
-    wormHelper.writeResponse("<div class='gridClient' style='height:inherit; width:inherit'>");
+    wormHelper.writeResponse("<div class='gridClient' style='position:relative; height:inherit; width:inherit'>");
     var childControls = this.properties.childControls;
     for (var index in childControls) {
         var childControl = childControls[index];

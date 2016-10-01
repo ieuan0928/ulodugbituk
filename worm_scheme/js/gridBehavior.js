@@ -42,7 +42,7 @@
                 var count = pointCollection.length;
                 for (var ctr = 0; ctr < count; ctr++) {
                     var pointDefinition = pointCollection[ctr];
-                    if (!pointDefinition[pointProperties.isFixed]) {
+                    if ((!pointDefinition[pointProperties.isFixed]) && (pointDefinition.definition.properties[definitionProperties.size].trim().toLowerCase() != "auto")) {
                         var size = parseFloat(pointDefinition.definition.properties[definitionProperties.size]); 
                         result += size ? size : 1;
                     }
@@ -119,19 +119,44 @@
                 var mustRecalculate = false;
                 for (var pcCtr = 0; pcCtr < pcCount; pcCtr++) {
                     var currentPoint = pointCollection[pcCtr];
+                    var pointDef = currentPoint.definition;
+
+                    if (maxPoint > currentPoint[pointProperties.size]) currentPoint[pointProperties.size] = maxPoint;
+                    else if (currentPoint[pointProperties.size] > maxPoint) maxPoint = currentPoint[pointProperties.size];
+
                     var size = currentPoint.definition.properties[definitionProperties.size];
 
                     if (!currentPoint[pointProperties.isFixed] && size.trim().toLowerCase() == "auto") {
+                        var maxPoint = currentPoint[pointProperties.size];
                         var ceCount = childElements.length;
                         for (var ceCtr = 0; ceCtr < ceCount; ceCtr++) {
                             var element = childElements[ceCtr];
                             var dataIndex = parseInt(element.getAttribute(childElementProperties.dataIndex));
                             var dataSpan = parseInt(element.getAttribute(childElementProperties.dataSpan));
 
-                            if (pcCtr == dataIndex + dataSpan - 1) {
-                                currentPoint[pointProperties.size] = parseFloat(element.children[0].getBoundingClientRect()["width"]);
+                            if (pcCtr == dataIndex) {
+                                var elementSize = parseFloat(element.children[0].getBoundingClientRect()[definitionProperties.size]) / dataSpan;
+
+                                if (elementSize > maxPoint) maxPoint = elementSize;
                             }
-                        } 
+                        }
+
+                        var max = pointDef[pointProperties.maxSize];
+                        var min = pointDef[pointProperties.minSize];
+
+                        if (max && maxPoint > parseFloat(max)) {
+                            mustRecalculate = true;
+                            maxPoint = max;
+                            isFixed = true;
+                        }
+
+                        if (min && maxPoint < parseFloat(min)) {
+                            mustRecalculate = true;
+                            maxPoint = min;
+                            isFixed = true;
+                        }
+
+                        currentPoint[pointProperties.size] = maxPoint; 
                     }
                 }
                 if (mustRecalculate) calculateAutoSizes(childElements, childElementProperties, pointCollection, pointProperties, definitionProperties);
@@ -153,6 +178,7 @@
                     }
                     else if ((typeof(size) == "string") && (size.trim().toLowerCase() == "auto")) {
                         gridPoints.hasAuto = true;
+                        newPoint[pointProperties.size] = 0;
                         newPoint[pointProperties.isFixed] = false;
                     }
                     else {
@@ -167,6 +193,7 @@
 
                 if (gridPoints.hasAuto) calculateAutoSizes(childElements, childElementProperties, pointCollection, pointProperties, definitionProperties);
                 if (gridPoints.hasStar) setupUnfixedSizes(pointCollection, pointProperties, definitionProperties, spaceSize);
+
                 calculatePoints(pointCollection, definitionProperties, pointProperties);
             }
 
@@ -184,16 +211,16 @@
                 gridPoints = { rows:[], columns:[], hasStar: false, hasAuto: false };
                 mySpaceCoord = mySpace[0].getBoundingClientRect();
 
-                createPoints(settings.columnDefinitions, gridPoints.columns, columnPoint, mySpaceCoord.width, childElements, { 
-                    size: "width", minSize: "minWidth", maxSize: "maxWidth"}, {
-                    location: "leftOffset", size: "width", isFixed: "isFixedWidth", minSize: "minWidth", maxSize: "maxWidth"}, {
-                    dataIndex: "data-column", dataSpan: "data-columnspan", coordSize: "width" }    
+                createPoints(settings.columnDefinitions, gridPoints.columns, columnPoint, mySpaceCoord.width, childElements, 
+                    {size: "width", minSize: "minWidth", maxSize: "maxWidth"}, 
+                    {location: "leftOffset", size: "width", isFixed: "isFixedWidth", minSize: "minWidth", maxSize: "maxWidth"},
+                    {dataIndex: "data-column", dataSpan: "data-columnspan", coordSize: "width" }    
                 );
                 
-                createPoints(settings.rowDefinitions, gridPoints.rows, rowPoint, mySpaceCoord.height, childElements, {
-                    size: "height", minSize: "minHeight", maxSize: "maxHeight"}, {
-                    location: "topOffset", size: "height", isFixed: "isFixedHeight", minSize: "minHeight", maxSize: "maxHeight"}, {
-                    dataIndex: "data-row", dataSpan: "data-rowspan", coordSize: "height" }
+                createPoints(settings.rowDefinitions, gridPoints.rows, rowPoint, mySpaceCoord.height, childElements,
+                    {size: "height", minSize: "minHeight", maxSize: "maxHeight"}, 
+                    {location: "topOffset", size: "height", isFixed: "isFixedHeight", minSize: "minHeight", maxSize: "maxHeight"},
+                    {dataIndex: "data-row", dataSpan: "data-rowspan", coordSize: "height"}
                 );
 
                 var childCount = childElements.length;
@@ -205,8 +232,8 @@
                     var rowSpan = childElement.getAttribute("data-rowspan");
 
                     $(childElement).css({
-                        "margin-left": gridPoints.columns[column].leftOffset,
-                        "margin-top" : gridPoints.rows[row].topOffset,
+                        "left": gridPoints.columns[column].leftOffset,
+                        "top" : gridPoints.rows[row].topOffset,
                         "width": calculateSize(column, colSpan, gridPoints.columns, "width") + "px",
                         "height": calculateSize(row, rowSpan, gridPoints.rows, "height") + "px"
                     });
