@@ -29,7 +29,8 @@ _proto.createElements = function() {
     this.column1.set("width", "auto");
     this.column2.set("width", "auto");
     this.column3.set("width", "*");
-    this.column1.set("minWidth", 120);
+    this.column1.set("minWidth", 150);
+    this.column2.set("minWidth", 10);
     this.row1.set("height", "auto");
     this.row2.set("height", "auto");
     this.row3.set("height", "auto");
@@ -85,7 +86,7 @@ _proto.createElements = function() {
 
     gridControl.setGridProperty(this.panel4, "row", 0);
     gridControl.setGridProperty(this.panel4, "column", 2);
-    //gridControl.setGridProperty(this.panel2, )
+    
 }
 
 module.exports = mainPage;

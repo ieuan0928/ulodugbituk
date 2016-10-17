@@ -114,52 +114,50 @@
                 if (mustResetup) setupUnfixedSizes(pointCollection, pointProperties, definitionProperties, spaceSize);
             }
 
-            var calculateAutoSizes = function(childElements, childElementProperties, pointCollection, pointProperties, definitionProperties) {
-                var pcCount = pointCollection.length;
-                var mustRecalculate = false;
-                for (var pcCtr = 0; pcCtr < pcCount; pcCtr++) {
-                    var currentPoint = pointCollection[pcCtr];
-                    var pointDef = currentPoint.definition;
+            var getSpaceOfAuto = function() {
+                var result = 0;
 
-                    if (maxPoint > currentPoint[pointProperties.size]) currentPoint[pointProperties.size] = maxPoint;
-                    else if (currentPoint[pointProperties.size] > maxPoint) maxPoint = currentPoint[pointProperties.size];
+                return result;
+            }
 
-                    var size = currentPoint.definition.properties[definitionProperties.size];
-
-                    if (!currentPoint[pointProperties.isFixed] && size.trim().toLowerCase() == "auto") {
-                        var maxPoint = currentPoint[pointProperties.size];
-                        var ceCount = childElements.length;
-                        for (var ceCtr = 0; ceCtr < ceCount; ceCtr++) {
-                            var element = childElements[ceCtr];
-                            var dataIndex = parseInt(element.getAttribute(childElementProperties.dataIndex));
-                            var dataSpan = parseInt(element.getAttribute(childElementProperties.dataSpan));
-
-                            if (pcCtr == dataIndex) {
-                                var elementSize = parseFloat(element.children[0].getBoundingClientRect()[definitionProperties.size]) / dataSpan;
-
-                                if (elementSize > maxPoint) maxPoint = elementSize;
-                            }
-                        }
-
-                        var max = pointDef[pointProperties.maxSize];
-                        var min = pointDef[pointProperties.minSize];
-
-                        if (max && maxPoint > parseFloat(max)) {
-                            mustRecalculate = true;
-                            maxPoint = max;
-                            isFixed = true;
-                        }
-
-                        if (min && maxPoint < parseFloat(min)) {
-                            mustRecalculate = true;
-                            maxPoint = min;
-                            isFixed = true;
-                        }
-
-                        currentPoint[pointProperties.size] = maxPoint; 
+            var calculateAutoSize = function(definitions, definitionProperties, definitionIndex, childElements, childElementProperties, pointCollection, pointProperties) {
+                var ceCount = childElements.length;
+                var definition = definitions[definitionIndex];
+                var maxPoint = 0;
+                for (var ceCtr = 0; ceCtr < ceCount; ceCtr++) {
+                    var element = childElements[ceCtr];
+                    var dataIndex = parseInt(element.getAttribute(childElementProperties.dataIndex));
+                    var dataSpan = parseInt(element.getAttribute(childElementProperties.dataSpan));
+                    var elementSize = 0; 
+                    if ((dataSpan == 1) && (definitionIndex == dataIndex)) {
+                        elementSize = parseFloat(element.children[0].getBoundingClientRect()[definitionProperties.size]) / dataSpan;
                     }
+                    else if (dataSpan > 1) {
+                        var usedSize = 0;
+                        var spanUsed = 0;
+                        if (pointCollection.length > 0)
+                            for (var ctr = dataIndex; (ctr <= definitionIndex) && (ctr < (dataSpan - 1 + dataIndex)); ctr++) {
+                                usedSize += pointCollection[ctr][pointProperties.size];
+                                spanUsed++; 
+                            }
+
+                        var unusedSpan = dataSpan - spanUsed;
+
+                        elementSize = (parseFloat(element.children[0].getBoundingClientRect()[definitionProperties.size]) - usedSize) / unusedSpan;
+                    }
+
+                    if (elementSize > maxPoint) maxPoint = elementSize;
+
+                    var defProperties = definition.properties;
+                    var maxSize = parseFloat(defProperties[definitionProperties.maxSize]);
+                    var minSize = parseFloat(defProperties[definitionProperties.minSize]);
+
+                    if (maxPoint > maxSize) maxPoint = maxSize;
+                    if (maxPoint < minSize) maxPoint = minSize;
                 }
-                if (mustRecalculate) calculateAutoSizes(childElements, childElementProperties, pointCollection, pointProperties, definitionProperties);
+
+                return maxPoint;
+
             }
 
             var createPoints = function(definitions, pointCollection, pointObject, spaceSize, childElements, definitionProperties, pointProperties, childElementProperties) {
@@ -178,8 +176,9 @@
                     }
                     else if ((typeof(size) == "string") && (size.trim().toLowerCase() == "auto")) {
                         gridPoints.hasAuto = true;
-                        newPoint[pointProperties.size] = 0;
-                        newPoint[pointProperties.isFixed] = false;
+                        var temp = calculateAutoSize(definitions, definitionProperties, dIndex, childElements, childElementProperties, pointCollection, pointProperties);
+                        newPoint[pointProperties.size] = temp;
+                        newPoint[pointProperties.isFixed] = true;
                     }
                     else {
                         newPoint[pointProperties.size] = parseFloat(size);
@@ -191,7 +190,6 @@
                     pointCollection.push(newPoint);
                 }
 
-                if (gridPoints.hasAuto) calculateAutoSizes(childElements, childElementProperties, pointCollection, pointProperties, definitionProperties);
                 if (gridPoints.hasStar) setupUnfixedSizes(pointCollection, pointProperties, definitionProperties, spaceSize);
 
                 calculatePoints(pointCollection, definitionProperties, pointProperties);
