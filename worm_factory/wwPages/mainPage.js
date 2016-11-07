@@ -14,6 +14,8 @@ function mainPage() {
     this.column1 = new columnDefinition();
     this.column2 = new columnDefinition();
     this.column3 = new columnDefinition();
+    this.column4 = new columnDefinition();
+    this.column5 = new columnDefinition();
 
     this.row1 = new rowDefinition();
     this.row2 = new rowDefinition();
@@ -23,14 +25,19 @@ function mainPage() {
     this.panel2 = new panel();
     this.panel3 = new panel();
     this.panel4 = new panel();
+    this.panel5 = new panel();
+    this.panel6 = new panel();
 }
 
 _proto.createElements = function() {
     this.column1.set("width", "auto");
     this.column2.set("width", "auto");
     this.column3.set("width", "*");
+    this.column3.set("minWidth", 150);
     this.column1.set("minWidth", 150);
     this.column2.set("minWidth", 10);
+    this.column4.set("width", "auto");
+    this.column5.set("width", "*")
     this.row1.set("height", "auto");
     this.row2.set("height", "auto");
     this.row3.set("height", "auto");
@@ -46,6 +53,8 @@ _proto.createElements = function() {
     this.gridControl1.addColumnDefinition(this.column1);
     this.gridControl1.addColumnDefinition(this.column2);
     this.gridControl1.addColumnDefinition(this.column3);
+    this.gridControl1.addColumnDefinition(this.column4);
+    this.gridControl1.addColumnDefinition(this.column5);
     this.gridControl1.addRowDefinition(this.row1);
     this.gridControl1.addRowDefinition(this.row2);
     this.gridControl1.addRowDefinition(this.row3);
@@ -74,6 +83,19 @@ _proto.createElements = function() {
     this.panel4.set("width", "inherit");
     this.panel4.set("backgroundColor", "blue");
 
+    this.panel5.set("identifier", "factory_panel5");
+    this.panel5.set("parent", this.gridControl1);
+    this.panel5.set("height", "20px");
+    this.panel5.set("width", "inherit");
+    this.panel5.set("backgroundColor", "blue");
+
+    this.panel6.set("identifier", "factory_panel5");
+    this.panel6.set("parent", this.gridControl1);
+    this.panel6.set("height", "20px");
+    this.panel6.set("width", "80");
+    this.panel6.set("backgroundColor", "green");
+
+
     gridControl.setGridProperty(this.panel1, "row", 1);
     gridControl.setGridProperty(this.panel1, "column", 0);
     gridControl.setGridProperty(this.panel1, "columnSpan", 2);
@@ -86,6 +108,12 @@ _proto.createElements = function() {
 
     gridControl.setGridProperty(this.panel4, "row", 0);
     gridControl.setGridProperty(this.panel4, "column", 2);
+
+    gridControl.setGridProperty(this.panel6, "row", 0);
+    gridControl.setGridProperty(this.panel6, "column", 3);
+
+    gridControl.setGridProperty(this.panel5, "row", 0);
+    gridControl.setGridProperty(this.panel5, "column", 4);
     
 }
 
