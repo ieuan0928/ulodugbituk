@@ -9,6 +9,7 @@ var image = wormHelper.refreshModule("./worm_scheme/ui_elements/image.js");
 var radioButton = wormHelper.refreshModule("./worm_scheme/ui_elements/radioButton.js");
 var comboBox = wormHelper.refreshModule("./worm_scheme/ui_elements/comboBox.js");
 var option = wormHelper.refreshModule("./worm_scheme/ui_elements/option.js");
+var googleMap = wormHelper.refreshModule("./worm_scheme/ui_elements/googleMap.js");
 
 _proto.constructor = home;
 
@@ -49,6 +50,7 @@ function home() {
 	this.comboBox1 = new comboBox();
 	this.option1 = new option();
 	this.option2 = new option();
+	this.googleMap1 = new googleMap();
 }
 
 
@@ -330,6 +332,16 @@ _proto.createElements = function() {
 	this.textBox5.set("value", "");
 	this.textBox5.set("backgroundColor", "violet");
 	this.textBox5.set("parent", this);
+	
+	this.googleMap1.set("identifier", "gmap_id_1");
+	this.googleMap1.set("className", "gmap_class_1");
+	this.googleMap1.set("latitude", "51.5");
+	this.googleMap1.set("longitude", "-0.2");
+	this.googleMap1.set("zoom", "10");
+	this.googleMap1.set("googleMapAPIKey", "AIzaSyDsPxJwaT3WLbh07FO66oLEQD_RafQhZDo");
+	this.googleMap1.set("width", "100%;");
+	this.googleMap1.set("height", "500px");
+	this.googleMap1.set("parent", this);
 }
 
 module.exports = home;
