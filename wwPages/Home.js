@@ -51,6 +51,7 @@ function home() {
 	this.option1 = new option();
 	this.option2 = new option();
 	this.googleMap1 = new googleMap();
+	this.googleMap2 = new googleMap();
 }
 
 
@@ -335,13 +336,24 @@ _proto.createElements = function() {
 	
 	this.googleMap1.set("identifier", "gmap_id_1");
 	this.googleMap1.set("className", "gmap_class_1");
-	this.googleMap1.set("latitude", "51.5");
-	this.googleMap1.set("longitude", "-0.2");
-	this.googleMap1.set("zoom", "10");
+	this.googleMap1.set("latitude", "7.190302");
+	this.googleMap1.set("longitude", "125.453313");
+	this.googleMap1.set("zoom", "19");
 	this.googleMap1.set("googleMapAPIKey", "AIzaSyDsPxJwaT3WLbh07FO66oLEQD_RafQhZDo");
 	this.googleMap1.set("width", "100%;");
 	this.googleMap1.set("height", "500px");
 	this.googleMap1.set("parent", this);
+	
+	this.googleMap2.set("identifier", "gmap_id_2");
+	this.googleMap2.set("className", "gmap_class_2");
+	this.googleMap2.set("latitude", "7.190640");
+	this.googleMap2.set("longitude", "125.452640");
+	this.googleMap2.set("zoom", "19");
+	this.googleMap2.set("googleMapAPIKey", "AIzaSyDsPxJwaT3WLbh07FO66oLEQD_RafQhZDo");
+	this.googleMap2.set("margintop", "20px");
+	this.googleMap2.set("width", "700px");
+	this.googleMap2.set("height", "500px");
+	this.googleMap2.set("parent", this);
 }
 
 module.exports = home;

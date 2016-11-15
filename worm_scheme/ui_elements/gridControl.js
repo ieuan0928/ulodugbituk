@@ -90,7 +90,7 @@ _proto.addRowDefinition = function(newRowDefinition) {
 _proto.preRender = function() {
     _parent.preRender.call(this);
 
-    wormHelper.site.jsBundler("/ws_js/gcb.js", "./worm_scheme/js/gridBehavior.js")
+    wormHelper.site.jsBundler("/ws_js/gcb.js", "./worm_scheme/js/gridBehavior.js");
 }
 
 _proto.render = function() {

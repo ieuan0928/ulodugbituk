@@ -4,6 +4,8 @@ var _parent = wormHelper.refreshModule("./worm_scheme/ui_elements/controlBase.js
 	
 _proto.constructor = googleMap;
 
+var count = 0;
+
 function googleMap() {
 	_parent.constructor.apply(this);
 	
@@ -37,7 +39,9 @@ _proto.get = function(propertyName) {
 	}
 };
 
-_proto.preRender = function() {};
+_proto.preRender = function() {
+	wormHelper.site.jsBundler("/ws_js/googleymapa.js", "./worm_scheme/js/googleMapHelper.js");
+};
 
 _proto.render = function() {
 
@@ -59,14 +63,19 @@ _proto.postRender = function() {
 	var zoom = this.properties.zoom;
 	var concat_function = "_function";
 	
+	if(count == 0)
+	{ 
+		wormHelper.writeResponse("<script src='https://maps.google.com/maps/api/js?key=" + googlemapapikey + "'></script>");
+	}
+	
+	count++;
+	
 	wormHelper.writeResponse("<script>");
-	wormHelper.writeResponse("function " + id + concat_function + "() {");
-	wormHelper.writeResponse("var mapCanvas = document.getElementById('" + id + "');");
-	wormHelper.writeResponse("var mapOptions = { center: new google.maps.LatLng(" + latitude + ", " + longitude + "), zoom: " + zoom + " };");
-	wormHelper.writeResponse("var map = new google.maps.Map(mapCanvas, mapOptions); }");
+	wormHelper.writeResponse("var call_helper = $.fn.googleMapHelper({'id': '" + id + "', 'idFunction': '" + id + concat_function + "', 'latitude': '" + latitude + "', 'longitude': '" + longitude + "', 'zoom': '" + zoom + "'});");
+	wormHelper.writeResponse("google.maps.event.addDomListener(window, 'load', call_helper.mapInit);");
 	wormHelper.writeResponse("</script>");
 	
-	wormHelper.writeResponse("<script src='https://maps.googleapis.com/maps/api/js?callback=" +  id + concat_function + "&key=" + googlemapapikey + "'></script>");
+	//wormHelper.writeResponse("<script async defer src='https://maps.googleapis.com/maps/api/js?key=" + googlemapapikey + "&callback=call_helper.mapInit'></script>");
 	
 }
 
