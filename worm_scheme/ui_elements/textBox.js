@@ -17,18 +17,15 @@ _proto.set = function(propertyName, value) {
 		case "ismultiline":
 			this.properties["isMultiline"] = value;
 			return true;
-			break;
 		case "value":
 			this.properties["value"] = value;
-			return true;
-			break;
+			return true;		
 		case "placeholder":
 			this.properties["placeHolder"] = value;
 			return true;
-			break;
 		default:
 			return _parent.set.call(this, propertyName, value);
-			break;
+			
 	}
 };
 
@@ -37,16 +34,12 @@ _proto.get = function(propertyName) {
 	switch(propertyName.trim().toLowerCase()) {
 		case "ismultiline":
 			return this.properties["isMultiline"];
-			break;
 		case "value":
 			return this.properties["value"];
-			break;
 		case "placeholder":
 			return this.properties["placeHolder"];
-			break;
 		default:
 			return _parent.get.call(this, propertyName);
-			break;
 	}
 };
 
@@ -84,7 +77,6 @@ _proto.render = function() {
 			break;
 		default:
 			return true;
-			break;
 	}
 }
 
