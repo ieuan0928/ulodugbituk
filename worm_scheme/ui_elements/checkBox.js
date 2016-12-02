@@ -23,18 +23,11 @@ _proto.set = function(propertyName, value) {
 		case "value":
 			this.properties["value"] = value;
 			return true;
-			break;
 		case "content":
 			this.content.set(propertyName, value);
 			return true;
-			break;
-		/*case "identifier":
-			this.content.set("identifier", value + contentId);
-			return _parent.set.call(this, propertyName, value);
-			break;*/
 		default:
 			return _parent.set.call(this, propertyName, value);
-			break;
 	}
 };
 
@@ -43,7 +36,6 @@ _proto.get = function(propertyName) {
 	switch(propertyName.trim().toLowerCase()) {
 		default:
 			return _parent.get.call(this, propertyName);
-			break;
 	}
 };
 
@@ -54,7 +46,6 @@ _proto.render = function() {
 	wormHelper.writeResponse("<input type='checkbox' id='" + this.properties.identifier + "' class='" + this.get("classcollection") + "' name='" + this.properties.name + "' value='" + this.properties.value + "'></input>");
 	this.content.render();
 	wormHelper.writeResponse("</div>");
-	
 }
 
 module.exports = checkBox;

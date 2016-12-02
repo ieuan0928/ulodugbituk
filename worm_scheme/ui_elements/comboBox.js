@@ -15,24 +15,17 @@ function comboBox() {
 _proto.set = function(propertyName, value) {
 	switch(propertyName.trim().toLowerCase()) {
 		case "type":
-			
 			if(value.trim().toLowerCase() == "dropdown")
-			{
 				this.properties["type"] = value;
-			}
 			else if(value.trim().toLowerCase() == "listselection")
-			{
 				this.properties["type"] = value;
-			}
+			
 			return true;
-			break;
 		case "addoption":
 			this.properties["options"].push(value);
 			return true;
-			break;
 		default:
 			return _parent.set.call(this, propertyName, value);
-			break;
 	}
 };
 
@@ -40,16 +33,13 @@ _proto.get = function(propertyName) {
 	switch(propertyName.trim().toLowerCase()) {
 		default:
 			return _parent.get.call(this, propertyName);
-			break;
 	}
 };
 
 _proto.renderOptions = function() {
-	
 	for(var x = 0; this.properties["options"][x] !== undefined; x++)
-	{
 		this.properties["options"][x].render();
-	}
+	
 };
 
 _proto.render = function() {

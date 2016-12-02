@@ -55,7 +55,6 @@ _proto.render = function() {
 };
 
 _proto.postRender = function() {
-	
 	var id = this.properties.identifier;
 	var googlemapapikey = this.properties.googleMapAPIKey;
 	var latitude = this.properties.latitude;
@@ -64,10 +63,7 @@ _proto.postRender = function() {
 	var concat_function = "_function";
 	
 	if(count == 0)
-	{ 
 		wormHelper.writeResponse("<script src='https://maps.google.com/maps/api/js?key=" + googlemapapikey + "'></script>");
-	}
-	
 	count++;
 	
 	wormHelper.writeResponse("<script>");

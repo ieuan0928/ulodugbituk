@@ -22,11 +22,6 @@ _proto.set = function(propertyName, value) {
 		case "content":
 			if(value !== null && typeof value === 'object')
 			{
-				/*this.properties["content"] = null;
-				this.panel1 = new panel();
-				this.panel1.addControl(value);*/
-				
-				
 				this.properties["content"] = null;
 				this.properties["contentPanel"] = new panel();
 				this.properties["contentPanel"].addControl(value);
@@ -37,22 +32,8 @@ _proto.set = function(propertyName, value) {
 				this.properties["content"] = value;
 			}
 			return true;
-			break;
-		/*case "identifier":
-			if(value !== null && typeof value === 'object')
-			{
-				this.panel1 = new panel();
-				this.panel1.set("identifier", value + panelId);
-			}
-			else
-			{
-				return _parent.set.call(this, propertyName, value);
-			}
-			return true;
-			break;*/
 		default:
 			return _parent.set.call(this, propertyName, value);
-			break;
 	}
 };
 
@@ -60,18 +41,10 @@ _proto.get = function(propertyName) {
 	
 	switch(propertyName.trim().toLowerCase()) {
 		case "content":
-			if(this.panel1 === null)
-			{
-				return this.properties["content"];
-			}
-			else
-			{
-				return this.panel1;
-			}
-			break;
+			if(this.panel1 === null) return this.properties["content"];
+			else return this.panel1;	
 		default:
 			return _parent.get.call(this, propertyName);
-			break;
 	}
 };
 
@@ -94,15 +67,9 @@ _proto.preRender = function() {
 
 _proto.render = function() {
 	this.preRender();
-		
-	if(this.properties.contentPanel == null)
-	{
-		wormHelper.writeResponse(this.properties["content"]);
-	}
-	else
-	{
-		this.properties.contentPanel.render();
-	}
+	
+	if(this.properties.contentPanel == null) wormHelper.writeResponse(this.properties["content"]);
+	else this.properties.contentPanel.render();
 }
 
 module.exports = contentControl;
