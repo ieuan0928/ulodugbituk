@@ -1,43 +1,40 @@
 
-var _proto = lookAndFeel.prototype;
+var _parent = wormHelper.refreshModule("./worm_scheme/propertyEntity.js").prototype,
+	_proto = lookAndFeel.prototype = Object.create(_parent);
 
 _proto.constructor = lookAndFeel;
-_proto.properties = null;
 
 function lookAndFeel() {
-	this.properties = [];
+	_parent.constructor.apply(this);
+};
+
+_proto.get = function(propertyName) {
+	switch (propertyName.trim().toLowerCase()) {
+		case "margin":
+			if (!this.properties["margin"]) {
+				var margin = wormHelper.refreshModule("./worm_scheme/ui_elements/ui_components/marginStyle.js");
+				this.properties["margin"] = new margin();
+			}
+			return this.properties["margin"];
+		case "padding":
+			if (!this.properties["padding"]) {
+				var padding = wormHelper.refreshModule("./worm_scheme/ui_elements/ui_components/paddingStyle.js");
+				this.properties["padding"] = new padding();
+			}
+			return this.properties["padding"]
+		default:
+			return _parent.get.call(this, propertyName);
+	}
 };
 
 _proto.set = function(propertyName, value) {
 	switch(propertyName.trim().toLowerCase()) {
-		//margin
-		case "margintop":
-			this.properties["marginTop"] = value;
+		case "margin":
+			this.properties["margin"] = value;
 			return true;
-		case "marginleft":
-			this.properties["marginLeft"] = value;
+		case "padding":
+			this.properties["padding"] = value;
 			return true;
-		case "marginright":
-			this.properties["marginRight"] = value;
-			return true;
-		case "marginbottom":
-			this.properties["marginBottom"] = value;
-			return true;
-
-		//padding	
-		case "paddingtop":
-			this.properties["paddingTop"] = value;
-			return true;
-		case "paddingleft":
-			this.properties["paddingLeft"] = value;
-			return true;
-		case "paddingright":
-			this.properties["paddingRight"] = value;
-			return true;
-		case "paddingbottom":
-			this.properties["paddingBottom"] = value;
-			return true;
-			
 		//border
 		case "bordertop":
 			this.properties["borderTop"] = value;
@@ -249,5 +246,9 @@ _proto.set = function(propertyName, value) {
 			return true;
 	}
 };
+
+_proto.render = function() {
+	if (this.properties.margin) this.properties.margin.render();
+}
 
 module.exports = lookAndFeel;

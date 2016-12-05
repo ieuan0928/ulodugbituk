@@ -261,40 +261,40 @@ _proto.createElements = function() {
 	//this.image3.set("parent", this.panelImage);
 	this.image3.set("parent", this);
 	this.image3.set("identifier", "image3_id");
-	this.image3.set("width", "50px");
-	this.image3.set("height", "50px");
+	this.image3.get("lookAndFeel").set("width", "50px");
+	this.image3.get("lookAndFeel").set("height", "50px");
 	
 	this.image4.set("parent", this);
 	this.image4.set("fakePath", "/hello.png");
 	this.image4.set("imagePath", "/sample_images/hello.png");
 	this.image4.set("imagefiletype", "png");
 	this.image4.set("identifier", "image4_id");
-	this.image4.set("width", "100px");
-	this.image4.set("height", "100px");
+	this.image4.get("lookAndFeel").set("width", "100px");
+	this.image4.get("lookAndFeel").set("height", "100px");
 	
 	this.image5.set("parent", this);
 	this.image5.set("fakePath", "/jpgfakepath.jpg");
 	this.image5.set("imagePath", "/sample_images/jpg.jpg");
 	this.image5.set("imagefiletype", "jpg");
 	this.image5.set("identifier", "image5_id");
-	this.image5.set("width", "130px");
-	this.image5.set("height", "130px");
+	this.image5.get("lookAndFeel").set("width", "130px");
+	this.image5.get("lookAndFeel").set("height", "130px");
 	
 	this.image6.set("parent", this);
 	this.image6.set("fakePath", "/svg.svg");
 	this.image6.set("imagePath", "/sample_images/svg.svg");
 	this.image6.set("imagefiletype", "svg");
 	this.image6.set("identifier", "image6_id");
-	this.image6.set("width", "150px");
-	this.image6.set("height", "150px");
+	this.image6.get("lookAndFeel").set("width", "150px");
+	this.image6.get("lookAndFeel").set("height", "150px");
 	
 	this.image7.set("parent", this);
 	this.image7.set("fakePath", "/banana.gif");
 	this.image7.set("imagePath", "/sample_images/banana.gif");
 	this.image7.set("imagefiletype", "gif");
 	this.image7.set("identifier", "image7_id");
-	this.image7.set("width", "150px");
-	this.image7.set("height", "150px");
+	this.image7.get("lookAndFeel").set("width", "150px");
+	this.image7.get("lookAndFeel").set("height", "150px");
 	
 	/*this.panelImage.set("backgroundcolor", "#4B4B4B");
 	this.panelImage.set("margintop", "0px");
@@ -331,7 +331,7 @@ _proto.createElements = function() {
 	this.textBox5.set("isMultiline", false);
 	this.textBox5.set("placeHolder", "tb 5");
 	this.textBox5.set("value", "");
-	this.textBox5.set("backgroundColor", "violet");
+	this.textBox5.get("lookAndFeel").set("backgroundColor", "violet");
 	this.textBox5.set("parent", this);
 	
 	this.googleMap1.set("identifier", "gmap_id_1");
@@ -340,8 +340,8 @@ _proto.createElements = function() {
 	this.googleMap1.set("longitude", "125.453313");
 	this.googleMap1.set("zoom", "19");
 	this.googleMap1.set("googleMapAPIKey", "AIzaSyDsPxJwaT3WLbh07FO66oLEQD_RafQhZDo");
-	this.googleMap1.set("width", "100%;");
-	this.googleMap1.set("height", "500px");
+	this.googleMap1.get("lookAndFeel").set("width", "100%;");
+	this.googleMap1.get("lookAndFeel").set("height", "500px");
 	this.googleMap1.set("parent", this);
 	
 	this.googleMap2.set("identifier", "gmap_id_2");
@@ -350,9 +350,9 @@ _proto.createElements = function() {
 	this.googleMap2.set("longitude", "125.452640");
 	this.googleMap2.set("zoom", "19");
 	this.googleMap2.set("googleMapAPIKey", "AIzaSyDsPxJwaT3WLbh07FO66oLEQD_RafQhZDo");
-	this.googleMap2.set("margintop", "20px");
-	this.googleMap2.set("width", "700px");
-	this.googleMap2.set("height", "500px");
+	this.googleMap2.get("lookAndFeel").set("margintop", "20px");
+	this.googleMap2.get("lookAndFeel").set("width", "700px");
+	this.googleMap2.get("lookAndFeel").set("height", "500px");
 	this.googleMap2.set("parent", this);
 }
 

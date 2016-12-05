@@ -9,6 +9,9 @@ function textBox() {
 	
 	var default_class = "text_Box_Default_Class";
 	this.set("className", default_class);
+
+	this.set("classStyle", "./styles/textBoxStylingObject.js");
+	this.set("renderStyle", "./ws_css/default_text_box.css");
 }
 
 _proto.set = function(propertyName, value) {
@@ -42,12 +45,6 @@ _proto.get = function(propertyName) {
 			return _parent.get.call(this, propertyName);
 	}
 };
-
-_proto.preRender = function() {
-	wormHelper.site.cssBundler("./ws_css/default_text_box.css", "./styles/textBoxStylingObject.js");
-	
-	_parent.preRender.call(this);
-}
 
 _proto.render = function() {
 	var isMultiline = this.get("isMultiline");

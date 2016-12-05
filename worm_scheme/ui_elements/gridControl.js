@@ -1,9 +1,9 @@
 var _parent = wormHelper.refreshModule("./worm_scheme/ui_elements/containerControl.js").prototype,
     _proto = gridControl.prototype = Object.create(_parent);
 
-var columnDefintion = wormHelper.refreshModule("./worm_scheme/ui_elements/ui_extensions/columnDefinition.js");
-var rowDefinition = wormHelper.refreshModule("./worm_scheme/ui_elements/ui_extensions/rowDefinition.js");
-var gridProperty = wormHelper.refreshModule("./worm_scheme/ui_elements/ui_extensions/gridProperty.js");
+var columnDefintion = wormHelper.refreshModule("./worm_scheme/ui_elements/ui_components/columnDefinition.js");
+var rowDefinition = wormHelper.refreshModule("./worm_scheme/ui_elements/ui_components/rowDefinition.js");
+var gridProperty = wormHelper.refreshModule("./worm_scheme/ui_elements/ui_components/gridProperty.js");
 
 _proto.constructor = gridControl;
 

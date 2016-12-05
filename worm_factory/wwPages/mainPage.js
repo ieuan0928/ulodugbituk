@@ -3,8 +3,8 @@ var _parent = wormHelper.refreshModule("./worm_scheme/ui_elements/pageBase.js").
 
 var gridControl = wormHelper.refreshModule("./worm_scheme/ui_elements/gridControl.js");
 var panel = wormHelper.refreshModule("./worm_scheme/ui_elements/panel.js");
-var columnDefinition = wormHelper.refreshModule("./worm_scheme/ui_elements/ui_extensions/columnDefinition.js");
-var rowDefinition = wormHelper.refreshModule("./worm_scheme/ui_elements/ui_extensions/rowDefinition.js");
+var columnDefinition = wormHelper.refreshModule("./worm_scheme/ui_elements/ui_components/columnDefinition.js");
+var rowDefinition = wormHelper.refreshModule("./worm_scheme/ui_elements/ui_components/rowDefinition.js");
 var explorer = wormHelper.refreshModule("./worm_scheme/ui_elements/explorer.js");
 
 function mainPage() {
@@ -15,6 +15,10 @@ function mainPage() {
 
     this.column1 = new columnDefinition();
     this.row1 = new rowDefinition();
+
+    this.panelWebWorms = new panel();
+    this.panelHeader = new panel();
+    this.panelAccount = new panel();
 }
 
 _proto.createElements = function() {

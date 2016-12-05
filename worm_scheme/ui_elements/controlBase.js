@@ -2,15 +2,17 @@
 var _parent = wormHelper.refreshModule("./worm_scheme/ui_elements/uiBase.js").prototype,
 	_proto = controlBase.prototype = Object.create(_parent);
 
-var lookAndFeelObj = wormHelper.refreshModule("./worm_scheme/ui_elements/lookAndFeel.js");
+var lookAndFeelObj = wormHelper.refreshModule("./worm_scheme/ui_elements/ui_components/lookAndFeel.js");
 	
 _proto.constructor = controlBase;
 _proto.lookAndfeel = null;
 
 function controlBase() {
 	_parent.constructor.apply(this, arguments);
-	this.lookAndFeel = new lookAndFeelObj();
 	this.properties["classCollection"] = [];
+
+	this.properties["renderStyle"] = null;
+	this.properties["classStyle"] = null;
 }
 
 _proto.set = function(propertyName, value) {
@@ -27,96 +29,96 @@ _proto.set = function(propertyName, value) {
 		case "parent":
 			value.addControl(this);
 			return true;
+		case "lookandfeel":
+			this.properties["lookAndFeel"] = value;
+			return true;
+
 			
 		///////////////////////////////look and feel//////////////////////////////////////////////////	
 		
-		case "margintop":
-		case "marginleft": 
-		case "marginright":
-		case "marginbottom":
+		// case "bordertop":
+		// case "borderleft":
+		// case "borderright":
+		// case "borderbottom":
 		
-		case "paddingtop":
-		case "paddingleft":
-		case "paddingright":
-		case "paddingbottom":
+		// case "bordercolortop":
+		// case "bordercolorleft":
+		// case "bordercolorright":
+		// case "bordercolorbottom":
 		
-		case "bordertop":
-		case "borderleft":
-		case "borderright":
-		case "borderbottom":
+		// case "bordertopstyle":
+		// case "borderleftstyle":
+		// case "borderrightstyle":
+		// case "borderbottomstyle":
 		
-		case "bordercolortop":
-		case "bordercolorleft":
-		case "bordercolorright":
-		case "bordercolorbottom":
+		// case "bordertopwidth":
+		// case "borderleftwidth":
+		// case "borderrightwidth":
+		// case "borderbottomwidth":
 		
-		case "bordertopstyle":
-		case "borderleftstyle":
-		case "borderrightstyle":
-		case "borderbottomstyle":
+		// case "bordertopleftradius":
+		// case "bordertoprightradius":
+		// case "borderbottomleftradius":
+		// case "borderbottomrightradius":
 		
-		case "bordertopwidth":
-		case "borderleftwidth":
-		case "borderrightwidth":
-		case "borderbottomwidth":
+		// case "backgroundcolor":
+		// case "backgroundsize":
+		// case "backgroundposition":
+		// case "backgroundattachment":
+		// case "backgroundrepeat":
+		// case "backgroundimage":
+		// case "color":
 		
-		case "bordertopleftradius":
-		case "bordertoprightradius":
-		case "borderbottomleftradius":
-		case "borderbottomrightradius":
+		// case "height":
+		// case "minheight":
+		// case "maxheight":
 		
-		case "backgroundcolor":
-		case "backgroundsize":
-		case "backgroundposition":
-		case "backgroundattachment":
-		case "backgroundrepeat":
-		case "backgroundimage":
-		case "color":
+		// case "width":
+		// case "minwidth":
+		// case "maxwidth":
 		
-		case "height":
-		case "minheight":
-		case "maxheight":
+		// case "lineargradient":
+		// case "radialgradient":
+		// case "repeatinglineargradient":
+		// case "repeatingradialgradient":
 		
-		case "width":
-		case "minwidth":
-		case "maxwidth":
+		// case "opacity":
 		
-		case "lineargradient":
-		case "radialgradient":
-		case "repeatinglineargradient":
-		case "repeatingradialgradient":
+		// case "overflow":
+		// case "overflowx":
+		// case "overflowy":
 		
-		case "opacity":
+		// case "visibility":
+		// case "display":
 		
-		case "overflow":
-		case "overflowx":
-		case "overflowy":
+		// case "verticalalign":
 		
-		case "visibility":
-		case "display":
+		// case "zindex":
 		
-		case "verticalalign":
+		// case "textdecoration":
+		// case "fontsize":
+		// case "fontfamily":
+		// case "fontstyle":
+		// case "fontvariant":
+		// case "fontweight":
+		// case "atfontface":
 		
-		case "zindex":
+		// case "liststyle":
+		// case "liststyleimage":
+		// case "liststyleposition":
+		// case "liststyletype":
 		
-		case "textdecoration":
-		case "fontsize":
-		case "fontfamily":
-		case "fontstyle":
-		case "fontvariant":
-		case "fontweight":
-		case "atfontface":
-		
-		case "liststyle":
-		case "liststyleimage":
-		case "liststyleposition":
-		case "liststyletype":
-		
-		case "cursor":
-            this.lookAndFeel.set(propertyName, value);
-			return true;
+		// case "cursor":
+        //     this.lookAndFeel.set(propertyName, value);
+		// 	return true;
 		
 		///////////////////////////////look and feel//////////////////////////////////////////////////
+		case "renderstyle":
+			this.properties["renderStyle"] = value;
+			return true;
+		case "classstyle":
+			this.properties["classStyle"] = value;
+			return true;
 		default:
 			return _parent.set.call(this, propertyName, value);
 	}
@@ -126,15 +128,25 @@ _proto.get = function(propertyName) {
 	
 	switch(propertyName.trim().toLowerCase()) {
 		case "classname":
-			if(this.properties["classCollection"][0] !== undefined) return this.properties["classCollection"][0];
+			if(this.properties["classCollection"][0] !== undefined) 
+				return this.properties["classCollection"][0];
 			else return "";
 		case "classcollection":
 			return this.getClasses();
 		case "identifier":
-			if(this.properties["identifier"] !== undefined) return this.properties["identifier"];
+			if(this.properties["identifier"] !== undefined) 
+				return this.properties["identifier"];
 			else return "";
 		case "name":
 			return this.properties["name"];
+		case "renderstyle":
+			return this.properties["renderStyle"];
+		case "classstyle":
+			return this.properties["classStyle"];
+		case "lookandfeel":
+			if (!this.properties["lookAndFeel"]) 
+				this.properties["lookAndFeel"] = new lookAndFeelObj();
+			return this.properties["lookAndFeel"];
 		default:
 			return _parent.get.call(this, propertyName);
 	}
@@ -149,44 +161,13 @@ _proto.getClasses = function() {
 	for(count; classCollection[count] !== undefined; count++)
 		classResult += classCollection[count] + " ";
 	
-	
 	return classResult;
 };
 
 _proto.getInlineStlye = function() {
 	var inlineStyle = "";
 
-	//margin
-	if(this.lookAndFeel.properties.margin !== undefined) 
-		inlineStyle += "margin: " + this.lookAndFeel.properties.margin + ";";
 	
-	if(this.lookAndFeel.properties.marginTop !== undefined) 
-		inlineStyle += "margin-top: " + this.lookAndFeel.properties.marginTop + ";";
-	
-	if(this.lookAndFeel.properties.marginLeft !== undefined) 
-		inlineStyle += "margin-left: " + this.lookAndFeel.properties.marginLeft + ";";
-	
-	if(this.lookAndFeel.properties.marginRight !== undefined) 
-		inlineStyle += "margin-right: " + this.lookAndFeel.properties.marginRight + ";";
-
-	if(this.lookAndFeel.properties.marginBottom !== undefined) 
-		inlineStyle += "margin-bottom: " + this.lookAndFeel.properties.marginBottom + ";";
-	
-	//padding
-	if(this.lookAndFeel.properties.padding !== undefined) 
-		inlineStyle += "padding " + this.lookAndFeel.properties.padding + ";";
-
-	if(this.lookAndFeel.properties.paddingTop !== undefined) 
-		inlineStyle += "padding-top: " + this.lookAndFeel.properties.paddingTop + ";";
-
-	if(this.lookAndFeel.properties.paddingLeft !== undefined) 
-		inlineStyle += "padding-left: " + this.lookAndFeel.properties.paddingLeft + ";";
-
-	if(this.lookAndFeel.properties.paddingRight !== undefined) 
-		inlineStyle += "padding-right: " + this.lookAndFeel.properties.paddingRight + ";";
-	
-	if(this.lookAndFeel.properties.paddingBottom !== undefined) 
-		inlineStyle += "padding-bottom: " + this.lookAndFeel.properties.paddingBottom + ";";
 
 	//border
 	if(this.lookAndFeel.properties.border !== undefined) 
@@ -267,7 +248,14 @@ _proto.getInlineStlye = function() {
 };
 
 _proto.render = function() {};
-_proto.preRender = function() {};
+_proto.preRender = function() {
+	var classStyle = this.get("classStyle");
+	var renderStyle = this.get("renderStyle");
+
+	if (classStyle !== null && renderStyle !== null)
+		wormHelper.site.cssBundler(renderStyle, classStyle);
+};
+
 _proto.postRender = function() {
 	
 	var classname = this.get("className");
