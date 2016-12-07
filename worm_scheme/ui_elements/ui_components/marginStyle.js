@@ -1,4 +1,4 @@
-var _parent = wormHelper.refreshModule("./worm_scheme/ui_elements/ui_components/baseStyle.js").prototype,
+var _parent = wormHelper.refreshModule("./worm_scheme/ui_elements/ui_components/anchorStyle.js").prototype,
     _proto = marginStyle.prototype = Object.create(_parent);
 
 _proto.constructor = marginStyle;

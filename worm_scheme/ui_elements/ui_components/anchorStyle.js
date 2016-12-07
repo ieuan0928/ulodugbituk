@@ -1,9 +1,9 @@
-var _parent = wormHelper.refreshModule("./worm_scheme/propertyEntity.js").prototype,
-    _proto = baseStyle.prototype = Object.create(_parent);
+var _parent = wormHelper.refreshModule("./worm_scheme/renderBase.js").prototype,
+    _proto = anchorStyle.prototype = Object.create(_parent);
 
-_proto.constructor = baseStyle;
+_proto.constructor = anchorStyle;
 
-function baseStyle() {
+function anchorStyle() {
     _parent.constructor.apply(this);
 
     this.properties.hasStyle = false;
@@ -54,4 +54,4 @@ _proto.set = function(propertyName, value) {
     }
 }
 
-module.exports = baseStyle;
+module.exports = anchorStyle;
