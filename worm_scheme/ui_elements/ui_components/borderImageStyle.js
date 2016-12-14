@@ -46,4 +46,17 @@ _proto.set = function(propertyName, value) {
     }
 }
 
+_proto.render = function() {
+    if (this.properties["source"] && this.properties["slice"] && this.properties["repeat"]) 
+        wormHelper.writeResponse("border-image: url(" + this.properties["source"] + ") " + this.properties["slice"] + " " + this.properties["repeat"] + ";");
+    else {
+        if (this.properties["source"]) wormHelper.writeResponse("border-image-source: url(" + this.properties["source"] +");");
+        if (this.properties["slice"]) wormHelper.writeResponse("border-image-slice: " + this.properties["slice"] + ";");
+        if (this.properties["repeat"]) wormHelper.writeResponse("border-image-repeat: " + this.properties["repeat"] + ";");
+    }
+
+    if (this.properties["outset"]) wormHelper.writeResponse("border-image-outset: " + this.properties["outset"] + ";");
+    if (this.properties["width"]) wormHelper.writeResponse("border-image-width: " + this.properties["width"] + ";");
+}
+
 module.exports = borderImageStyle;

@@ -15,6 +15,8 @@ _proto.get = function(propertyName) {
             return this.properties["style"];
         case "width":
             return this.properties["width"];
+        case "anchorPosition":
+            return this.properties["anchorPosition"];
         default: 
             return _parent.get.call(this, propertyName);
     }
@@ -31,27 +33,35 @@ _proto.set = function(propertyName, value) {
         case "width":
             this.properties["width"] = value;
             return true;
+        case "anchorPosition":
+            this.properties["anchorPosition"] = value;
+            return true;
         default:
             return _parent.set.call(this, propertyName);
     }
 }
 
 _proto.render = function() {
+    var prefix = "border";
+
+    if (this.properties["anchorPosition"]) 
+        prefix += "-" + this.properties["anchorPosition"];
+
     if (this.properties["color"] && this.properties["style"] && this.properties["width"]) {
-        wormHelper.writeResponse("border: " + 
+        wormHelper.writeResponse(prefix +  ": " + 
             this.properties["width"]  + " " + 
             this.properties["style"] + " " +
             this.properties["color"] + ";");
     }
     else {
         if (this.properties["width"])
-            wormHelper.writeResponse("border-width: " + this.properties["width"] + ";");
+            wormHelper.writeResponse(prefix + "-width: " + this.properties["width"] + ";");
 
         if (this.properties["style"])
-            wormHelper.writeResponse("border-style: " + this.properties["style"] + ";");
+            wormHelper.writeResponse(prefix + "-style: " + this.properties["style"] + ";");
 
         if (this.properties["color"])
-            wormHelper.writeResponse("border-color: " + this.properties["color"] + ";");
+            wormHelper.writeResponse(prefix + "-color: " + this.properties["color"] + ";");
     }
 }
 

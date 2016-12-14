@@ -35,32 +35,7 @@ _proto.set = function(propertyName, value) {
 
 			
 		///////////////////////////////look and feel//////////////////////////////////////////////////	
-		
-		// case "bordertop":
-		// case "borderleft":
-		// case "borderright":
-		// case "borderbottom":
-		
-		// case "bordercolortop":
-		// case "bordercolorleft":
-		// case "bordercolorright":
-		// case "bordercolorbottom":
-		
-		// case "bordertopstyle":
-		// case "borderleftstyle":
-		// case "borderrightstyle":
-		// case "borderbottomstyle":
-		
-		// case "bordertopwidth":
-		// case "borderleftwidth":
-		// case "borderrightwidth":
-		// case "borderbottomwidth":
-		
-		// case "bordertopleftradius":
-		// case "bordertoprightradius":
-		// case "borderbottomleftradius":
-		// case "borderbottomrightradius":
-		
+
 		// case "backgroundcolor":
 		// case "backgroundsize":
 		// case "backgroundposition":

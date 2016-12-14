@@ -22,6 +22,12 @@ _proto.get = function(propertyName) {
 				this.properties["padding"] = new padding();
 			}
 			return this.properties["padding"]
+		case "border":
+			if (!this.properties["border"]) {
+				var border = wormHelper.refreshModule("./worm_scheme/ui_elements/ui_components/borderStyle.js");
+				this.properties["border"] = new border();
+			}
+			return this.properties["border"];
 		default:
 			return _parent.get.call(this, propertyName);
 	}
@@ -35,76 +41,9 @@ _proto.set = function(propertyName, value) {
 		case "padding":
 			this.properties["padding"] = value;
 			return true;
-		//border
-		case "bordertop":
-			this.properties["borderTop"] = value;
+		case "border":
+			this.properties["border"] = value;
 			return true;
-		case "borderleft":
-			this.properties["borderLeft"] = value;
-			return true;
-		case "borderright":
-			this.properties["borderRight"] = value;
-			return true;
-		case "borderbottom":
-			this.properties["borderBottom"] = value;
-			return true;
-
-		//border-color
-		case "bordercolortop":
-			this.properties["borderColorTop"] = value;
-			return true;
-		case "bordercolorleft":
-			this.properties["borderColorLeft"] = value;
-			return true;
-		case "bordercolorright":
-			this.properties["borderColorRight"] = value;
-			return true;
-		case "bordercolorbottom":
-			this.properties["borderColorBottom"] = value;
-			return true;
-		
-		//border-style
-		case "bordertopstyle":
-			this.properties["borderTopStyle"] = value;
-			return true;
-		case "borderleftstyle":
-			this.properties["borderLeftStyle"] = value;
-			return true;
-		case "borderrightstyle":
-			this.properties["borderRightStyle"] = value;
-			return true;
-		case "borderbottomstyle":
-			this.properties["borderBottomStyle"] = value;
-			return true;
-		
-		//border-width
-		case "bordertopwidth":
-			this.properties["borderTopWidth"] = value;
-			return true;
-		case "borderleftwidth":
-			this.properties["borderLeftWidth"] = value;
-			return true;
-		case "borderrightwidth":
-			this.properties["borderRightWidth"] = value;
-			return true;
-		case "borderBottomwidth":
-			this.properties["borderBottomWidth"] = value;
-			return true;
-		
-		//border-radius
-		case "bordertopleftradius":
-			this.properties["borderTopLeftRadius"] = value;
-			return true;
-		case "bordertoprightradius":
-			this.properties["borderTopRightRadius"] = value;
-			return true;
-		case "borderbottomleftradius":
-			this.properties["borderBottomLeftRadius"] = value;
-			return true;
-		case "borderbottomrightradius":
-			this.properties["borderBottomRightRadius"] = value;
-			return true;
-		
 		//background
 		case "backgroundcolor":
 			this.properties["backgroundColor"] = value;
@@ -249,6 +188,8 @@ _proto.set = function(propertyName, value) {
 
 _proto.render = function() {
 	if (this.properties.margin) this.properties.margin.render();
+	if (this.properties.padding) this.properties.padding.render();
+	if (this.properties.border) this.properties.border.render();
 }
 
 module.exports = lookAndFeel;

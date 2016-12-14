@@ -5,8 +5,6 @@ _proto.constructor = anchorStyle;
 
 function anchorStyle() {
     _parent.constructor.apply(this);
-
-    this.properties.hasStyle = false;
 }
 
 _proto.get = function(propertyName) {
@@ -19,13 +17,6 @@ _proto.get = function(propertyName) {
             return this.properties["bottom"];
         case "left":
             return this.properties["left"];
-        case "hasstyle":
-            return this.properties["hasStyle"];
-        case "allhasstyle":
-            return (this.properties["top"] && 
-                this.properties["right"] && 
-                this.properties["bottom"] &&
-                this.properties["left"]);
         default:
             return _parent.get.call(this, propertyName);
     }
@@ -35,19 +26,15 @@ _proto.set = function(propertyName, value) {
     switch (propertyName.trim().toLowerCase()) {
         case "top":
             this.properties["top"] = value;
-            this.properties.hasStyle = true;
             return true;
         case "right":
             this.properties["right"] = value;
-            this.properties.hasStyle = true;
             return true;
         case "bottom":
             this.properties["bottom"] = value;
-            this.properties.hasStyle = true;
             return true;
         case "left":
             this.properties["left"] = value;
-            this.properties.hasStyle = true;
             return true;
         default:
             return _parent.set.call(this, propertyName, value);

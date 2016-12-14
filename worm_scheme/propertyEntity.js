@@ -4,7 +4,7 @@ var _proto = propertyEntity.prototype;
 _proto.constructor = propertyEntity;
 
 function propertyEntity() {
-	this.properties = [];
+	this.properties = {};
 };
 
 _proto.properties = null;
